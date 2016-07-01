@@ -1,0 +1,32 @@
+{
+  "name": "react-starterify",
+  "description": "React JS application skeleton using Browserify and other awesome tools",
+  "main": "app.js",
+  "authors": [
+    "Maurizio Mangione"
+  ],
+  "license": "no",
+  "keywords": [
+    "gulp",
+    "react",
+    "browserify",
+    "seed",
+    "boilerplate",
+    "kickstarter",
+    "ES6",
+    "ES2015",
+    "babel",
+    "ava"
+  ],
+  "moduleType": [],
+  "homepage": "--",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

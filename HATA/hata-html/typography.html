@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en-US">
+
+    <head>
+
+        <title>HATA - The Real Estate</title>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <script src="js/pace.js"></script>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.selectBox.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/green.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/responsive.css" type="text/css">
+        <link rel="stylesheet" href="css/pace-minimal.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.ico">
+
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <!-- TOP -->
+        <div class="top-bar">
+
+            <p class="text">
+                <a><i class="fa fa-map-marker"></i> 121 King Street, Melbourne Victoria 3000 Australia</a>
+                <a href="tel:+61383766284"><i class="fa fa-phone"></i> + 613 8376 6284</a>
+            </p>
+
+            <p class="social">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-vimeo"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-skype"></i></a>
+            </p>
+
+        </div>
+        <!-- TOP -->
+
+        <!-- HEADER -->
+        <header class="clearfix">
+
+            <div class="logo">
+                <a href="#"><img src="images/logo.png" alt="HATA">HATA</a>
+            </div>
+
+            <nav class="navbar collapse" id="mobile-menu">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Properties</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="properties-grid.html">Properties Grid</a></li>
+                            <li><a href="properties-list.html">Properties List</a></li>
+                            <li><a href="properties-map.html">Properties Map</a></li>
+                            <li><a href="properties-single.html">Properties Single</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html">Services Page</a></li>
+                            <li><a href="services-single.html">Preparation of Documents</a></li>
+                            <li><a href="services-single.html">Design Projects</a></li>
+                            <li><a href="services-single.html">Repair of Apartments</a></li>
+                            <li><a href="services-single.html">Utility Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Page</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="team.html">Team</a></li>
+                            <li><a href="team-single.html">Team Single</a></li>
+                            <li><a href="typography.html">Typography</a></li>
+                            <li><a href="error.html">404 Error</a></li>
+                            <li><a href="offline.html">Site Offline</a></li>
+                            <li><a href="coming-soon.html">Coming Soon</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Blog</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="blog.html">Blog Posts</a></li>
+                            <li><a href="blog-post.html">Single Post</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="user">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="images/avatar1.png" alt="User Photo">
+                    <span class="drop-arow"></span>
+                </a>
+                <ul class="dropdown-menu user-drop">
+                    <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                    <li><a href="#"><i class="fa fa-list"></i>My Properties</a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+                </ul>
+            </div>
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobile-menu" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </header>
+        <!-- HEADER -->
+
+        <div class="page-wrap">
+
+            <!-- BREADCRUMBS-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumbs">
+                            <a href="index.html">Home</a>
+                            <span class="sep">/</span>
+                            <span class="current">Typography</span>
+                        </div>
+                        <h2 class="page-title">Typography</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- BREADCRUMBS -->
+
+            <!-- TYPOGRAPHY -->
+            <div class="full-width page-contents typography">
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure>
+                                <a href="#">
+                                    <img src="images/about.png" alt="Profile Image" class="img-responsive">
+                                    <div class="overlay"></div>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium:</p>
+                            <ul>
+                                <li><span>totam rem aperiam, eaque ipsa quae.</span></li>
+                                <li><span>tab illo inventore veritatis et quasi architecto.</span></li>
+                                <li><span>beatae vitae dicta sunt explicabo.</span></li>
+                            </ul>
+                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-1">
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,<br> eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam<br>voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h1>Headline (H1)</h1>
+                            <h2>Headline (H2)</h2>
+                            <h3>Headline (H3)</h3>
+                            <h4>Headline (H4)</h4>
+                            <h5>Headline (H5)</h5>
+                            <h6>Headline (H6)</h6>
+                        </div>
+                        <div class="col-md-7">
+                            <blockquote>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem <br> accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </blockquote>
+                            <blockquote class="style2">
+                                <p><span>&#60;blockquote&#62;</span></p>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
+                                <p><span>&#60;/blockquote&#62;</span></p>
+                            </blockquote>
+                            <p class="highlight"><span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</span><br><span>doloremque laudantium, totam rem aperiam, eaque ipsa quae.</span></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>Header</td>
+                                    <td>$</td>
+                                    <td>&</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>It is a long established fact</td>
+                                    <td>27826</td>
+                                    <td>35%</td>
+                                </tr>
+                                <tr>
+                                    <td>Lorem ipsum is that</td>
+                                    <td>56938</td>
+                                    <td>75%</td>
+                                </tr>
+                                <tr>
+                                    <td>Another new ipsum here</td>
+                                    <td>00369</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>It is a long established fact</td>
+                                    <td>27826</td>
+                                    <td>35%</td>
+                                </tr>
+                                <tr>
+                                    <td>Lorem ipsum is that</td>
+                                    <td>56938</td>
+                                    <td>75%</td>
+                                </tr>
+                                <tr>
+                                    <td>Another new ipsum here</td>
+                                    <td>00369</td>
+                                    <td>26%</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="accordion">
+                                <h3>Section 1</h3>
+                                <div>
+                                    <p>
+                                        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                                        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                                        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                                        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                                    </p>
+                                </div>
+                                <h3>Section 2</h3>
+                                <div>
+                                    <p>
+                                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                                        suscipit faucibus urna.
+                                    </p>
+                                </div>
+                                <h3>Section 3</h3>
+                                <div>
+                                    <p>
+                                        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                                        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                                        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                                        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                                    </p>
+                                    <ul>
+                                        <li>List item one</li>
+                                        <li>List item two</li>
+                                        <li>List item three</li>
+                                    </ul>
+                                </div>
+                                <h3>Section 4</h3>
+                                <div>
+                                    <p>
+                                        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                                        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                                        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                                        mauris vel est.
+                                    </p>
+                                    <p>
+                                        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                                        inceptos himenaeos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-danger"><i class="fa fa-search"></i>Big button with Icon</button>
+                            <button class="btn btn-danger btn-alt"><i class="fa fa-search"></i>Big button with Icon</button>
+                            <br>
+                            <button class="btn btn-danger">Big Button</button>
+                            <button class="btn btn-danger btn-alt">Big Button</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger btn-small">Small Button</button>
+                            <button class="btn btn-danger btn-alt btn-small">Small Button</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- TYPOGRAPHY -->
+
+        </div>
+
+        <!-- CALL2ACTION -->
+        <div class="full-width call-action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4>Want to sell you property? contact us now!</h4>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="contact.html" class="btn btn-danger">Submit Property</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CALL2ACTION -->
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 copy-right">
+                        <p><img src="images/footer-logo.png" alt="Logo" class="img-responsive"> &copy; 2015 HATA — Real Estate Site Template</p>
+                    </div>
+                    <div class="col-md-7">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Properties</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- FOOTER -->
+
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/masonry.pkgd.min.js"></script>
+        <script src="js/jquery.flexslider-min.js"></script>
+        <script src="js/jquery.selectBox.min.js"></script>
+        <script src="js/icheck.js"></script>
+        <script src="js/counter.animation.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/jquery.cycle2.js"></script>
+
+    </body>
+</html>

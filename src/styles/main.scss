@@ -1,0 +1,19 @@
+header .logo img{
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+.filter .selectBox {
+  padding: 0 !important;
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.filter .selectBox.type, .filter .selectBox.cata {
+  width: 100% !important;
+}
+
+.filter .btn {
+  margin: 20px 0;
+}

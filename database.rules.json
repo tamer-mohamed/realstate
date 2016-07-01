@@ -1,0 +1,13 @@
+{
+  ".read": true,
+  ".write": false,
+  "properties": {
+    ".write": true
+  },
+  "users": {
+    ".write": "auth != null",
+    "$uid": {
+      ".write": "auth.uid === $uid" // only the current user can edit his info
+    }
+  }
+}

@@ -19,7 +19,7 @@ If you are an advanced user, and you need more features, you can choose one of t
 
 ## Usage
 
-[Download React Starterify](https://github.com/Granze/react-starterify/releases/latest)
+__Clone the repository__
 
 __Install the dependencies:__
 

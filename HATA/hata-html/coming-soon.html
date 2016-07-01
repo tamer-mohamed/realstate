@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-US">
+
+    <head>
+
+        <title>HATA - The Real Estate</title>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <script src="js/pace.js"></script>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.selectBox.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/green.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/responsive.css" type="text/css">
+        <link rel="stylesheet" href="css/pace-minimal.css">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
+
+        <link rel="shortcut icon" href="favicon.ico">
+
+        <!--[if lt IE 9]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body class="offline coming-soon">
+
+        <!-- HEADER -->
+        <header class="clearfix">
+
+            <div class="left-side clearfix">
+
+                <div class="logo">
+                    <a href="#"><img src="images/logo.png" alt="HATA">HATA</a>
+                </div>
+
+            </div>
+
+            <div class="right-side">
+
+                <div class="adress">
+                    <a href="#">121 King Street, Melbourne Victoria 3000 Australia</a>
+                </div>
+
+                <div class="phone">
+                    <a href="tel:+61383766284">+ 613 8376 6284</a>
+                </div>
+
+            </div>
+
+        </header>
+        <!-- HEADER -->
+
+        <!-- ERROR -->
+        <div class="page-wrap error-page">
+
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="col-md-12">
+                        <h4>Coming Soon</h4>
+                        <div class="progress-bar">
+                            <div style="width: 70%;"></div>
+                        </div>
+                        <div class="cycle-slideshow" data-cycle-slides="> div" data-cycle-timeout="5000" data-cycle-prev="#comingsoon-slider-control .prev" data-cycle-next="#comingsoon-slider-control .next">
+                            <div><p><span>110 835</span>Seconds Left</p></div>
+                            <div><p><span>7 835</span>Minutes Left</p></div>
+                            <div><p><span>130</span>Hours Left</p></div>
+                        </div>
+                        <div id="comingsoon-slider-control" class="slider-control">
+                            <a href="#" class="prev"><i class="fa fa-angle-left"></i>In Seconds</a>
+                            <a href="#" class="next">In Hours<i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ERROR -->
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="col-md-12 copy-right">
+                        <p>&copy; 2015 HATA - Real Estate Site Template</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- FOOTER -->
+
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/masonry.pkgd.min.js"></script>
+        <script src="js/jquery.flexslider-min.js"></script>
+        <script src="js/jquery.selectBox.min.js"></script>
+        <script src="js/icheck.js"></script>
+        <script src="js/counter.animation.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/jquery.cycle2.js"></script>
+
+    </body>
+</html>
