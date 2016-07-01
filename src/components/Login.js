@@ -72,25 +72,29 @@ const Login = React.createClass({
             <div className="row">
               <form action="#">
                 {this.state.loginResult || ""}
-                <div className="col-md-6">
-                  <div className="input-group input-group-lg">
-                    <span className="input-group-addon" id="sizing-addon1">Email</span>
-                    <input type="text" className="form-control" placeholder="jhon@smith.com"
-                           aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}
-                           value={this.state.loginInfo.email}/>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="input-group input-group-lg">
+                      <span className="input-group-addon" id="sizing-addon1">Email</span>
+                      <input type="text" className="form-control" placeholder="jhon@smith.com"
+                             aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}
+                             value={this.state.loginInfo.email}/>
+                    </div>
                   </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="input-group input-group-lg">
+                  <div className="col-md-6">
+                    <div className="input-group input-group-lg">
                   <span className="input-group-addon" id="sizing-addon1"
                         value={this.state.loginInfo.password}>Password</span>
-                    <input type="password" className="form-control" placeholder="****"
-                           aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({password:e.target.value})}/>
-                  </div>
+                      <input type="password" className="form-control" placeholder="****"
+                             aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({password:e.target.value})}/>
+                    </div>
+                  </div>¬
                 </div>
-                <div className="col-lg-12">
-                  <div className="input-group input-group-lg">
-                    <input type="submit" className="btn btn-danger" onClick={this.submitLogin} value="Login"/>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="input-group input-group-lg">
+                      <input type="submit" className="btn btn-danger" onClick={this.submitLogin} value="Login"/>
+                    </div>
                   </div>
                 </div>
               </form>

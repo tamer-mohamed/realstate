@@ -10,12 +10,14 @@ import Registration from './components/Registration';
 // user
 import PropertyAdd from './components/secure/PropertyAdd';
 
+//utils
+import auth from './utils/auth';
+
 const routes = [
   {
     path: '/',
     component: App,
     onEnter: function(nextState, replace){
-      //if(supportedLangs.indexOf(nextState.location.pathname) === -1){
       if(nextState.location.pathname === "/" || nextState.location.pathname === ""){
         replace("/ar");
       }
@@ -37,19 +39,28 @@ const routes = [
             path: 'user',
             indexRoute: {component: Properties},
             childRoutes: [
-              {path:"register", component: Registration},
+              {path: "register", component: Registration},
+              {path: "login", component: Login},
               {
-                path: 'properties',
+
+                // user dashboard
+                path: 'dashboard',
+                onEnter: auth.requireAuth,
                 indexRoute: {component: Properties},
                 childRoutes: [
                   {
-                    path: 'add',
-                    component: PropertyAdd
+                    path: 'properties',
+                    indexRoute: {component: Properties},
+                    childRoutes: [
+                      {
+                        path: 'add',
+                        component: PropertyAdd
+                      }
+                    ]
                   }
                 ]
               }
             ]
-
           },
           {
 
