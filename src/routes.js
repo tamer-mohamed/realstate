@@ -39,6 +39,8 @@ const routes = [
             path: 'user',
             indexRoute: {component: Properties},
             childRoutes: [
+
+              // TODO: redirect to dashboard in case user logged in
               {path: "register", component: Registration},
               {path: "login", component: Login},
               {

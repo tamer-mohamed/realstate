@@ -1,8 +1,11 @@
 import React from 'react';
 import Firebase from 'firebase';
+import {intlShape, injectIntl} from 'react-intl';
 
 const Login = React.createClass({
-
+  propTypes: {
+    intl: intlShape.isRequired,
+  },
   getInitialState: function(){
     return {
       loginInfo: {
@@ -27,7 +30,9 @@ const Login = React.createClass({
   renderResult: function(state, e){
     let result;
     if(state){
-      result = <div className="alert alert-success" role="alert">You have successfully logged in, you will be redirected to the homepage.</div>;
+      result =
+        <div className="alert alert-success" role="alert">You have successfully logged in, you will be redirected to the
+          homepage.</div>;
       setTimeout(()=>{
         this.props.history.push('/');
       }, 5000);
@@ -56,6 +61,7 @@ const Login = React.createClass({
 
 
   render: function(){
+    const {formatMessage} = this.props.intl;
     return (
       <div className="page-wrap">
 
@@ -77,8 +83,7 @@ const Login = React.createClass({
                     <div className="input-group input-group-lg">
                       <span className="input-group-addon" id="sizing-addon1">Email</span>
                       <input type="text" className="form-control" placeholder="jhon@smith.com"
-                             aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}
-                             value={this.state.loginInfo.email}/>
+                             aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}/>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -86,14 +91,17 @@ const Login = React.createClass({
                   <span className="input-group-addon" id="sizing-addon1"
                         value={this.state.loginInfo.password}>Password</span>
                       <input type="password" className="form-control" placeholder="****"
-                             aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({password:e.target.value})}/>
+                             aria-describedby="sizing-addon1"
+                             onChange={(e)=>this.updateInfo({password:e.target.value})}/>
                     </div>
-                  </div>¬
+                  </div>
+                  ¬
                 </div>
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="input-group input-group-lg">
-                      <input type="submit" className="btn btn-danger" onClick={this.submitLogin} value="Login"/>
+                      <input type="submit" className="btn btn-danger" onClick={this.submitLogin}
+                             value={formatMessage({id:"forms.users.login.submit"})}/>
                     </div>
                   </div>
                 </div>
@@ -108,4 +116,4 @@ const Login = React.createClass({
 });
 
 
-export default Login;
+export default injectIntl(Login);

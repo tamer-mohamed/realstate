@@ -7,16 +7,26 @@ import UserGadgeNotLogged from './UserGadget.notLogged';
 
 
 const UserGadget = React.createClass({
-
-  isLoggedIn: function(){
-    return this.props.userId !== null
+  contextTypes: {
+    lang: React.PropTypes.string,
+    user: React.PropTypes.any
   },
 
+  renderGadget: function(){
+    let gadget;
+    if(this.context.user !== null){
+      gadget = <UserGadgetLogged userId={this.context.user.uid}/>;
+    }
+    else
+      gadget = <UserGadgeNotLogged />;
+
+    return gadget;
+  },
   render: function(){
-    console.log(this.props.userId);
+
     return (
       <div className="user">
-        {this.isLoggedIn() ? <UserGadgetLogged/> : <UserGadgeNotLogged/>}
+        {this.renderGadget()}
       </div>
     );
   }

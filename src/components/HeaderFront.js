@@ -13,9 +13,8 @@ const HeaderFront = React.createClass({
     user: React.PropTypes.any
   },
   render: function(){
-    console.log('HEADER CONTEXT', this.context);
-
     let lang = this.context.lang;
+    
     return (
       <section>
 
