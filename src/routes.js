@@ -6,6 +6,8 @@ import Login from './components/Login';
 import PropertySingle from './components/PropertySingle';
 import Properties from './components/Properties';
 import Registration from './components/Registration';
+import Error404 from './components/Error404';
+
 
 // user
 import PropertyAdd from './components/secure/PropertyAdd';
@@ -76,6 +78,11 @@ const routes = [
               }
             ]
 
+          },
+          {
+
+            // user screens
+            path: '*', component: Error404
           }
         ]
       }

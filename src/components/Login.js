@@ -1,10 +1,14 @@
 import React from 'react';
 import Firebase from 'firebase';
+import {browserHistory} from 'react-router';
 import {intlShape, injectIntl} from 'react-intl';
 
 const Login = React.createClass({
   propTypes: {
     intl: intlShape.isRequired,
+  },
+  contextTypes: {
+    lang: React.PropTypes.string
   },
   getInitialState: function(){
     return {
@@ -34,7 +38,8 @@ const Login = React.createClass({
         <div className="alert alert-success" role="alert">You have successfully logged in, you will be redirected to the
           homepage.</div>;
       setTimeout(()=>{
-        this.props.history.push('/');
+        // redirect to homepage
+        browserHistory.push(this.context.lang);
       }, 5000);
     }
     else{
@@ -48,6 +53,8 @@ const Login = React.createClass({
   submitLogin: function(e){
     e.preventDefault();
 
+    // reset result
+    this.setState({loginResult: null});
 
     Firebase.auth().signInWithEmailAndPassword(this.state.loginInfo.email, this.state.loginInfo.password).then((user)=>{
       console.log('Logged', user);

@@ -9,7 +9,7 @@ const UserGadgetLogged = React.createClass({
   render: function(){
     return (
       <div>
-        <Link to={`${this.context.lang}/user/login`}>Login</Link> / <Link to={`${this.context.lang}/user/register`}>Register</Link>
+        <Link to={`${this.context.lang}/user/login`}>Login</Link> /  <Link to={`${this.context.lang}/user/register`}>Register</Link>
       </div>
     )
   }

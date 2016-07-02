@@ -66,11 +66,6 @@ const Home = React.createClass({
         else
           matchedType = p.type === data.type.value;
 
-        console.log('location', matchedLocation);
-        console.log('purpose', matchedPurpose);
-        console.log('type', matchedType);
-        console.log('data', data);
-
         return matchedLocation && matchedPurpose && matchedType;
       });
       this.setState({filteredData: filteredData, isSearchEnabled: true});
