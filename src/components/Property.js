@@ -44,7 +44,7 @@ const Property = React.createClass({
         <div className="item-detail">
           <div className="left">
               <span className="place">
-                <i className="fa fa-map-marker"/>{this.props.data.area}({this.props.data.location})
+                <i className="fa fa-map-marker"/>{this.props.data.location}
               </span>
 
             {this.renderDetails()}
