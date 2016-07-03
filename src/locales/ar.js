@@ -19,15 +19,15 @@ module.exports = {
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
-<<<<<<< Updated upstream
+
     "block.submitProperty.text": "هل تريد اضافة عقارك؟",
     "block.submitProperty.buttonText": "إضافة عقار",
-=======
+
 
     // validations
->>>>>>> Stashed changes
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
+
     "forms.validations.generic.isNumeric":" يجب أن يكون رقمية",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
@@ -46,6 +46,7 @@ module.exports = {
     "forms.property.add.labels.genericInfo":" معلومات عامة عن العقار",
     "forms.property.add.labels.address":" معلومات عنوان العقار",
     "forms.property.add.labels.featuredLevel":" مستوى عنوان العقار المميز",
+
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
