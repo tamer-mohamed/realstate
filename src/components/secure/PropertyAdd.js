@@ -8,6 +8,7 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 import InputField from '../form/Input';
 import SelectField from '../form/Select';
 import RadioButton from '../form/RadioButton';
+import InputPostfixAddon from '../form/InputPostfixAddon';
 
 
 //components
@@ -44,7 +45,7 @@ const PropertyAdd = React.createClass({
 
     this.bindAsArray(firebase.database().ref(`areas/${location}`), 'areas');
   },
-  submit: function(data){
+  submit: function(data, reset){
 
     let {formatMessage} = this.props.intl;
 
@@ -160,17 +161,23 @@ const PropertyAdd = React.createClass({
                                   required/>
                     </div>
                     <div className="row">
-                      <InputField className="col-md-3" title={"forms.property.add.fields.price"} name="price"
-                                  validations={{isNumeric:true,minLength:1}}
-                                  validationErrors={{
-                                  isNumeric:formatMessage({id:"forms.validations.isNumeric"}),
-                                  isDefaultRequiredValue: formatMessage({id:"forms.validations.required"})
+                      <InputPostfixAddon className="col-md-3"
+                                         title={"forms.property.add.fields.price"}
+                                         name="price"
+                                         addOnLabel={"DK"}
+                                         validations={{isNumeric:true,minLength:1}}
+                                         validationErrors={{
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"}),
+                                  isDefaultRequiredValue: formatMessage({id:"forms.validation.generic.required"})
                                   }} required/>
 
-                      <InputField className="col-md-3" title={"forms.property.add.fields.space"} name="space"
-                                  addOn={true} addOnType={'postfix'} addOnLabel={"m2"} validations="isNumeric"
-                                  validationError={formatMessage({id:"forms.validations.isNumeric"})}
-                                  required/>
+                      <InputPostfixAddon className="col-md-3"
+                                         title={"forms.property.add.fields.space"}
+                                         name="space"
+                                         addOnLabel={"m2"}
+                                         validations="isNumeric"
+                                         validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
+                                         required/>
 
                       <SelectField className="col-md-3" title={"forms.property.add.fields.purpose"} name="purpose"
                                    options={purposes} value={purposes[0]}/>
@@ -205,7 +212,7 @@ const PropertyAdd = React.createClass({
                     <div className="input-group">
                       {this.state.featuredLevels.map((level)=>{
                         return (
-                          <RadioButton type="radio" value={level['.key']}
+                          <RadioButton key={level['.key']} type="radio" value={level['.key']}
                                        title={`forms.property.add.fields.featuredLevel.${level['.value']}`}
                                        name="featuredLevel"/>
                         )

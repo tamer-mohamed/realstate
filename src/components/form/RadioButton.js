@@ -40,7 +40,7 @@ const RadioButton = React.createClass({
         />
 
 
-          <FormattedMessage id={this.props.title}>Message</FormattedMessage>
+          <FormattedMessage id={this.props.title}/>
         </label>
 
         <span className='validation-error'>{errorMessage}</span>
