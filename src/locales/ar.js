@@ -10,7 +10,7 @@ module.exports = {
     "menu.contact": "اتصل بنا",
 
     // user menu
-    "userMenu.signout": "signout",
+    "userMenu.signout": "خروج",
     "userMenu.allProperties": "عنا",
     "userMenu.contact": "اتصل بنا",
 
@@ -20,15 +20,15 @@ module.exports = {
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
 <<<<<<< Updated upstream
-    "block.submitProperty.text": "Submit your property",
-    "block.submitProperty.buttonText": "Submit",
+    "block.submitProperty.text": "هل تريد اضافة عقارك؟",
+    "block.submitProperty.buttonText": "إضافة عقار",
 =======
 
     // validations
 >>>>>>> Stashed changes
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
-    "forms.validations.generic.isNumeric":" has to be  numeric",
+    "forms.validations.generic.isNumeric":" يجب أن يكون رقمية",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
     // registeration form
@@ -43,9 +43,9 @@ module.exports = {
 
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
-    "forms.property.add.labels.genericInfo":" Property general information",
-    "forms.property.add.labels.address":" Property Address information",
-    "forms.property.add.labels.featuredLevel":" Property Address Featured level",
+    "forms.property.add.labels.genericInfo":" معلومات عامة عن العقار",
+    "forms.property.add.labels.address":" معلومات عنوان العقار",
+    "forms.property.add.labels.featuredLevel":" مستوى عنوان العقار المميز",
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
@@ -199,6 +199,8 @@ module.exports = {
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
-    "featuredLevel.tamam": "tamam"
+    "featuredLevel.1": "hot"
+      "featuredLevel.2": "Slider"
+      "featuredLevel.3": "Highlighted"
   }
 }
