@@ -28,21 +28,23 @@ const InputField = React.createClass({
 
     const labelClassName = "form-control-label";
 
-    const addOnLabel = <span className="input-group-addon">{this.props.addOnLabel}</span>;
-
     return (
       <div className={className}>
         <label htmlFor={this.props.name} className={labelClassName}>
           <FormattedMessage id={this.props.title}/>
         </label>
+        <div className="input-group">
+          <div className="input-group-addon">{this.props.addOnLabel}</div>
+          <input
+            className="form-control"
+            type={this.props.type || 'text'}
+            name={this.props.name}
+            onBlur={this.changeValue}
+            checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
+          />
+        </div>
 
-        <input
-          className="form-control"
-          type={this.props.type || 'text'}
-          name={this.props.name}
-          onBlur={this.changeValue}
-          checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
-        />
+
         <span className='validation-error'>{errorMessage}</span>
       </div>
     );

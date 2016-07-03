@@ -7,6 +7,9 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 // form components
 import InputField from '../form/Input';
 import SelectField from '../form/Select';
+import RadioButton from '../form/RadioButton';
+import InputPostfixAddon from '../form/InputPostfixAddon';
+
 
 //components
 const PropertyAdd = React.createClass({
@@ -14,40 +17,22 @@ const PropertyAdd = React.createClass({
   propTypes: {
     intl: intlShape.isRequired,
   },
+  contextTypes: {
+    user: React.PropTypes.any
+  },
   getInitialState: function(){
     return {
-      validationErrors: {},
       formResult: null,
       purposes: [],
-      locations: []
+      locations: [],
+      featuredLevels: []
     };
-  },
-  validateForm: function(values){
-    const {formatMessage} = this.props.intl;
-    let validation = {};
-    switch(true){
-      case !values.title:
-        validation.title = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      case !values.price:
-        validation.price = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      case !values.space:
-        validation.space = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      default:
-        validation = {};
-
-    }
-
-    this.setState({
-      validationErrors: validation
-    });
   },
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref('purposes'), 'purposes');
     this.bindAsArray(firebase.database().ref('locations'), 'locations');
     this.bindAsArray(firebase.database().ref('types'), 'types');
+    this.bindAsArray(firebase.database().ref('config/featuredLevels'), 'featuredLevels');
   },
   componentWillUnMount: function(){
     this.unbind('purposes');
@@ -60,29 +45,37 @@ const PropertyAdd = React.createClass({
 
     this.bindAsArray(firebase.database().ref(`areas/${location}`), 'areas');
   },
-  submit: function(data){
-    // validate data
-    this.validateForm(data);
+  submit: function(data, reset){
 
-    if(this.state.validationErrors === {}){
+    let {formatMessage} = this.props.intl;
+
+    //reset errors
+    this.setState({formResult: null});
+
+    if(this.refs.form.state.isValid){
       firebase.database().ref('properties').push({
         title: data.title,
-        location: data.location,
+        location: data.location.value,
         price: data.price,
-        area: data.area,
+        area: data.area.value,
         space: data.space,
-        type: data.type,
-        purpose: data.purpose
+        type: data.type.value,
+        purpose: data.purpose.value,
+        featuredLevel: data.featuredLevel,
+        addedBy: this.context.user.uid
       }, (e)=>{
         if(e === null){
           this.setState({formResult: true});
           this.resetForm();
         }
         else{
-
+          this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
         }
-        this.setState({formErrors: e});
       })
+    }
+
+    else{
+      this.setState({formResult: formatMessage({id: `forms.validations.correctErrors`})});
     }
 
   },
@@ -120,8 +113,7 @@ const PropertyAdd = React.createClass({
         <div className="row"><SelectField className="col-md-4 " title={"forms.property.add.fields.area"}
                                           name="area" options={options} value={options[0]}/></div>;
     }
-    else if(typeof this.state.locations !== 'undefined' && this.state.locations.length > 1){
-      console.log(this.state.locations);
+    else if(this.state.locations.length === 1){
       this.updateAreas(this.state.locations[0]['.key']);
     }
 
@@ -138,7 +130,6 @@ const PropertyAdd = React.createClass({
             </div>
             <div className="row">
               <Form ref="form" onSubmit={this.submit}
-                    validationErrors={this.state.validationErrors}
                     className="login">
 
                 <If condition={this.state.formResult !== null}>
@@ -151,33 +142,84 @@ const PropertyAdd = React.createClass({
                       </Then>
 
                       <Else>
-                        <FormattedMessage id="forms.property.error"/>
+                        <div className="col-md-12 alert alert-error">
+                          {this.state.formResult}
+                        </div>
                       </Else>
                     </If>
                   </Then>
                 </If>
 
+
                 <div className="row">
-                  <InputField className="col-md-6" title={"forms.property.add.fields.title"} name="title"
-                              required/>
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.genericInfo"/>
+                    </h6>
+                    <div className="row">
+                      <InputField className="col-md-6" title={"forms.property.add.fields.title"} name="title"
+                                  required/>
+                    </div>
+                    <div className="row">
+                      <InputPostfixAddon className="col-md-3"
+                                         title={"forms.property.add.fields.price"}
+                                         name="price"
+                                         addOnLabel={formatMessage({id:"settings.currency"})}
+                                         validations={{isNumeric:true,minLength:1}}
+                                         validationErrors={{
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"}),
+                                  isDefaultRequiredValue: formatMessage({id:"forms.validations.generic.required"})
+                                  }} required/>
+
+                      <InputPostfixAddon className="col-md-3"
+                                         title={"forms.property.add.fields.space"}
+                                         name="space"
+                                         addOnLabel={"m2"}
+                                         validations="isNumeric"
+                                         validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
+                                         required/>
+
+                      <SelectField className="col-md-3" title={"forms.property.add.fields.purpose"} name="purpose"
+                                   options={purposes} value={purposes[0]}/>
+                    </div>
+                  </div>
                 </div>
+
+
                 <div className="row">
-                  <InputField className="col-md-3" title={"forms.property.add.fields.price"} name="price"
-                              validations="isNumeric" required/>
-                  <InputField className="col-md-3" title={"forms.property.add.fields.space"} name="space"
-                              addOn={true} addOnType={'postfix'} addOnLabel={"m2"} validations="isNumeric" required/>
-                </div>
-                <div className="row">
-                  <SelectField className="col-md-4" title={"forms.property.add.fields.purpose"} name="purpose"
-                               options={purposes} value={purposes[0]}/>
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.address"/>
+                    </h6>
+                  </div>
+
                   <SelectField className="col-md-4" title={"forms.property.add.fields.type"} name="type"
                                options={types} value={types[0]}/>
                   <SelectField className="col-md-4" title={"forms.property.add.fields.location"}
                                name="location" options={locations}
                                onChange={(e)=>this.updateAreas(e.currentTarget.value)} value={locations[0]}/>
+
+                  {areaSelect}
+
                 </div>
 
-                {areaSelect}
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.featuredLevel"/>
+                    </h6>
+                    <div className="input-group">
+                      {this.state.featuredLevels.map((level)=>{
+                        return (
+                          <RadioButton key={level['.key']} type="radio" value={level['.key']}
+                                       title={`featuredLevel.${level['.value']}`}
+                                       name="featuredLevel"/>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
 
                 <div className="row">
                   <div className="col-lg-12">

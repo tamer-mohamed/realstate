@@ -1,9 +1,9 @@
 {
-  "name": "react-starterify",
+  "name": "Alahmed realstate",
   "description": "React JS application skeleton using Browserify and other awesome tools",
-  "main": "app.js",
+  "main": "index.js",
   "authors": [
-    "Maurizio Mangione"
+    "Tamer Elsayed"
   ],
   "license": "no",
   "keywords": [
@@ -28,5 +28,7 @@
     "test",
     "tests"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "slick-carousel": "^1.6.0"
+  }
 }

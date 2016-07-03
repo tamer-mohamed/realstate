@@ -1,6 +1,6 @@
 import React from 'react';
 import Firebase from 'firebase';
-import {browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 import {intlShape, injectIntl} from 'react-intl';
 
 const Login = React.createClass({
@@ -39,7 +39,7 @@ const Login = React.createClass({
           homepage.</div>;
       setTimeout(()=>{
         // redirect to homepage
-        browserHistory.push(this.context.lang);
+        hashHistory.push(this.context.lang);
       }, 5000);
     }
     else{
