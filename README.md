@@ -9,8 +9,6 @@ ReactJS application with Firebase
 
 ## Usage
 
-__Clone the repository__
-
 __Install the dependencies:__
 
 `npm install`

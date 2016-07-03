@@ -6,16 +6,20 @@ import Login from './components/Login';
 import PropertySingle from './components/PropertySingle';
 import Properties from './components/Properties';
 import Registration from './components/Registration';
+import Error404 from './components/Error404';
+
 
 // user
 import PropertyAdd from './components/secure/PropertyAdd';
+
+//utils
+import auth from './utils/auth';
 
 const routes = [
   {
     path: '/',
     component: App,
     onEnter: function(nextState, replace){
-      //if(supportedLangs.indexOf(nextState.location.pathname) === -1){
       if(nextState.location.pathname === "/" || nextState.location.pathname === ""){
         replace("/ar");
       }
@@ -37,19 +41,30 @@ const routes = [
             path: 'user',
             indexRoute: {component: Properties},
             childRoutes: [
-              {path:"register", component: Registration},
+
+              // TODO: redirect to dashboard in case user logged in
+              {path: "register", component: Registration},
+              {path: "login", component: Login},
               {
-                path: 'properties',
+
+                // user dashboard
+                path: 'dashboard',
+                onEnter: auth.requireAuth,
                 indexRoute: {component: Properties},
                 childRoutes: [
                   {
-                    path: 'add',
-                    component: PropertyAdd
+                    path: 'properties',
+                    indexRoute: {component: Properties},
+                    childRoutes: [
+                      {
+                        path: 'add',
+                        component: PropertyAdd
+                      }
+                    ]
                   }
                 ]
               }
             ]
-
           },
           {
 
@@ -63,6 +78,11 @@ const routes = [
               }
             ]
 
+          },
+          {
+
+            // user screens
+            path: '*', component: Error404
           }
         ]
       }
