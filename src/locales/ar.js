@@ -10,6 +10,8 @@ module.exports = {
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
+    "block.submitProperty.text": "Submit your property",
+    "block.submitProperty.buttonText": "Submit",
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validation.generic.required": "هذه الخانة مطلوبه",
     "forms.validation.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
