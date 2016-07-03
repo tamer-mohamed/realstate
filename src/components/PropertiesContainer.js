@@ -4,13 +4,13 @@ import Property from './Property';
 
 const PropertiesContainer = React.createClass({
   propTypes: {
-    data: React.PropTypes.object
+    data: React.PropTypes.array
   },
 
   // rendering data
   propertiesRender: function(){
     return this.props.data.map((property)=>{
-      return (<li className="col-md-4 col-sm-6" key={property['.key']}><Property data={property}/></li>);
+      return (<li className="col-md-3 col-sm-6" key={property['.key']}><Property data={property}/></li>);
     });
   },
 
@@ -24,7 +24,5 @@ const PropertiesContainer = React.createClass({
     )
   }
 });
-
-PropertiesContainer.propTypes = {data: React.PropTypes.array};
 
 export default PropertiesContainer;

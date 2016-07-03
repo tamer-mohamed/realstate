@@ -4,7 +4,7 @@ import Select from 'react-select';
 import Button from 'react-bootstrap/lib/Button';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
-import User from './UserGadget';
+import UserGadget from './UserGadget';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 
 const HeaderFront = React.createClass({
@@ -13,9 +13,8 @@ const HeaderFront = React.createClass({
     user: React.PropTypes.any
   },
   render: function(){
-    console.log('HEADER CONTEXT', this.context);
-
     let lang = this.context.lang;
+
     return (
       <section>
 
@@ -39,7 +38,7 @@ const HeaderFront = React.createClass({
                   </ul>
                 </nav>
 
-                <User userId={this.props.userId}/>
+                <UserGadget userId={this.context.user}/>
 
 
                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#mobile-menu"

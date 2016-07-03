@@ -4,7 +4,12 @@ import {hashHistory} from 'react-router';
 import {intlShape, injectIntl} from 'react-intl';
 
 const Login = React.createClass({
-
+  propTypes: {
+    intl: intlShape.isRequired,
+  },
+  contextTypes: {
+    lang: React.PropTypes.string
+  },
   getInitialState: function(){
     return {
       loginInfo: {

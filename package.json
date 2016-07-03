@@ -1,11 +1,11 @@
 {
-  "name": "react-starterify",
-  "version": "2.4.1",
-  "description": "React JS application skeleton using Browserify and other awesome tools",
+  "name": "react-realstate",
+  "version": "0.0.1",
+  "description": "React JS application for realstate agency.",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Granze/react-starterify"
+    "url": "https://github.com/tamerelsayed/realstate"
   },
   "keywords": [
     "gulp",
@@ -32,12 +32,7 @@
     "deploy": "gulp deploy",
     "test": "ava --tap | tap-nyan"
   },
-  "author": "Maurizio Mangione",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Granze/react-starterify/issues"
-  },
-  "homepage": "https://github.com/Granze/react-starterify",
+  "author": "Tamer Elsayed",
   "dependencies": {
     "firebase": "^3.0.5",
     "formsy-react": "^0.18.0",

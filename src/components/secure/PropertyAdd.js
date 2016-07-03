@@ -21,34 +21,11 @@ const PropertyAdd = React.createClass({
   },
   getInitialState: function(){
     return {
-      validationErrors: {},
       formResult: null,
       purposes: [],
       locations: [],
       featuredLevels: []
     };
-  },
-  validateForm: function(values){
-    const {formatMessage} = this.props.intl;
-    let validation = {};
-    switch(true){
-      case !values.title:
-        validation.title = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      case !values.price:
-        validation.price = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      case !values.space:
-        validation.space = formatMessage({id: "forms.validation.generic.required"});
-        break;
-      default:
-        validation = {};
-
-    }
-
-    this.setState({
-      validationErrors: validation
-    });
   },
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref('purposes'), 'purposes');
@@ -68,18 +45,21 @@ const PropertyAdd = React.createClass({
     this.bindAsArray(firebase.database().ref(`areas/${location}`), 'areas');
   },
   submit: function(data){
-    // validate data
-    this.validateForm(data);
 
-    if(this.state.validationErrors === {}){
+    let {formatMessage} = this.props.intl;
+
+    //reset errors
+    this.setState({formResult: null});
+
+    if(this.refs.form.state.isValid){
       firebase.database().ref('properties').push({
         title: data.title,
-        location: data.location,
+        location: data.location.value,
         price: data.price,
-        area: data.area,
+        area: data.area.value,
         space: data.space,
-        type: data.type,
-        purpose: data.purpose,
+        type: data.type.value,
+        purpose: data.purpose.value,
         featuredLevel: data.featuredLevel,
         addedBy: this.context.user.uid
       }, (e)=>{
@@ -88,10 +68,13 @@ const PropertyAdd = React.createClass({
           this.resetForm();
         }
         else{
-
+          this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
         }
-        this.setState({formErrors: e});
       })
+    }
+
+    else{
+      this.setState({formResult: formatMessage({id: `forms.validations.correctErrors`})});
     }
 
   },
@@ -129,8 +112,7 @@ const PropertyAdd = React.createClass({
         <div className="row"><SelectField className="col-md-4 " title={"forms.property.add.fields.area"}
                                           name="area" options={options} value={options[0]}/></div>;
     }
-    else if(typeof this.state.locations !== 'undefined' && this.state.locations.length > 1){
-      console.log(this.state.locations);
+    else if(this.state.locations.length === 1){
       this.updateAreas(this.state.locations[0]['.key']);
     }
 
@@ -147,7 +129,6 @@ const PropertyAdd = React.createClass({
             </div>
             <div className="row">
               <Form ref="form" onSubmit={this.submit}
-                    validationErrors={this.state.validationErrors}
                     className="login">
 
                 <If condition={this.state.formResult !== null}>
@@ -160,7 +141,9 @@ const PropertyAdd = React.createClass({
                       </Then>
 
                       <Else>
-                        <FormattedMessage id="forms.property.error"/>
+                        <div className="col-md-12 alert alert-error">
+                          {this.state.formResult}
+                        </div>
                       </Else>
                     </If>
                   </Then>
@@ -178,10 +161,17 @@ const PropertyAdd = React.createClass({
                     </div>
                     <div className="row">
                       <InputField className="col-md-3" title={"forms.property.add.fields.price"} name="price"
-                                  validations="isNumeric" required/>
+                                  validations={{isNumeric:true,minLength:1}}
+                                  validationErrors={{
+                                  isNumeric:formatMessage({id:"forms.validations.isNumeric"}),
+                                  isDefaultRequiredValue: formatMessage({id:"forms.validations.required"})
+                                  }} required/>
+
                       <InputField className="col-md-3" title={"forms.property.add.fields.space"} name="space"
                                   addOn={true} addOnType={'postfix'} addOnLabel={"m2"} validations="isNumeric"
+                                  validationError={formatMessage({id:"forms.validations.isNumeric"})}
                                   required/>
+
                       <SelectField className="col-md-3" title={"forms.property.add.fields.purpose"} name="purpose"
                                    options={purposes} value={purposes[0]}/>
                     </div>
