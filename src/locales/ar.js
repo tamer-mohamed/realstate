@@ -19,16 +19,15 @@ module.exports = {
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
-<<<<<<< Updated upstream
+
+    // blocks
     "block.submitProperty.text": "Submit your property",
     "block.submitProperty.buttonText": "Submit",
-=======
 
     // validations
->>>>>>> Stashed changes
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
-    "forms.validations.generic.isNumeric":" has to be  numeric",
+    "forms.validations.generic.isNumeric": " has to be  numeric",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
     // registeration form
@@ -43,9 +42,9 @@ module.exports = {
 
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
-    "forms.property.add.labels.genericInfo":" Property general information",
-    "forms.property.add.labels.address":" Property Address information",
-    "forms.property.add.labels.featuredLevel":" Property Address Featured level",
+    "forms.property.add.labels.genericInfo": " Property general information",
+    "forms.property.add.labels.address": " Property Address information",
+    "forms.property.add.labels.featuredLevel": " Property Address Featured level",
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
