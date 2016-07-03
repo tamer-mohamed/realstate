@@ -7,6 +7,8 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 // form components
 import InputField from '../form/Input';
 import SelectField from '../form/Select';
+import RadioButton from '../form/RadioButton';
+
 
 //components
 const PropertyAdd = React.createClass({
@@ -14,12 +16,16 @@ const PropertyAdd = React.createClass({
   propTypes: {
     intl: intlShape.isRequired,
   },
+  contextTypes: {
+    user: React.PropTypes.any
+  },
   getInitialState: function(){
     return {
       validationErrors: {},
       formResult: null,
       purposes: [],
-      locations: []
+      locations: [],
+      featuredLevels: []
     };
   },
   validateForm: function(values){
@@ -48,6 +54,7 @@ const PropertyAdd = React.createClass({
     this.bindAsArray(firebase.database().ref('purposes'), 'purposes');
     this.bindAsArray(firebase.database().ref('locations'), 'locations');
     this.bindAsArray(firebase.database().ref('types'), 'types');
+    this.bindAsArray(firebase.database().ref('config/featuredLevels'), 'featuredLevels');
   },
   componentWillUnMount: function(){
     this.unbind('purposes');
@@ -72,7 +79,9 @@ const PropertyAdd = React.createClass({
         area: data.area,
         space: data.space,
         type: data.type,
-        purpose: data.purpose
+        purpose: data.purpose,
+        featuredLevel: data.featuredLevel,
+        addedBy: this.context.user.uid
       }, (e)=>{
         if(e === null){
           this.setState({formResult: true});
@@ -157,27 +166,63 @@ const PropertyAdd = React.createClass({
                   </Then>
                 </If>
 
+
                 <div className="row">
-                  <InputField className="col-md-6" title={"forms.property.add.fields.title"} name="title"
-                              required/>
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.genericInfo"/>
+                    </h6>
+                    <div className="row">
+                      <InputField className="col-md-6" title={"forms.property.add.fields.title"} name="title"
+                                  required/>
+                    </div>
+                    <div className="row">
+                      <InputField className="col-md-3" title={"forms.property.add.fields.price"} name="price"
+                                  validations="isNumeric" required/>
+                      <InputField className="col-md-3" title={"forms.property.add.fields.space"} name="space"
+                                  addOn={true} addOnType={'postfix'} addOnLabel={"m2"} validations="isNumeric"
+                                  required/>
+                      <SelectField className="col-md-3" title={"forms.property.add.fields.purpose"} name="purpose"
+                                   options={purposes} value={purposes[0]}/>
+                    </div>
+                  </div>
                 </div>
+
+
                 <div className="row">
-                  <InputField className="col-md-3" title={"forms.property.add.fields.price"} name="price"
-                              validations="isNumeric" required/>
-                  <InputField className="col-md-3" title={"forms.property.add.fields.space"} name="space"
-                              addOn={true} addOnType={'postfix'} addOnLabel={"m2"} validations="isNumeric" required/>
-                </div>
-                <div className="row">
-                  <SelectField className="col-md-4" title={"forms.property.add.fields.purpose"} name="purpose"
-                               options={purposes} value={purposes[0]}/>
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.address"/>
+                    </h6>
+                  </div>
+
                   <SelectField className="col-md-4" title={"forms.property.add.fields.type"} name="type"
                                options={types} value={types[0]}/>
                   <SelectField className="col-md-4" title={"forms.property.add.fields.location"}
                                name="location" options={locations}
                                onChange={(e)=>this.updateAreas(e.currentTarget.value)} value={locations[0]}/>
+
+                  {areaSelect}
+
                 </div>
 
-                {areaSelect}
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <h6 className="fieldset-title">
+                      <FormattedMessage id="forms.property.add.labels.featuredLevel"/>
+                    </h6>
+                    <div className="input-group">
+                      {this.state.featuredLevels.map((level)=>{
+                        return (
+                          <RadioButton type="radio" value={level['.key']}
+                                       title={`forms.property.add.fields.featuredLevel.${level['.value']}`}
+                                       name="featuredLevel"/>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
 
                 <div className="row">
                   <div className="col-lg-12">
