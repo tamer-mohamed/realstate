@@ -164,11 +164,11 @@ const PropertyAdd = React.createClass({
                       <InputPostfixAddon className="col-md-3"
                                          title={"forms.property.add.fields.price"}
                                          name="price"
-                                         addOnLabel={"DK"}
+                                         addOnLabel={formatMessage({id:"settings.currency"})}
                                          validations={{isNumeric:true,minLength:1}}
                                          validationErrors={{
                                   isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"}),
-                                  isDefaultRequiredValue: formatMessage({id:"forms.validation.generic.required"})
+                                  isDefaultRequiredValue: formatMessage({id:"forms.validations.generic.required"})
                                   }} required/>
 
                       <InputPostfixAddon className="col-md-3"
@@ -213,7 +213,7 @@ const PropertyAdd = React.createClass({
                       {this.state.featuredLevels.map((level)=>{
                         return (
                           <RadioButton key={level['.key']} type="radio" value={level['.key']}
-                                       title={`forms.property.add.fields.featuredLevel.${level['.value']}`}
+                                       title={`featuredLevel.${level['.value']}`}
                                        name="featuredLevel"/>
                         )
                       })}
