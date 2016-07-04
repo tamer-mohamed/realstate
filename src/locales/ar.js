@@ -27,11 +27,10 @@ module.exports = {
     // validations
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
-
-    "forms.validations.generic.isNumeric":" يجب أن يكون رقمية",
+    "forms.validations.generic.isNumeric": " يجب أن يكون رقمية",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
-    // registeration form
+    // registration form
     "screen.user.register.pageTitle": "التسجيل",
     "forms.user.register.errors.addUser": "خطأ في إضافة مستخدم",
     "forms.user.register.fields.email": "البريد الإلكتروني",
@@ -41,11 +40,16 @@ module.exports = {
     "forms.user.register.submit": "تسجيل",
     "forms.user.register.success": "سجلت بنجاح",
 
+
+    // user all properties
+    "screen.secure.properties.pageTitle": "All properties",
+
+
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
-    "forms.property.add.labels.genericInfo":" معلومات عامة عن العقار",
-    "forms.property.add.labels.address":" معلومات عنوان العقار",
-    "forms.property.add.labels.featuredLevel":" مستوى عنوان العقار المميز",
+    "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
+    "forms.property.add.labels.address": " معلومات عنوان العقار",
+    "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
@@ -200,8 +204,8 @@ module.exports = {
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
-    "featuredLevel.1": "hot"
-      "featuredLevel.2": "Slider"
-      "featuredLevel.3": "Highlighted"
+    "featuredLevel.1": "hot",
+    "featuredLevel.2": "Slider",
+    "featuredLevel.3": "Highlighted",
   }
-}
+};

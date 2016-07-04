@@ -125,10 +125,6 @@ const PropertyAdd = React.createClass({
             <h2 className="page-title">
               <FormattedMessage id="screen.secure.properties.add.pageTitle"/></h2>
             <div className="row">
-              <div className="col-md-11 col-md-offset-1">
-              </div>
-            </div>
-            <div className="row">
               <Form ref="form" onSubmit={this.submit}
                     className="login">
 
@@ -213,7 +209,7 @@ const PropertyAdd = React.createClass({
                       {this.state.featuredLevels.map((level)=>{
                         return (
                           <RadioButton key={level['.key']} type="radio" value={level['.key']}
-                                       title={`featuredLevel.${level['.value']}`}
+                                         title={`featuredLevel.${level['.value']}`}
                                        name="featuredLevel"/>
                         )
                       })}

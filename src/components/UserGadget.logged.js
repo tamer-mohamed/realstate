@@ -47,7 +47,7 @@ const UserGadgetLogged = React.createClass({
             <Link to={`${lang}/user/profile`}><i className="fa fa-user"/>My Profile</Link>
           </li>
           <li>
-            <Link to={`${lang}/user/dashboard/properties/add`}><i className="fa fa-list"/>My Properties</Link>
+            <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/>My Properties</Link>
           </li>
           <li>
             <a onClick={this.handleLogout}><i className="fa fa-sign-out"/>Logout</a>
