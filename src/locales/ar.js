@@ -3,16 +3,35 @@ module.exports = {
   messages: {
     "screen.about": "معلومات عنا",
     "screen.breadcrumb": "معلومات عنا",
+
+    // main menu
     "menu.home": "الرئسية",
     "menu.about": "عنا",
     "menu.contact": "اتصل بنا",
+
+    // user menu
+    "userMenu.signout": "خروج",
+    "userMenu.allProperties": "عنا",
+    "userMenu.contact": "اتصل بنا",
+
+    // filters
     "filters.submitButton": "إرسال",
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
+
+    "block.submitProperty.text": "هل تريد اضافة عقارك؟",
+    "block.submitProperty.buttonText": "إضافة عقار",
+
+
+    // validations
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
-    "forms.validation.generic.required": "هذه الخانة مطلوبه",
-    "forms.validation.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
+    "forms.validations.generic.required": "هذه الخانة مطلوبه",
+
+    "forms.validations.generic.isNumeric":" يجب أن يكون رقمية",
+    "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
+
+    // registeration form
     "screen.user.register.pageTitle": "التسجيل",
     "forms.user.register.errors.addUser": "خطأ في إضافة مستخدم",
     "forms.user.register.fields.email": "البريد الإلكتروني",
@@ -21,7 +40,13 @@ module.exports = {
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
     "forms.user.register.submit": "تسجيل",
     "forms.user.register.success": "سجلت بنجاح",
+
+    // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
+    "forms.property.add.labels.genericInfo":" معلومات عامة عن العقار",
+    "forms.property.add.labels.address":" معلومات عنوان العقار",
+    "forms.property.add.labels.featuredLevel":" مستوى عنوان العقار المميز",
+
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
@@ -29,6 +54,7 @@ module.exports = {
     "forms.property.add.fields.type": "نوع العقار",
     "forms.property.add.fields.location": "المحافظة",
     "forms.property.add.fields.area": "المنطقة",
+
     "areas.ahmadi.abuHalifa": "أبوحليفه",
     "areas.ahmadi.ahmadi": "الأحمدي",
     "areas.ahmadi.bnaider": "بنيدر",
@@ -142,14 +168,20 @@ module.exports = {
     "areas.mubarakAlKabeer.sabahAlSalem": "ضاحية صباح السالم",
     "areas.mubarakAlKabeer.subhan": "صبحان",
     "areas.mubarakAlKabeer.wista": "الوسطة",
+
+
     "locations.ahmadi": "محافظة الأحمدي",
     "locations.farwaniya": "محافظة الفروانية",
     "locations.hawally": "محافظة حولي",
     "locations.jahra": "محافظة الجهراء",
     "locations.kuwaitCity": "محافظة العاصمة",
     "locations.mubarakAlKabeer": "محافظة مبارك الكبير",
+
+
     "purposes.rent": "إيجار",
     "purposes.sale": "البيع",
+
+
     "types.apartment": "شقة",
     "types.beachHouse": "شالية",
     "types.buildings": "بناية",
@@ -164,6 +196,12 @@ module.exports = {
     "types.shop": "محل",
     "types.showroom": "معرض",
     "types.villa": "فيلا",
-    "types.warehouse": "مخزن"
+    "types.warehouse": "مخزن",
+
+    //TODO: change the following the corresponding featured levels in firebase
+    // ex "featuredLevel.tamam" : "tamam"
+    "featuredLevel.1": "hot"
+      "featuredLevel.2": "Slider"
+      "featuredLevel.3": "Highlighted"
   }
 }

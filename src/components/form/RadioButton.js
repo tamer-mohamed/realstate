@@ -3,7 +3,7 @@ import Formsy from 'formsy-react';
 import { If, Then, Else } from 'react-if';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 
-const InputField = React.createClass({
+const RadioButton = React.createClass({
 
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
@@ -26,27 +26,27 @@ const InputField = React.createClass({
     // or the server has returned an error message
     const errorMessage = this.getErrorMessage();
 
-    const labelClassName = "form-control-label";
-
-    const addOnLabel = <span className="input-group-addon">{this.props.addOnLabel}</span>;
+    const labelClassName = "form-control-label-radio pull-left";
 
     return (
-      <div className={className}>
+      <div className={"radio"}>
+
         <label htmlFor={this.props.name} className={labelClassName}>
+        <input
+          type={'radio'}
+          name={this.props.name}
+          className="pull-left"
+          onBlur={this.changeValue}
+        />
+
+
           <FormattedMessage id={this.props.title}/>
         </label>
 
-        <input
-          className="form-control"
-          type={this.props.type || 'text'}
-          name={this.props.name}
-          onBlur={this.changeValue}
-          checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
-        />
         <span className='validation-error'>{errorMessage}</span>
       </div>
     );
   }
 });
 
-export default InputField;
+export default RadioButton;
