@@ -40,10 +40,7 @@ const PropertyAdd = React.createClass({
     this.unbind('types');
   },
   updateAreas: function(location){
-    if(typeof this.state.areas !== 'undefined')
-      this.unbind('areas');
-
-    this.bindAsArray(firebase.database().ref(`areas/${location}`), 'areas');
+    this.setState({propertyLocation: location});
   },
   submit: function(data, reset){
 
@@ -209,7 +206,7 @@ const PropertyAdd = React.createClass({
                       {this.state.featuredLevels.map((level)=>{
                         return (
                           <RadioButton key={level['.key']} type="radio" value={level['.key']}
-                                         title={`featuredLevel.${level['.value']}`}
+                                       title={`featuredLevel.${level['.value']}`}
                                        name="featuredLevel"/>
                         )
                       })}

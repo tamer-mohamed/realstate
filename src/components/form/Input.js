@@ -8,6 +8,15 @@ const InputField = React.createClass({
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
 
+  getInitialState: function () {
+    return {
+      value: this.props.value
+    };
+  },
+  syncValue: function () {
+    this.setValue(this.state.value);
+  },
+
   // setValue() will set the value of the component, which in
   // turn will validate it and the rest of the form
   changeValue(event) {
@@ -28,8 +37,6 @@ const InputField = React.createClass({
 
     const labelClassName = "form-control-label";
 
-    const addOnLabel = <span className="input-group-addon">{this.props.addOnLabel}</span>;
-
     return (
       <div className={className}>
         <label htmlFor={this.props.name} className={labelClassName}>
@@ -40,12 +47,16 @@ const InputField = React.createClass({
           className="form-control"
           type={this.props.type || 'text'}
           name={this.props.name}
-          onBlur={this.changeValue}
+          onChange={this.changeValue}
+          onBlur={this.syncValue}
+          value={this.getValue()}
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
         />
         <span className='validation-error'>{errorMessage}</span>
       </div>
     );
+
+    const addOnLabel = <span className="input-group-addon">{this.props.addOnLabel}</span>;
   }
 });
 

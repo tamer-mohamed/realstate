@@ -30,6 +30,12 @@ const App = React.createClass({
     return localeData;
   },
 
+  getInitialState: function(){
+    return {
+      loggedIn: null
+    }
+  },
+
   childContextTypes: {
     lang: React.PropTypes.string,
     user: React.PropTypes.any
