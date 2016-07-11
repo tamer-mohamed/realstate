@@ -40,10 +40,7 @@ const PropertyAdd = React.createClass({
     this.unbind('types');
   },
   updateAreas: function(location){
-    if(typeof this.state.areas !== 'undefined')
-      this.unbind('areas');
-
-    this.bindAsArray(firebase.database().ref(`areas/${location}`), 'areas');
+    this.setState({propertyLocation: location});
   },
   submit: function(data, reset){
 
@@ -124,10 +121,6 @@ const PropertyAdd = React.createClass({
           <div className="page-contents">
             <h2 className="page-title">
               <FormattedMessage id="screen.secure.properties.add.pageTitle"/></h2>
-            <div className="row">
-              <div className="col-md-11 col-md-offset-1">
-              </div>
-            </div>
             <div className="row">
               <Form ref="form" onSubmit={this.submit}
                     className="login">

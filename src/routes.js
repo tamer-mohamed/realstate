@@ -5,6 +5,8 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import PropertySingle from './components/PropertySingle';
 import Properties from './components/Properties';
+import MyProperties from './components/secure/MyProperties';
+import PropertyManage from './components/secure/PropertyManage';
 import Registration from './components/Registration';
 import Error404 from './components/Error404';
 
@@ -54,30 +56,21 @@ const routes = [
                 childRoutes: [
                   {
                     path: 'properties',
-                    indexRoute: {component: Properties},
+                    indexRoute: {component: MyProperties},
                     childRoutes: [
                       {
                         path: 'add',
                         component: PropertyAdd
+                      },
+                      {
+                        path: 'manage/:propId',
+                        component: PropertyManage
                       }
                     ]
                   }
                 ]
               }
             ]
-          },
-          {
-
-            // user screens
-            path: 'properties',
-            indexRoute: {component: Properties},
-            childRoutes: [
-              {
-                path: ':propertyId',
-                component: PropertySingle
-              }
-            ]
-
           },
           {
 

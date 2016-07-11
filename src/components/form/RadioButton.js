@@ -32,15 +32,15 @@ const RadioButton = React.createClass({
       <div className={"radio"}>
 
         <label htmlFor={this.props.name} className={labelClassName}>
-        <input
-          type={'radio'}
-          name={this.props.name}
-          className="pull-left"
-          onBlur={this.changeValue}
-        />
-
-
+          
+          <input
+            type={'radio'}
+            name={this.props.name}
+            className="pull-left"
+            onBlur={this.changeValue}
+          />
           <FormattedMessage id={this.props.title}/>
+
         </label>
 
         <span className='validation-error'>{errorMessage}</span>
