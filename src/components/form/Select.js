@@ -1,6 +1,6 @@
 import React from 'react';
 import Formsy from 'formsy-react';
-import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 
 const SelectField = React.createClass({

@@ -1,6 +1,14 @@
 module.exports = {
   locale: "ar",
+  formats: {},
+  className: "rtl",
+  "pluralRuleFunction": function(){
+  },
   messages: {
+    "settings.currency": "KWD",
+
+    "contextualMenu.addProperty": "Add property",
+
     "screen.about": "معلومات عنا",
     "screen.breadcrumb": "معلومات عنا",
 
@@ -13,6 +21,9 @@ module.exports = {
     "userMenu.signout": "خروج",
     "userMenu.allProperties": "عنا",
     "userMenu.contact": "اتصل بنا",
+
+    // Contextual Menu
+    "contextualMenu.user.addProperty": "Add property",
 
     // filters
     "filters.submitButton": "إرسال",
@@ -38,7 +49,22 @@ module.exports = {
     "forms.user.register.fields.password": "كلمه السر",
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
     "forms.user.register.submit": "تسجيل",
+    "forms.user.register.fields.accountType": "Account type",
     "forms.user.register.success": "سجلت بنجاح",
+
+
+    //
+    "screen.secure.properties.listing.propertyTitle": "Title",
+    "screen.secure.properties.listing.propertyFeatureLevel": "",
+    "screen.secure.properties.listing.manageProperty": " ",
+
+    // generic form vars
+    "forms.generic.add": "Add",
+    "forms.generic.select": "-- ¬choose --",
+    "forms.generic.update": "Update",
+
+    //login form
+    "forms.users.login.submit": "login",
 
 
     // user all properties
@@ -47,9 +73,12 @@ module.exports = {
 
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
+    "screen.secure.properties.manage.pageTitle": "Edit property",
     "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
     "forms.property.add.labels.address": " معلومات عنوان العقار",
     "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
+    "forms.property.add.labels.info": "Information",
+    "forms.property.success": "Tam 7efz el property bnga7",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
@@ -58,6 +87,25 @@ module.exports = {
     "forms.property.add.fields.type": "نوع العقار",
     "forms.property.add.fields.location": "المحافظة",
     "forms.property.add.fields.area": "المنطقة",
+
+
+    // forms error
+    "forms.errors.property.add": "Error on add property",
+
+    // prefrences
+    "property.preference.beds": "bedroom",
+    "property.preference.rooms": "rooms",
+    "property.preference.kitchen": "kitchen",
+    "property.preference.bathroom": "bathroom",
+    "property.preference.apartment": "apartment",
+    "property.preference.balcony": "balcony",
+    "property.preference.parking": "balcony",
+    "property.preference.floors": "balcony",
+    "property.preference.swimmingPool": "balcony",
+    "property.preference.laborResidence": "labor Residence",
+    "property.preference.villa": "villa",
+    "property.preference.waterWell": "water Well",
+
 
     "areas.ahmadi.abuHalifa": "أبوحليفه",
     "areas.ahmadi.ahmadi": "الأحمدي",

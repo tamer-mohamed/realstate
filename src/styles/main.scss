@@ -1,7 +1,13 @@
-header .logo img{
+
+
+header .logo img {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   -o-border-radius: 0;
+}
+
+.filter {
+  margin-top: 0px !important;
 }
 
 .filter .selectBox {
@@ -18,3 +24,6 @@ header .logo img{
   margin: 20px 0;
 }
 
+.validation-error {
+  color: red;
+}

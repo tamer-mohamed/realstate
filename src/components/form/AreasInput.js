@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
-import SelectField from '../form/Select';
+import Formsy from 'formsy-react';
+import {FormattedMessage} from 'react-intl';
 
 //components
 const AreasInput = React.createClass({
-  mixins: [ReactFireMixin],
+  mixins: [ReactFireMixin, Formsy.Mixin],
 
   propTypes: {
     location: React.PropTypes.string.isRequired,
+    options: React.PropTypes.array,
     className: React.PropTypes.string,
     value: React.PropTypes.string,
     name: React.PropTypes.string,
@@ -18,6 +20,14 @@ const AreasInput = React.createClass({
       areas: []
     }
   },
+
+  changeValue(event) {
+    if(this.props.onChange)
+      this.props.onChange(event);
+
+    this.setValue(event.currentTarget.value);
+  },
+
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
   },
@@ -26,27 +36,46 @@ const AreasInput = React.createClass({
     this.unbind('areas');
     this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
   },
-  componentWillUnmount: function(){
-    this.unbind('areas');
-  },
 //  shouldComponentUpdate: function(nextProps, nextState) {
 //    console.log(nextProps);
 //    return nextProps.location !== this.props.location;
 //  },
   render: function(){
+    const className = (this.props.className || ' ') + " " +
+      (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
+    const errorMessage = this.getErrorMessage();
 
-    const areaOptions = this.state.areas.map((p)=>{
-      return {value: p['.key'], title: p['.value']}
-    });
 
-    console.log('=OPTIONS==', this.state.areas);
+    const options = this.state.areas.map((option, i) => (
+      <option key={'areas-option-'+i} value={ option['.key']}>
+        { option['.value']}
+      </option>
+    ));
+
+    options.unshift(
+      <option key={'areas-option-null'} value={null}>
+        --- CHOOSE ---
+      </option>
+    );
+
+    const labelClassName = "form-control-label";
+
     return (
-      <SelectField
-        title={this.props.title}
-        className={this.props.className}
-        name={this.props.name}
-        options={areaOptions}
-      />
+      <div className={className}>
+        <label htmlFor={this.props.name} className={labelClassName}>
+          <FormattedMessage id={this.props.title}/>
+        </label>
+        <select
+          title={this.props.title}
+          onChange={this.changeValue}
+          value={this.getValue()}
+          className="form-control"
+          name={this.props.name}
+          required>
+          {options}
+        </select>
+        <span className='validation-error'>{errorMessage}</span>
+      </div>
     );
   }
 

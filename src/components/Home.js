@@ -77,7 +77,6 @@ const Home = React.createClass({
     let data = this.state.isSearchEnabled ? this.state.filteredData : this.state.propertiesList;
     return (
       <div>
-        <FeaturedSlider/>
         <Filter submitSearch={this.submitSearch}/>
         <PropertiesContainer data={data}/>
         <div className="full-width call-action">

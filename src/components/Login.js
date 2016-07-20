@@ -76,13 +76,6 @@ const Login = React.createClass({
           <div className="page-contents">
             <h2 className="page-title">Login</h2>
             <div className="row">
-              <div className="col-md-11 col-md-offset-1">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                  totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                  sunt explicabo.</p>
-              </div>
-            </div>
-            <div className="row">
               <form action="#">
                 {this.state.loginResult || ""}
                 <div className="row">

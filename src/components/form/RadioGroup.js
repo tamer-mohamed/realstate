@@ -27,13 +27,10 @@ const RadioGroup = React.createClass({
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
 
-    const { name, title, items } = this.props;
-
-    console.log('========== ITEMS', items);
+    const { name, items } = this.props;
     return (
 
       <div className={className}>
-        <label htmlFor={name}><FormattedMessage id={title}/></label>
         {items.map((item, i) => (
           <div key={i}>
             <input
@@ -42,7 +39,7 @@ const RadioGroup = React.createClass({
               onChange={this.changeValue.bind(this, item['.key'])}
               checked={this.state.value === item['.key']}
             />
-            <span><FormattedMessage id={`featuredLevel.${item['.value']}`}/></span>
+            <span><FormattedMessage id={`${item['.value']}`}/></span>
           </div>
         ))
         }

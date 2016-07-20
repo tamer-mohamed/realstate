@@ -48,7 +48,7 @@ const InputField = React.createClass({
           type={this.props.type || 'text'}
           name={this.props.name}
           onChange={this.changeValue}
-          onBlur={this.syncValue}
+          onBlur={this.changeValue}
           value={this.getValue()}
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
         />

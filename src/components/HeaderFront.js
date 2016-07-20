@@ -30,7 +30,11 @@ const HeaderFront = React.createClass({
 
                 <nav className="navbar collapse" id="mobile-menu">
                   <ul className="nav navbar-nav">
-                    <li><Link activeClassName="active" to={`/${lang}`}><FormattedMessage id="menu.home"/></Link></li>
+                    <li>
+                      <Link activeClassName="active" to={`/${lang}`}>
+                        <FormattedMessage id="menu.home"/>
+                      </Link>
+                    </li>
                     <li><Link activeClassName="active" to={`/${lang}/about/`}><FormattedMessage id="menu.about"/></Link>
                     </li>
                     <li><Link activeClassName="active" to={`/${lang}/contact/`}><FormattedMessage

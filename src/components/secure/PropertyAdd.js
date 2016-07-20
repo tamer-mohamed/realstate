@@ -3,11 +3,15 @@ import ReactFireMixin from 'reactfire';
 import { Form } from 'formsy-react';
 import Firebase from 'firebase';
 import { If, Then, Else } from 'react-if';
+import _ from 'lodash';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 // form components
 import InputField from '../form/Input';
 import SelectField from '../form/Select';
 import RadioButton from '../form/RadioButton';
+import RadioGroup from '../form/RadioGroup';
+import AreasInput from '../form/AreasInput';
+import PreferencesInput from '../form/PreferencesInput';
 import InputPostfixAddon from '../form/InputPostfixAddon';
 
 
@@ -23,9 +27,14 @@ const PropertyAdd = React.createClass({
   getInitialState: function(){
     return {
       formResult: null,
+      property: {},
       purposes: [],
       locations: [],
-      featuredLevels: []
+      featuredLevels: [],
+      propertyLocation: "",
+      formHelpers: {
+        locationChanged: false
+      }
     };
   },
   componentWillMount: function(){
@@ -45,25 +54,41 @@ const PropertyAdd = React.createClass({
   submit: function(data, reset){
 
     let {formatMessage} = this.props.intl;
+    let property = this.state.property;
+
+    console.log('DDDD', data);
 
     //reset errors
     this.setState({formResult: null});
 
+    //TODO: set validation for area
+
     if(this.refs.form.state.isValid){
-      firebase.database().ref('properties').push({
+      let prefrencePrefix = 'property-preference-';
+
+      let propertyPref = {};
+      _.forEach(data.type.preferences, function(v, k){
+        propertyPref[k] = data[prefrencePrefix + k];
+      });
+
+      Firebase.database().ref('properties').push({
         title: data.title,
-        location: data.location.value,
+        location: data.location,
         price: data.price,
-        area: data.area.value,
+        area: data.area,
         space: data.space,
-        type: data.type.value,
+        type: data.type.type,
+        preferences: propertyPref,
         purpose: data.purpose.value,
-        featuredLevel: data.featuredLevel,
-        addedBy: this.context.user.uid
+        //featuredLevel: data.featuredLevel,
+        addedBy: this.context.user.uid,
+        addedAt: new Date()
       }, (e)=>{
         if(e === null){
-          this.setState({formResult: true});
+
           this.resetForm();
+          this.setState({formResult: true});
+
         }
         else{
           this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
@@ -76,17 +101,16 @@ const PropertyAdd = React.createClass({
     }
 
   },
-  enableButton: function(){
-    this.setState({canSubmit: true});
-  },
-  disableButton: function(){
-    this.setState({canSubmit: false});
-  },
   resetForm: function(){
     this.refs.form.reset();
   },
+  updateAreas: function(location){
+    this.refs.areaInput.resetValue();
+    this.setState({selectedLocation: location, formHelpers: {locationChanged: true}})
+  },
   render: function(){
     const {formatMessage} = this.props.intl;
+    const property = this.state.property;
 
     let purposes = this.state.purposes.map((p)=>{
       return {value: p['.key'], title: p['.value']}
@@ -100,18 +124,24 @@ const PropertyAdd = React.createClass({
       return {value: p['.key'], title: p['.value']}
     });
 
+    let areasInput = null;
 
-    let areaSelect = "";
-    if(typeof this.state.areas !== 'undefined'){
-      let options = this.state.areas.map((p)=>{
-        return {value: p['.key'], title: p['.value']}
-      });
-      areaSelect =
-        <div className="row"><SelectField className="col-md-4 " title={"forms.property.add.fields.area"}
-                                          name="area" options={options} value={options[0]}/></div>;
-    }
-    else if(this.state.locations.length === 1){
-      this.updateAreas(this.state.locations[0]['.key']);
+    if(this.state.locations.length > 0){
+      let location = locations[0].value;
+      if(this.state.formHelpers.locationChanged){
+        location = this.state.selectedLocation;
+      }
+      areasInput = <div>
+        <SelectField className="col-md-4" title={"forms.property.add.fields.location"}
+                     name="location"
+                     options={locations}
+                     onChange={(e)=>this.updateAreas(e.currentTarget.value)}
+                     value={location}/>
+        <AreasInput ref="areaInput" location={location}
+                    className="col-md-4"
+                    title="forms.property.add.fields.area"
+                    name={"area"}/>
+      </div>
     }
 
     return (
@@ -122,8 +152,7 @@ const PropertyAdd = React.createClass({
             <h2 className="page-title">
               <FormattedMessage id="screen.secure.properties.add.pageTitle"/></h2>
             <div className="row">
-              <Form ref="form" onSubmit={this.submit}
-                    className="login">
+              <Form ref="form" onSubmit={this.submit}>
 
                 <If condition={this.state.formResult !== null}>
                   <Then>
@@ -150,7 +179,10 @@ const PropertyAdd = React.createClass({
                       <FormattedMessage id="forms.property.add.labels.genericInfo"/>
                     </h6>
                     <div className="row">
-                      <InputField className="col-md-6" title={"forms.property.add.fields.title"} name="title"
+                      <InputField className="col-md-6"
+                                  title={"forms.property.add.fields.title"}
+                                  value={property.title}
+                                  name="title"
                                   required/>
                     </div>
                     <div className="row">
@@ -172,8 +204,11 @@ const PropertyAdd = React.createClass({
                                          validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
                                          required/>
 
-                      <SelectField className="col-md-3" title={"forms.property.add.fields.purpose"} name="purpose"
-                                   options={purposes} value={purposes[0]}/>
+                      <SelectField className="col-md-3"
+                                   title={"forms.property.add.fields.purpose"}
+                                   name="purpose"
+                                   options={purposes}
+                                   value={purposes[0]}/>
                     </div>
                   </div>
                 </div>
@@ -185,14 +220,7 @@ const PropertyAdd = React.createClass({
                       <FormattedMessage id="forms.property.add.labels.address"/>
                     </h6>
                   </div>
-
-                  <SelectField className="col-md-4" title={"forms.property.add.fields.type"} name="type"
-                               options={types} value={types[0]}/>
-                  <SelectField className="col-md-4" title={"forms.property.add.fields.location"}
-                               name="location" options={locations}
-                               onChange={(e)=>this.updateAreas(e.currentTarget.value)} value={locations[0]}/>
-
-                  {areaSelect}
+                  {areasInput}
 
                 </div>
 
@@ -200,19 +228,15 @@ const PropertyAdd = React.createClass({
                 <div className="row">
                   <div className="col-md-12">
                     <h6 className="fieldset-title">
-                      <FormattedMessage id="forms.property.add.labels.featuredLevel"/>
+                      <FormattedMessage id="forms.property.add.labels.info"/>
                     </h6>
-                    <div className="input-group">
-                      {this.state.featuredLevels.map((level)=>{
-                        return (
-                          <RadioButton key={level['.key']} type="radio" value={level['.key']}
-                                       title={`featuredLevel.${level['.value']}`}
-                                       name="featuredLevel"/>
-                        )
-                      })}
-                    </div>
                   </div>
+
+                  <PreferencesInput className="col-md-12"
+                                    title={"forms.property.add.fields.type"}
+                                    name="type"/>
                 </div>
+
 
                 <div className="row">
                   <div className="col-lg-12">
@@ -221,6 +245,7 @@ const PropertyAdd = React.createClass({
                     </div>
                   </div>
                 </div>
+
               </Form>
             </div>
           </div>

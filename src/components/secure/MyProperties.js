@@ -40,6 +40,10 @@ const MyProperties = React.createClass({
           <div className="page-contents">
             <h2 className="page-title">
               <FormattedMessage id="screen.secure.properties.pageTitle"/>
+
+              <Link className="btn btn-default pull-right" to={`${this.context.lang}/user/dashboard/properties/add`}>
+                <FormattedMessage id="contextualMenu.addProperty"/>
+              </Link>
             </h2>
 
 
@@ -48,9 +52,6 @@ const MyProperties = React.createClass({
               <tr>
                 <th>
                   <FormattedMessage id="screen.secure.properties.listing.propertyTitle"/>
-                </th>
-                <th>
-                  <FormattedMessage id="screen.secure.properties.listing.propertyFeatureLevel"/>
                 </th>
                 <th>
                   <FormattedMessage id="screen.secure.properties.listing.manageProperty"/>
@@ -63,7 +64,6 @@ const MyProperties = React.createClass({
                   return (
                     <tr key={property['.key']}>
                       <td width="75%">{property.title}</td>
-                      <td>{property.featuredLevel}</td>
                       <td>
                         <Link to={`${this.context.lang}/user/dashboard/properties/manage/${property['.key']}`}>
                           Edit
