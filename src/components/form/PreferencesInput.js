@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Formsy from 'formsy-react';
 import _ from 'lodash';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage,intlShape} from 'react-intl';
 import InputField from './Input';
 
 //components
@@ -13,9 +13,15 @@ const PreferencesInput = React.createClass({
     className: React.PropTypes.string,
     propertyType: React.PropTypes.string,
     name: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    intl: intlShape.isRequired,
+    editMode: React.PropTypes.bool
   },
-
+  getDefaultProps: function(){
+    return {
+      editMode: false
+    }
+  },
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref(`types`), 'types');
   },
@@ -36,8 +42,7 @@ const PreferencesInput = React.createClass({
 //    return nextProps.location !== this.props.location;
 //  },
   render: function(){
-
-
+    const {formatMessage} = this.props.intl;
     const className = (this.props.className || ' ') + " " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
@@ -51,7 +56,7 @@ const PreferencesInput = React.createClass({
           <InputField key={`property-preference-${k}`} className="col-md-3"
                       title={`property.preference.${k}`}
                       name={`property-preference-${k}`}
-                      value={currentValue.preferences[k]} required/>)
+                      value={this.props.editMode? currentValue.preferences[k] : 0} required/>)
       });
     }
     const options = this.state.types.map((option, i) => (
@@ -63,7 +68,7 @@ const PreferencesInput = React.createClass({
 
     options.unshift(
       <option key={' types-option-null'} value={''}>
-        --- CHOOSE ---
+        {formatMessage({id: "forms.generic.select"})}
       </option>
     );
 

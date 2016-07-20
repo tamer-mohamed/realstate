@@ -60,7 +60,7 @@ module.exports = {
 
     // generic form vars
     "forms.generic.add": "Add",
-    "forms.generic.select": "-- ¬choose --",
+    "forms.generic.select": "--choose --",
     "forms.generic.update": "Update",
 
     //login form

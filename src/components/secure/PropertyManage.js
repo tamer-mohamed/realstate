@@ -31,7 +31,6 @@ const PropertyAdd = React.createClass({
       purposes: [],
       locations: [],
       types: [],
-      featuredLevels: []
     };
   },
   componentWillMount: function(){
@@ -71,8 +70,8 @@ const PropertyAdd = React.createClass({
         area: data.area,
         space: data.space,
         type: data.type,
+        preferences: propertyPref,
         purpose: data.purpose,
-        featuredLevel: data.featuredLevel,
         addedBy: this.context.user.uid
       }).then(()=>{
         this.setState({formResult: true});
@@ -218,6 +217,8 @@ const PropertyAdd = React.createClass({
 
                   {property ?
                     <PreferencesInput className="col-md-12"
+                                      intl={this.props.intl}
+                                      editMode={true}
                                       title={"forms.property.add.fields.type"}
                                       value={{type:property.type,preferences:property.preferences}}
                                       name="type"/>
@@ -229,7 +230,8 @@ const PropertyAdd = React.createClass({
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="input-group input-group-lg">
-                      <input type="submit" className="btn btn-primary" value={formatMessage({id:"forms.generic.add"})}/>
+                      <input type="submit" className="btn btn-primary"
+                             value={formatMessage({id:"forms.generic.update"})}/>
                     </div>
                   </div>
                 </div>
