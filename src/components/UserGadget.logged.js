@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import { Link } from 'react-router';
 
 const UserGadgetLogged = React.createClass({

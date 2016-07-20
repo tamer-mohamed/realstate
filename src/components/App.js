@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import _ from 'lodash';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData ,defineMessages} from 'react-intl';
 // components
 import Header from './HeaderFront';
 import Topbar from './Topbar';
@@ -26,6 +26,8 @@ firebase.initializeApp(config);
 const App = React.createClass({
   intlData: function(){
     let localeData = messages[this.props.params.lang];
+
+    defineMessages(localeData);
     addLocaleData(localeData);
     return localeData;
   },
@@ -62,9 +64,11 @@ const App = React.createClass({
 
 
   render: function(){
+    const localeData = this.intlData();
+
     return (
-      <IntlProvider {... this.intlData()}>
-        <div>
+      <IntlProvider {... localeData} defaultLocale="ar">
+        <div className={localeData.className}>
           <Topbar/>
           <Header/>
           <section>

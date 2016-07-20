@@ -3,9 +3,11 @@ import { Link } from 'react-router';
 import { Form } from 'formsy-react';
 import Firebase from 'firebase';
 import { If, Then, Else } from 'react-if';
+import { hashHistory } from 'react-router';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 // form components
 import InputField from './form/Input';
+import RadioGroup from './form/RadioGroup';
 import SelectField from './form/Select';
 
 const Registration = React.createClass({
@@ -15,6 +17,9 @@ const Registration = React.createClass({
       formResult: null,
       canSubmit: false
     };
+  },
+  contextTypes: {
+    lang: React.PropTypes.string
   },
   resetForm: function(){
     this.refs.form.reset();
@@ -68,6 +73,8 @@ const Registration = React.createClass({
           if(e === null){
             this.setState({formResult: true});
             this.resetForm();
+            // redirect to homepage
+            hashHistory.push(this.context.lang);
           }
           else{
             this.setState({formResult: formatMessage({id: `forms.user.register.errors.addUser`})});
@@ -102,9 +109,7 @@ const Registration = React.createClass({
             <div className="row">
               <div className="col-md-7">
 
-                <Form ref="form" onSubmit={this.submit} onInvalid={this.disableSubmitButton}
-                      onValid={this.enableSubmitButton}
-                      className="register">
+                <Form ref="form" onSubmit={this.submit} className="register">
 
 
                   <If condition={this.state.formResult !== null}>
@@ -117,7 +122,7 @@ const Registration = React.createClass({
                         </Then>
 
                         <Else>
-                          <div className="col-md-12 alert alert-error">
+                          <div className="col-md-12 alert alert-danger">
                             {this.state.formResult}
                           </div>
                         </Else>
@@ -151,6 +156,19 @@ const Registration = React.createClass({
                                 equalsField: 'password has to match'
                               }} required/>
 
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-12">
+                      <h6 className="fieldset-title">
+                        <FormattedMessage id="forms.user.register.fields.accountType"/>
+                      </h6>
+                      <div className="input-group">
+                        <RadioGroup items={[{".key":1,".value":"Individual"}, {".key":1,".value":"Business"}]}
+                                    value={0}
+                                    name="userType"/>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="row">
