@@ -8,19 +8,28 @@ const InputField = React.createClass({
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
 
-  getInitialState: function () {
+  propTypes: {
+    onChange: React.PropTypes.func
+  },
+
+  getInitialState: function(){
     return {
       value: this.props.value
     };
   },
-  syncValue: function () {
+  syncValue: function(){
     this.setValue(this.state.value);
   },
 
   // setValue() will set the value of the component, which in
   // turn will validate it and the rest of the form
   changeValue(event) {
-    this.setValue(event.currentTarget[this.props.type === 'checkbox' ? 'checked' : 'value']);
+    let value = event.currentTarget[this.props.type === 'checkbox' ? 'checked' : 'value'];
+
+    if(this.props.onChange)
+      this.props.onChange(value);
+
+    this.setValue(value);
   },
   render() {
     // Set a specific className based on the validation
@@ -29,7 +38,8 @@ const InputField = React.createClass({
     // passed to the input. showError() is true when the
     // value typed is invalid
     const className = (this.props.className || ' ') + " " +
-      (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
+      (this.showRequired() ? 'required' : this.showError() ? 'error' : '') +
+      (this.props.type === 'checkbox' ? '' : '');
 
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
@@ -37,22 +47,32 @@ const InputField = React.createClass({
 
     const labelClassName = "form-control-label";
 
+    const input = <input
+      className={this.props.type !== 'checkbox'? "form-control" : null}
+      type={this.props.type || 'text'}
+      name={this.props.name}
+      onChange={this.changeValue}
+      onBlur={this.changeValue}
+      value={this.getValue()}
+      checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
+    />;
+
     return (
       <div className={className}>
-        <label htmlFor={this.props.name} className={labelClassName}>
-          <FormattedMessage id={this.props.title}/>
-        </label>
 
-        <input
-          className="form-control"
-          type={this.props.type || 'text'}
-          name={this.props.name}
-          onChange={this.changeValue}
-          onBlur={this.changeValue}
-          value={this.getValue()}
-          checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
-        />
-        <span className='validation-error'>{errorMessage}</span>
+        {this.props.type === "checkbox" ?
+          <label> <FormattedMessage id={this.props.title}/> {input} </label>
+          :
+          <div>
+            <label htmlFor={this.props.name} className={labelClassName}>
+              <FormattedMessage id={this.props.title}/>
+            </label>
+            {input}
+            <span className='validation-error'>{errorMessage}</span>
+          </div>
+        }
+
+
       </div>
     );
 

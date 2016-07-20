@@ -1,5 +1,6 @@
 import React from 'react';
 import Formsy from 'formsy-react';
+import InputField from './Input';
 import {FormattedMessage} from 'react-intl';
 
 const RadioGroup = React.createClass({
@@ -7,7 +8,7 @@ const RadioGroup = React.createClass({
 
   getInitialState: function(){
     return {
-      value: this.props.value || null
+      values: {}
     }
   },
 
@@ -21,7 +22,15 @@ const RadioGroup = React.createClass({
     this.setValue(value);
     this.setState({value});
   },
+  updateList: function(key, value){
+    let values = this.state.values;
+    values[key] = value;
 
+    if(this.props.onChange)
+      this.props.onChange(values);
+
+    this.setState({values})
+  },
   render() {
     const className = 'form-group' + (this.props.className || ' ') +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
@@ -33,13 +42,13 @@ const RadioGroup = React.createClass({
       <div className={className}>
         {items.map((item, i) => (
           <div key={i}>
-            <input
-              type="radio"
+            <InputField
+              type="checkbox"
+              title={item['title']}
               name={name}
-              onChange={this.changeValue.bind(this, item['.key'])}
+              onChange={(value)=> this.updateList(item['.key'],value)}
               checked={this.state.value === item['.key']}
             />
-            <span><FormattedMessage id={`${item['title']}`}/></span>
           </div>
         ))
         }

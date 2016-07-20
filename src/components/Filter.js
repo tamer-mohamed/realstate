@@ -75,7 +75,7 @@ const Filter = React.createClass({
     });
 
     let types = this.state.types.map(function(result){
-      return {value: result['.key'], label: result['.value']};
+      return {value: result['.key'], label: result['title']};
     });
 
     return (

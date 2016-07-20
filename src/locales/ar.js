@@ -77,7 +77,9 @@ module.exports = {
     "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
     "forms.property.add.labels.address": " معلومات عنوان العقار",
     "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
+    "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
     "forms.property.add.labels.info": "Information",
+    "forms.property.add.labels.addFeatureLevel": "Add feature level",
     "forms.property.success": "Tam 7efz el property bnga7",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
@@ -255,5 +257,8 @@ module.exports = {
     "featuredLevel.1": "hot",
     "featuredLevel.2": "Slider",
     "featuredLevel.3": "Highlighted",
+
+    // generic
+    "totalSum": "Total"
   }
 };

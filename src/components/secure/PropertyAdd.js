@@ -13,9 +13,20 @@ import RadioGroup from '../form/RadioGroup';
 import AreasInput from '../form/AreasInput';
 import PreferencesInput from '../form/PreferencesInput';
 import InputPostfixAddon from '../form/InputPostfixAddon';
+import FeatureLevelsModal from '../form/FeatureLevelsModal';
 
 
-//components
+const featuredModalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
 const PropertyAdd = React.createClass({
   mixins: [ReactFireMixin],
   propTypes: {
@@ -27,6 +38,8 @@ const PropertyAdd = React.createClass({
   getInitialState: function(){
     return {
       formResult: null,
+      modalIsOpen: false,
+      step: 1,
       property: {},
       purposes: [],
       locations: [],
@@ -56,44 +69,53 @@ const PropertyAdd = React.createClass({
     let {formatMessage} = this.props.intl;
     let property = this.state.property;
 
-    console.log('DDDD', data);
-
     //reset errors
     this.setState({formResult: null});
 
     //TODO: set validation for area
 
     if(this.refs.form.state.isValid){
-      let prefrencePrefix = 'property-preference-';
 
-      let propertyPref = {};
-      _.forEach(data.type.preferences, function(v, k){
-        propertyPref[k] = data[prefrencePrefix + k];
-      });
+      switch(this.state.step){
+        case 1:
+          this.setState({step: 2});
+          break;
 
-      Firebase.database().ref('properties').push({
-        title: data.title,
-        location: data.location,
-        price: data.price,
-        area: data.area,
-        space: data.space,
-        type: data.type.type,
-        preferences: propertyPref,
-        purpose: data.purpose.value,
-        //featuredLevel: data.featuredLevel,
-        addedBy: this.context.user.uid,
-        addedAt: new Date()
-      }, (e)=>{
-        if(e === null){
+        case 2:
+          let prefrencePrefix = 'property-preference-';
 
-          this.resetForm();
-          this.setState({formResult: true});
+          let propertyPref = {};
+          _.forEach(data.type.preferences, function(v, k){
+            propertyPref[k] = data[prefrencePrefix + k];
+          });
 
-        }
-        else{
-          this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
-        }
-      })
+          Firebase.database().ref('properties').push({
+            title: data.title,
+            location: data.location,
+            price: data.price,
+            area: data.area,
+            space: data.space,
+            type: data.type.type,
+            preferences: propertyPref,
+            purpose: data.purpose.value,
+            //featuredLevel: data.featuredLevel,
+            addedBy: this.context.user.uid,
+            addedAt: new Date()
+          }, (e)=>{
+            if(e === null){
+
+              this.resetForm();
+              this.setState({formResult: true});
+
+            }
+            else{
+              this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
+            }
+          })
+
+          break;
+      }
+
     }
 
     else{
@@ -164,7 +186,7 @@ const PropertyAdd = React.createClass({
                       </Then>
 
                       <Else>
-                        <div className="col-md-12 alert alert-error">
+                        <div className="col-md-12 alert alert-danger">
                           {this.state.formResult}
                         </div>
                       </Else>
@@ -233,10 +255,12 @@ const PropertyAdd = React.createClass({
                   </div>
 
                   <PreferencesInput className="col-md-12"
+                                    intl={this.props.intl}
                                     title={"forms.property.add.fields.type"}
                                     name="type"/>
                 </div>
 
+                <FeatureLevelsModal isOpen={this.state.step === 2 && true} onClose={()=> this.setState({step:1})}/>
 
                 <div className="row">
                   <div className="col-lg-12">
