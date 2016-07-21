@@ -30,7 +30,7 @@ const ItemDetails = React.createClass({
         </div>
         <div className="right">
           <span className="area">{this.props.itemData.space} m2</span>
-          <span className="price">$ {this.props.itemData.price}</span>
+          <span className="price">KD {this.props.itemData.price}</span>
         </div>
       </div>
     )
