@@ -5,9 +5,9 @@ module.exports = {
   "pluralRuleFunction": function(){
   },
   messages: {
-    "settings.currency": "KWD",
+    "settings.currency": "د.ك",
 
-    "contextualMenu.addProperty": "Add property",
+    "contextualMenu.addProperty": "إضافة العقارات",
 
     "screen.about": "معلومات عنا",
     "screen.breadcrumb": "معلومات عنا",
@@ -19,11 +19,11 @@ module.exports = {
 
     // user menu
     "userMenu.signout": "خروج",
-    "userMenu.allProperties": "عنا",
-    "userMenu.contact": "اتصل بنا",
+    "userMenu.allProperties": "العقارات",
+    "userMenu.contact": "الهيئة الشخصية",
 
     // Contextual Menu
-    "contextualMenu.user.addProperty": "Add property",
+    "contextualMenu.user.addProperty": "إضافة العقار",
 
     // filters
     "filters.submitButton": "إرسال",
@@ -49,38 +49,37 @@ module.exports = {
     "forms.user.register.fields.password": "كلمه السر",
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
     "forms.user.register.submit": "تسجيل",
-    "forms.user.register.fields.accountType": "Account type",
+    "forms.user.register.fields.accountType": "نوع الحساب",
     "forms.user.register.success": "سجلت بنجاح",
 
 
     //
-    "screen.secure.properties.listing.propertyTitle": "Title",
+    "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
     "screen.secure.properties.listing.propertyFeatureLevel": "",
     "screen.secure.properties.listing.manageProperty": " ",
 
     // generic form vars
-    "forms.generic.add": "Add",
-    "forms.generic.select": "--choose --",
-    "forms.generic.update": "Update",
+    "forms.generic.add": "اضافة",
+    "forms.generic.select": "-- ¬اختيار --",
+    "forms.generic.update": "تحديث",
 
     //login form
-    "forms.users.login.submit": "login",
+    "forms.users.login.submit": "دخول",
 
 
     // user all properties
-    "screen.secure.properties.pageTitle": "All properties",
+    "screen.secure.properties.pageTitle": "العقارات",
 
 
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
-    "screen.secure.properties.manage.pageTitle": "Edit property",
+    "screen.secure.properties.manage.pageTitle": "تعديل العقار",
     "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
     "forms.property.add.labels.address": " معلومات عنوان العقار",
     "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
     "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
-    "forms.property.add.labels.info": "Information",
-    "forms.property.add.labels.addFeatureLevel": "Add feature level",
-    "forms.property.success": "Tam 7efz el property bnga7",
+    "forms.property.add.labels.info": "المعلومات",
+    "forms.property.success": "تم اضافت العقار بنجاح",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
@@ -92,21 +91,21 @@ module.exports = {
 
 
     // forms error
-    "forms.errors.property.add": "Error on add property",
+    "forms.errors.property.add": "خطأ عند إضافة العقارات",
 
     // prefrences
-    "property.preference.beds": "bedroom",
-    "property.preference.rooms": "rooms",
-    "property.preference.kitchen": "kitchen",
-    "property.preference.bathroom": "bathroom",
-    "property.preference.apartment": "apartment",
-    "property.preference.balcony": "balcony",
-    "property.preference.parking": "balcony",
-    "property.preference.floors": "balcony",
-    "property.preference.swimmingPool": "balcony",
-    "property.preference.laborResidence": "labor Residence",
-    "property.preference.villa": "villa",
-    "property.preference.waterWell": "water Well",
+    "property.preference.beds": "السرير",
+    "property.preference.rooms": "غرف",
+    "property.preference.kitchen": "مطبخ",
+    "property.preference.bathroom": "حمام",
+    "property.preference.apartment": "شقة",
+    "property.preference.balcony": "شرفة",
+    "property.preference.parking": "موقف سيارات",
+    "property.preference.floors": "ادوار",
+    "property.preference.swimmingPool": "حمام سباحة",
+    "property.preference.laborResidence": "سكن عمال",
+    "property.preference.villa": "فيلا",
+    "property.preference.waterWell": "بئر ماء",
 
 
     "areas.ahmadi.abuHalifa": "أبوحليفه",
@@ -254,11 +253,12 @@ module.exports = {
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
-    "featuredLevel.1": "hot",
-    "featuredLevel.2": "Slider",
-    "featuredLevel.3": "Highlighted",
-
+    "featuredLevel.1": "مميز",
+    "featuredLevel.2": "راية الرئيسية",
+    "featuredLevel.3": "النشرة الإخبارية",
+    "featuredLevel.4": "بريد مباشر",
     // generic
-    "totalSum": "Total"
+    "totalSum": "Total",
+    "loading": "Loading ..."
   }
 };

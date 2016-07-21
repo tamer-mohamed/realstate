@@ -29,10 +29,10 @@ const RadioGroup = React.createClass({
     if(this.props.onChange)
       this.props.onChange(values);
 
-    this.setState({values})
+    this.setState({values});
   },
   render() {
-    const className = 'form-group' + (this.props.className || ' ') +
+    const className = 'form-group ' + (this.props.className || ' ') +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
 

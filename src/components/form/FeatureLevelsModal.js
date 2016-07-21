@@ -2,6 +2,7 @@ import React from 'react';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import ReactFireMixin from 'reactfire';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
+import _ from 'lodash';
 import { Form } from 'formsy-react';
 // components
 import CheckGroup from './CheckGroup';
@@ -11,114 +12,121 @@ const FeatureLevelsModal = React.createClass({
   propTypes: function(){
     return {
       editMode: React.PropTypes.bool,
-      isOpen: React.PropTypes.bool,
       totalSum: React.PropTypes.number,
       propertyLevel: React.PropTypes.array,
       onClose: React.PropTypes.func,
+      intl: intlShape.isRequired,
       onSubmit: React.PropTypes.func
     }
   },
   getDefaultProps: function(){
     return {
       editMode: false,
-      isOpen: false
+      propertyLevel: [],
+      totalSum: 0
     }
   },
   getInitialState: function(){
     return {
-      isShowingModal: this.props.isOpen,
-      propertyLevel: this.props.propertyLevel || [],
-      propertyLevels: [],
-      totalSum: this.props.totalSum || 0
+      isShowingModal: true,
+      propertyLevel: this.props.propertyLevel,
+      levels: [], //
+      totalSum: this.props.totalSum
     }
   },
   componentWillMount: function(){
-    this.bindAsArray(firebase.database().ref(`config/featuredLevels`), 'propertyLevels');
+    this.bindAsArray(firebase.database().ref(`config/featuredLevels`), 'levels');
   },
   closeModal: function(){
     this.setState({isShowingModal: false});
   },
   handleClose: function(){
+    console.log('CALLED');
     if(this.props.onClose)
       this.props.onClose();
 
     this.closeModal();
   },
   handleSubmit: function(){
+    let featuredValues = [];
+    _.forEach(this.state.propertyLevel, function(v, k){
+      if(v === true)
+        featuredValues.push(k);
+    });
+
     if(this.props.onSubmit)
-      this.props.onSubmit();
+      this.props.onSubmit(featuredValues);
 
     this.closeModal();
-  },
-  handleClick: function(){
-    this.setState({isShowingModal: true})
+
   },
   shouldComponentUpdate: function(nextProps, nextState){
-    return nextProps.isOpen !== this.props.isOpen ||
-      this.state.isShowingModal !== nextState.isShowingModal ||
-      this.state.totalSum !== nextState.totalSum;
+    return this.state.isShowingModal !== nextState.isShowingModal || this.state.totalSum !== nextState.totalSum;
   },
   calculateTotal: function(checkedValues){
     let total = 0;
 
-    _.forEach(this.state.propertyLevels, (v, k)=>{
+    _.forEach(this.state.levels, (v, k)=>{
       // since bindAsArray starts from 0 and values ID starts from 1
       let key = k + 1;
       if(checkedValues[key])
-        total += this.state.propertyLevels[k].price;
+        total += this.state.levels[k].price;
     });
 
-    this.setState({totalSum: total});
+    this.setState({totalSum: total, propertyLevel: checkedValues});
   },
   render: function(){
     return (
       <div>
-        {
-          this.props.isOpen || this.state.isShowingModal ?
-            <ModalContainer onClose={this.handleClose}>
-              <ModalDialog onClose={this.handleClose} className="modal-featureLevels">
-                <h5><FormattedMessage id="forms.property.add.labels.featuredLevel"/></h5>
+        {this.state.isShowingModal ?
+          <ModalContainer onClose={this.handleClose}>
+            <ModalDialog onClose={this.handleClose} className="modal-featureLevels">
+              <h5><FormattedMessage id="forms.property.add.labels.featuredLevel"/></h5>
 
-                <Form onsubmit={this.handleSubmit}>
+              <Form>
 
-                  { !_.isEmpty(this.state.propertyLevels) ?
-                    <div>
+                { !_.isEmpty(this.state.levels) ?
+                  <div>
+                    <div className="well">
+                      <div className="row">
+                        <div className="col-md-12">
 
-                      <div className="well">
-                        <div className="row">
-                          <div className="col-md-12">
+                          <p className="alert alert-info">
+                            <FormattedMessage id="forms.property.add.labels.featuredLevel.description"/>
+                          </p>
 
-                            <p className="alert alert-info">
-                              <FormattedMessage id="forms.property.add.labels.featuredLevel.description"/>
-                            </p>
-
+                          <div className="row">
                             <CheckGroup title="forms.property.add.labels.featuredLevel"
-                                        items={this.state.propertyLevels}
+                                        items={this.state.levels}
                                         onChange={this.calculateTotal}
+                                        className="col-md-12"
                                         name="featuredLevel"/>
-
-                            <hr/>
-                            <h5>
-                              <FormattedMessage id="totalSum"/>: {this.state.totalSum} <FormattedMessage
-                              id="settings.currency"/>
-                            </h5>
                           </div>
+
+                          <hr/>
+                          <h5>
+                            <FormattedMessage id="totalSum"/>: {this.state.totalSum} <FormattedMessage
+                            id="settings.currency"/>
+                          </h5>
                         </div>
                       </div>
-
-                      <button type="submit" className="btn btn-danger pull-right">
-                        <FormattedMessage id="forms.generic.update"/></button>
                     </div>
-                    : null
-                  }
-                </Form>
-              </ModalDialog>
-            </ModalContainer>
-            : null
+
+                    <input type="submit" className="btn btn-danger pull-right" onClick={this.handleSubmit}
+                           value="update"/>
+                    <FormattedMessage id="forms.generic.update"/>
+                  </div>
+                  : null
+                }
+
+              </Form>
+            </ModalDialog>
+          </ModalContainer>
+          : null
         }
       </div>);
   }
 
 });
 
-export default FeatureLevelsModal;
+export default injectIntl(FeatureLevelsModal);
