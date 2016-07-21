@@ -10,7 +10,7 @@ const Purposes = React.createClass({
     intl: intlShape.isRequired,
     title: React.PropTypes.string.isRequired,
     className: React.PropTypes.string,
-    value: React.PropTypes.object,
+    value: React.PropTypes.string,
     editMode: React.PropTypes.bool
   },
   getInitialState: function(){

@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Formsy from 'formsy-react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 //components
 const AreasInput = React.createClass({
   mixins: [ReactFireMixin, Formsy.Mixin],
 
   propTypes: {
+    intl: intlShape.isRequired,
     location: React.PropTypes.string.isRequired,
     options: React.PropTypes.array,
     className: React.PropTypes.string,
@@ -17,7 +18,8 @@ const AreasInput = React.createClass({
   },
   getInitialState: function(){
     return {
-      areas: []
+      areas: [],
+      value: this.props.value
     }
   },
 
@@ -41,10 +43,10 @@ const AreasInput = React.createClass({
 //    return nextProps.location !== this.props.location;
 //  },
   render: function(){
+    const {formatMessage} = this.props.intl;
     const className = (this.props.className || ' ') + " " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
-
 
     const options = this.state.areas.map((option, i) => (
       <option key={'areas-option-'+i} value={ option['.key']}>
@@ -54,7 +56,7 @@ const AreasInput = React.createClass({
 
     options.unshift(
       <option key={'areas-option-null'} value={null}>
-        --- CHOOSE ---
+        {formatMessage({id: "forms.generic.select"})}
       </option>
     );
 
@@ -82,4 +84,4 @@ const AreasInput = React.createClass({
 });
 
 
-export default AreasInput;
+export default injectIntl(AreasInput);

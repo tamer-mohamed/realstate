@@ -23,15 +23,13 @@ const PropertyAdd = React.createClass({
     };
   },
   submit: function(values){
-    console.log('VVVVV',values);
-
     let {formatMessage} = this.props.intl;
     let data = values;
 
 
     Firebase.database().ref('properties').push({
       title: data[1].title,
-      location: data[1].location,
+      location: data[1].location.value,
       price: data[1].price,
       area: data[1].area,
       space: data[1].space,
@@ -43,6 +41,7 @@ const PropertyAdd = React.createClass({
       addedAt: new Date()
     }, (e)=>{
       if(e === null){
+
       }
       else{
         this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});

@@ -6,7 +6,7 @@ import SelectField from './Select';
 import Loader from '../Loader';
 
 
-const PropertyForm = React.createClass({
+const LocationField = React.createClass({
 
   mixins: [ReactFireMixin],
   propTypes: {
@@ -36,7 +36,7 @@ const PropertyForm = React.createClass({
         locations.push({value: k, title: v});
       });
 
-      if(this.props.onLoaded)
+      if(this.props.onLoaded && !this.props.editMode)
         this.props.onLoaded(locations[0].value);
 
 
@@ -57,6 +57,8 @@ const PropertyForm = React.createClass({
 
     let selectedLocation = this.props.editMode ? this.props.value : locations[0];
 
+    console.log('asdasdasd',selectedLocation);
+
     return ( <SelectField className={this.props.className}
                           title={this.props.title}
                           name="location"
@@ -69,4 +71,4 @@ const PropertyForm = React.createClass({
 
 });
 
-export default injectIntl(PropertyForm);
+export default injectIntl(LocationField);

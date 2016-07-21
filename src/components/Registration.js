@@ -143,14 +143,17 @@ const Registration = React.createClass({
                   </div>
 
                   <div className="row">
-                    <InputField className="col-md-6" title={"forms.user.register.fields.password"} name="password"
+                    <InputField className="col-md-6" title={"forms.user.register.fields.password"}
+                                name="password"
+                                type="password"
                                 validations={{
-                                minLength: 10
+                                minLength: 7
                               }} validationErrors={{
                                 minLength: 'You can not type in less than 10 characters'
                               }} required/>
 
                     <InputField className="col-md-6" title={"forms.user.register.fields.repeatPassword"}
+                                type="password"
                                 name="repeatPassword" validations="equalsField:password"
                                 validationErrors={{
                                 equalsField: 'password has to match'

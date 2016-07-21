@@ -9,15 +9,13 @@ import CheckGroup from './CheckGroup';
 
 const FeatureLevelsModal = React.createClass({
   mixins: [ReactFireMixin],
-  propTypes: function(){
-    return {
-      editMode: React.PropTypes.bool,
-      totalSum: React.PropTypes.number,
-      propertyLevel: React.PropTypes.array,
-      onClose: React.PropTypes.func,
-      intl: intlShape.isRequired,
-      onSubmit: React.PropTypes.func
-    }
+  propTypes: {
+    editMode: React.PropTypes.bool,
+    totalSum: React.PropTypes.number,
+    propertyLevel: React.PropTypes.array,
+    onClose: React.PropTypes.func,
+    intl: intlShape.isRequired,
+    onSubmit: React.PropTypes.func
   },
   getDefaultProps: function(){
     return {
@@ -76,6 +74,8 @@ const FeatureLevelsModal = React.createClass({
     this.setState({totalSum: total, propertyLevel: checkedValues});
   },
   render: function(){
+    const {formatMessage} = this.props.intl;
+    const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
     return (
       <div>
         {this.state.isShowingModal ?

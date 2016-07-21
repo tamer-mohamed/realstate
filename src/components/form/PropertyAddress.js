@@ -11,26 +11,28 @@ const PropertyAddress = React.createClass({
   mixins: [ReactFireMixin],
   propTypes: {
     intl: intlShape.isRequired,
-    location: React.PropTypes.string,
-    editMode: React.PropTypes.bool
+    area: React.PropTypes.string,
+    editMode: React.PropTypes.bool,
+    value:React.PropTypes.object
   },
   getInitialState: function(){
     return {
-      selectedLocation: null
+      selectedLocation: this.props.value.location || null
     }
   },
   getDefaultProps: function(){
     return {
-      editMode: false
+      editMode: false,
+      area: ""
     }
   },
   shouldComponentUpdate: function(nextProps, nextState){
-    return nextProps.location !== this.props.location || this.state.selectedLocation != nextState.selectedLocation;
+    return nextProps.value !== this.props.value || this.state.selectedLocation != nextState.selectedLocation;
   },
   updateAreas: function(location){
-
     if(this.refs.areaInput)
       this.refs.areaInput.resetValue();
+
     this.setState({selectedLocation: location})
   },
   render: function(){
@@ -39,11 +41,14 @@ const PropertyAddress = React.createClass({
         <Location className="col-md-4"
                   title="forms.property.add.fields.location"
                   editMode={this.props.editMode}
+                  value={this.props.value.location}
                   onLoaded={this.updateAreas}
                   onChange={this.updateAreas}/>
 
         {this.state.selectedLocation ? <Areas ref="areaInput" location={this.state.selectedLocation}
                                               className="col-md-4"
+                                              editMode={this.props.editMode}
+                                              value={this.props.value.area}
                                               title="forms.property.add.fields.area"
                                               name={"area"}/> : null}
       </div>

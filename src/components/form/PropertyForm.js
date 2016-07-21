@@ -59,7 +59,7 @@ const PropertyForm = React.createClass({
     let prefrencePrefix = 'property-preference-';
     let propertyPref = {};
     _.forEach(values.type.preferences, function(v, k){
-      propertyPref[k] = values[prefrencePrefix + k];
+      propertyPref[k] = parseInt(values[prefrencePrefix + k], 10);
     });
 
     return propertyPref;
@@ -70,6 +70,7 @@ const PropertyForm = React.createClass({
     //TODO: set validation for area
     if(this.refs.form.state.isValid){
       if(this.props.editMode){
+        values.preferences = this.formatPreferences(values);
         this.props.onSubmit(values);
       }
 
@@ -105,6 +106,7 @@ const PropertyForm = React.createClass({
   render: function(){
     const {formatMessage} = this.props.intl;
     const property = this.props.property;
+    const submitTextId = this.props.editMode? "forms.generic.update": "forms.generic.add";
 
     return (<Form ref="form" onSubmit={this.submit}>
 
@@ -126,6 +128,7 @@ const PropertyForm = React.createClass({
                                name="price"
                                addOnLabel={formatMessage({id:"settings.currency"})}
                                validations={{isNumeric:true,minLength:1}}
+                               value={property.price}
                                validationErrors={{
                                   isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"}),
                                   isDefaultRequiredValue: formatMessage({id:"forms.validations.generic.required"})
@@ -135,11 +138,13 @@ const PropertyForm = React.createClass({
                                title={"forms.property.add.fields.space"}
                                name="space"
                                addOnLabel={"m2"}
+                               value={property.space}
                                validations="isNumeric"
                                validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
                                required/>
 
             <Purposes className="col-md-3"
+                      value={property.purpose}
                       title={"forms.property.add.fields.purpose"}/>
           </div>
         </div>
@@ -153,7 +158,7 @@ const PropertyForm = React.createClass({
           </h6>
         </div>
 
-        <PropertyAddress />
+        <PropertyAddress editMode={this.props.editMode} value={{location:property.location,area:property.area}}/>
 
       </div>
 
@@ -167,6 +172,8 @@ const PropertyForm = React.createClass({
 
         <PreferencesInput className="col-md-12"
                           intl={this.props.intl}
+                          editMode={this.props.editMode}
+                          value={{type:property.type,preferences:property.preferences}}
                           title={"forms.property.add.fields.type"}
                           name="type"/>
       </div>
@@ -180,7 +187,7 @@ const PropertyForm = React.createClass({
       <div className="row">
         <div className="col-lg-12">
           <div className="input-group input-group-lg">
-            <input type="submit" className="btn btn-primary" value={formatMessage({id:"forms.generic.add"})}/>
+            <input type="submit" className="btn btn-primary" value={formatMessage({id:submitTextId})}/>
           </div>
         </div>
       </div>
