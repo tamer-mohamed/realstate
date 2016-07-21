@@ -6,6 +6,8 @@ module.exports = {
   },
   messages: {
     "settings.currency": "د.ك",
+    "settings.country": "Kuwait",
+
 
     "contextualMenu.addProperty": "إضافة العقارات",
 
@@ -259,6 +261,8 @@ module.exports = {
     "featuredLevel.4": "بريد مباشر",
     // generic
     "totalSum": "Total",
-    "loading": "Loading ..."
+    "loading": "Loading ...",
+    "register": "register",
+    "login": "login"
   }
 };

@@ -1,15 +1,10 @@
 import React from 'react';
 import Formsy from 'formsy-react';
 import {FormattedMessage} from 'react-intl';
+import InputField from './Input';
 
 const RadioGroup = React.createClass({
   mixins: [Formsy.Mixin],
-
-  getInitialState: function(){
-    return {
-      value: this.props.value || null
-    }
-  },
 
   componentDidMount() {
     const value = this.props.value;
@@ -26,20 +21,24 @@ const RadioGroup = React.createClass({
     const className = 'form-group' + (this.props.className || ' ') +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
-
     const { name, items } = this.props;
+
+    console.log('itemitemitemitem', items);
     return (
 
       <div className={className}>
         {items.map((item, i) => (
+
           <div key={i}>
-            <input
-              type="radio"
-              name={name}
-              onChange={this.changeValue.bind(this, item['.key'])}
-              checked={this.state.value === item['.key']}
-            />
-            <span><FormattedMessage id={`${item['title']}`}/></span>
+            <label>
+              <FormattedMessage id={`${item['title']}`}/>
+              <input
+                type="radio"
+                name={name}
+                onChange={this.changeValue.bind(this, item.value)}
+                checked={this.state.value === item.value}
+              />
+            </label>
           </div>
         ))
         }

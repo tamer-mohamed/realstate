@@ -7,7 +7,7 @@ import { hashHistory } from 'react-router';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 // form components
 import InputField from './form/Input';
-import RadioGroup from './form/RadioGroup';
+import AccountTypes from './form/AccountTypes';
 import SelectField from './form/Select';
 
 const Registration = React.createClass({
@@ -68,7 +68,7 @@ const Registration = React.createClass({
       Firebase.auth().createUserWithEmailAndPassword(data.email, data.password).then((user)=>{
         Firebase.database().ref(`users/${user.uid}`).set({
           fname: data.fname,
-          type: 1
+          type: data.userType
         }, (e)=>{
           if(e === null){
             this.setState({formResult: true});
@@ -149,7 +149,7 @@ const Registration = React.createClass({
                                 validations={{
                                 minLength: 7
                               }} validationErrors={{
-                                minLength: 'You can not type in less than 10 characters'
+                                minLength: 'You can not type in less than 7 characters'
                               }} required/>
 
                     <InputField className="col-md-6" title={"forms.user.register.fields.repeatPassword"}
@@ -167,9 +167,7 @@ const Registration = React.createClass({
                         <FormattedMessage id="forms.user.register.fields.accountType"/>
                       </h6>
                       <div className="input-group">
-                        <RadioGroup items={[{".key":1,".value":"Individual"}, {".key":1,".value":"Business"}]}
-                                    value={0}
-                                    name="userType"/>
+                        <AccountTypes />
                       </div>
                     </div>
                   </div>

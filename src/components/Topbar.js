@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 
 const Topbar = React.createClass({
@@ -12,7 +13,7 @@ const Topbar = React.createClass({
             <div className="col-md-12">
 
               <p className="text">
-                <a><i className="fa fa-map-marker"/> Kuwait</a>
+                <a><i className="fa fa-map-marker"/> <FormattedMessage id="settings.country"/></a>
                 <a href="tel:+61383766284"><i className="fa fa-phone"/> +965 6995 8669</a>
               </p>
 
