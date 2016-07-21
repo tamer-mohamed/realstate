@@ -31,7 +31,7 @@ const RadioGroup = React.createClass({
 
           <div key={i}>
             <label>
-              <FormattedMessage id={`${item['title']}`}/>
+              <FormattedMessage id={`accountType.${item['title']}`}/>
               <input
                 type="radio"
                 name={name}

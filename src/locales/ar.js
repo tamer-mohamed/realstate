@@ -263,6 +263,10 @@ module.exports = {
     "totalSum": "Total",
     "loading": "Loading ...",
     "register": "register",
-    "login": "login"
+    "login": "login",
+
+    "accountType.individual": "individual",
+    "accountType.business": "business",
+    "accountType.agent": "agent"
   }
 };
