@@ -51,7 +51,7 @@ const Property = React.createClass({
 
           </div>
           <div className="right">
-            <span className="area">{this.props.data.space} m2</span>
+            <span className="area">{this.props.data.space} m<sup>2</sup></span>
             <span className="price">KD {this.props.data.price}</span>
           </div>
         </div>
