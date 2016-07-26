@@ -2,10 +2,12 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import { Form } from 'formsy-react';
 import Firebase from 'firebase';
+import NProgress from "nprogress";
 import { If, Then, Else } from 'react-if';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 import {hashHistory} from 'react-router';
 import _ from 'lodash';
+import NotificationSystem from 'react-notification-system';
 // form components
 import PropertyForm from '../form/PropertyForm';
 import Loader from '../Loader';
@@ -19,24 +21,29 @@ const PropertyAdd = React.createClass({
   },
   contextTypes: {
     user: React.PropTypes.any,
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    pushNotification: React.PropTypes.func
   },
   getInitialState: function(){
     return {
       property: {},
-      loaded: false,
+      loaded: false
     };
   },
   componentWillMount: function(){
     let propertyId = this.props.params.propId;
+    NProgress.start();
 
     firebase.database().ref(`properties/${propertyId}`).once('value', (snapshot)=>{
+      NProgress.done();
       let value = snapshot.val();
       this.setState({loaded: true, property: value})
     });
 
   },
   submit: function(data){
+    let {formatMessage} = this.props.intl;
+
     firebase.database().ref(`properties/${this.props.params.propId}`).update({
       title: data.title,
       location: data.location,
@@ -46,9 +53,13 @@ const PropertyAdd = React.createClass({
       type: data.type.type,
       preferences: data.preferences,
       purpose: data.purpose.value,
+      image: data.propertyImage,
       addedBy: this.context.user.uid,
-      updatedAt: new Date()
+      updatedAt: Firebase.ServerValue.TIMESTAMP
     }).then(()=>{
+
+      this.context.pushNotification({message: formatMessage({id: "forms.property.success"}), level: 'success'});
+
       hashHistory.push(`${this.context.lang}/user/dashboard/properties`);
     }).catch((e)=> window.alert(e));
 
@@ -59,18 +70,18 @@ const PropertyAdd = React.createClass({
   render: function(){
     const property = this.state.property;
 
-    if(!this.state.loaded)
-      return <Loader title="Loading"/>
-
     return (
-      <div className="page-wrap">
 
+      <div className="page-wrap">
         <div className="container">
           <div className="page-contents">
             <h2 className="page-title">
               <FormattedMessage id="screen.secure.properties.manage.pageTitle"/></h2>
             <div className="row">
-              <PropertyForm onSubmit={this.submit} editMode={true} property={property}/>
+              {this.state.loaded ?
+                <PropertyForm onSubmit={this.submit} editMode={true} property={property}/>
+                : null
+              }
             </div>
           </div>
         </div>

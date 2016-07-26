@@ -6,6 +6,7 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 // form components
 import InputField from './Input';
+import FileUpload from './FileUpload';
 import SelectField from './Select';
 import RadioButton from './RadioButton';
 import RadioGroup from './RadioGroup';
@@ -25,7 +26,8 @@ const PropertyForm = React.createClass({
     onSubmit: React.PropTypes.func.isRequired
   },
   contextTypes: {
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    pushNotification: React.PropTypes.func
   },
   getDefaultProps: function(){
     return {
@@ -99,14 +101,16 @@ const PropertyForm = React.createClass({
 
     }
     else{
-      this.setState({formResult: formatMessage({id: `forms.validations.correctErrors`})});
+      this.context.pushNotification({message: formatMessage({id: "forms.validations.correctErrors"}), level: 'error'});
     }
 
   },
   render: function(){
     const {formatMessage} = this.props.intl;
     const property = this.props.property;
-    const submitTextId = this.props.editMode? "forms.generic.update": "forms.generic.add";
+    const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
+
+    console.log('PROPER', property.location);
 
     return (<Form ref="form" onSubmit={this.submit}>
 
@@ -162,6 +166,23 @@ const PropertyForm = React.createClass({
 
       </div>
 
+      <div className="row">
+        <div className="col-md-6">
+          <h6 className="fieldset-title">
+            <FormattedMessage id="forms.property.add.fields.title"/>
+          </h6>
+        </div>
+
+
+        <FileUpload className="col-md-6"
+                    title={"forms.property.add.fields.title"}
+                    value={property.propertyImage}
+                    name="property_image"
+                    type="file"
+                    required/>
+
+      </div>
+
 
       <div className="row">
         <div className="col-md-12">
@@ -187,7 +208,7 @@ const PropertyForm = React.createClass({
       <div className="row">
         <div className="col-lg-12">
           <div className="input-group input-group-lg">
-            <input type="submit" className="btn btn-primary" value={formatMessage({id:submitTextId})}/>
+            <input type="submit" className="btn btn-danger" value={formatMessage({id:submitTextId})}/>
           </div>
         </div>
       </div>

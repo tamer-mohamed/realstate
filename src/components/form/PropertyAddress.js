@@ -11,11 +11,11 @@ const PropertyAddress = React.createClass({
   mixins: [ReactFireMixin],
   propTypes: {
     intl: intlShape.isRequired,
-    area: React.PropTypes.string,
     editMode: React.PropTypes.bool,
-    value:React.PropTypes.object
+    value: React.PropTypes.object
   },
   getInitialState: function(){
+    console.log('asdasdasd', this.props.value);
     return {
       selectedLocation: this.props.value.location || null
     }
@@ -36,6 +36,7 @@ const PropertyAddress = React.createClass({
     this.setState({selectedLocation: location})
   },
   render: function(){
+    console.log(this.state.selectedLocation);
     return (
       <div>
         <Location className="col-md-4"

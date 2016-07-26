@@ -13,7 +13,8 @@ const PropertyAdd = React.createClass({
     intl: intlShape.isRequired,
   },
   contextTypes: {
-    user: React.PropTypes.any
+    user: React.PropTypes.any,
+    pushNotification: React.PropTypes.func
   },
   getInitialState: function(){
     return {
@@ -38,13 +39,13 @@ const PropertyAdd = React.createClass({
       purpose: data[1].purpose.value,
       featuredLevel: data[2],
       addedBy: this.context.user.uid,
-      addedAt: new Date()
+      addedAt: Firebase.ServerValue.TIMESTAMP
     }, (e)=>{
       if(e === null){
-
+        this.context.pushNotification({message: formatMessage({id: "forms.property.success"}),level:'success'});
       }
       else{
-        this.setState({formResult: formatMessage({id: `forms.errors.property.add`})});
+        this.context.pushNotification({message: formatMessage({id: "forms.errors.property.add"}),level:'error'});
       }
     })
 

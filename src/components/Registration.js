@@ -19,10 +19,21 @@ const Registration = React.createClass({
     };
   },
   contextTypes: {
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    pushNotification: React.PropTypes.func
   },
-  resetForm: function(){
-    this.refs.form.reset();
+  sendWelcomeMail: function(data, cb){
+    Firebase.database().ref(`welcomeMails/${data.uid}`).set({
+      fname: data.fname,
+      mail: data.email,
+      userType: data.userType
+    }, function(e){
+
+      if(e === null){
+        cb();
+      }
+
+    });
   },
   disableSubmitButton: function(){
     this.setState({canSubmit: false});
@@ -71,23 +82,39 @@ const Registration = React.createClass({
           type: data.userType
         }, (e)=>{
           if(e === null){
-            this.setState({formResult: true});
-            this.resetForm();
+            data.uid = user.uid;
+//            this.sendWelcomeMail(data, ()=>{
+//
+//
+//
+//            });
+
+            this.context.pushNotification({
+              message: formatMessage({id: 'forms.user.register.success'}),
+              level: 'success'
+            });
+
             // redirect to homepage
             hashHistory.push(this.context.lang);
+
+
           }
           else{
-            this.setState({formResult: formatMessage({id: `forms.user.register.errors.addUser`})});
+            this.context.pushNotification({
+              message: formatMessage({id: 'forms.user.register.errors.addUser'}),
+              level: 'error'
+            });
+
           }
 
         });
 
       }).catch((e)=>{
-        this.setState({formResult: formatMessage({id: `forms.validations.${e.code}`})})
+        this.context.pushNotification({message: formatMessage({id: `forms.validations.${e.code}`}), level: 'error'});
       });
     }
     else{
-      this.setState({formResult: formatMessage({id: `forms.validations.correctErrors`})});
+      this.context.pushNotification({message: formatMessage({id: 'forms.validations.correctErrors'}), level: 'error'});
     }
 
   },
@@ -110,26 +137,6 @@ const Registration = React.createClass({
               <div className="col-md-7">
 
                 <Form ref="form" onSubmit={this.submit} className="register">
-
-
-                  <If condition={this.state.formResult !== null}>
-                    <Then>
-                      <If condition={this.state.formResult === true}>
-                        <Then>
-                          <div className="col-md-12 alert alert-success">
-                            <FormattedMessage id="forms.user.register.success"/>
-                          </div>
-                        </Then>
-
-                        <Else>
-                          <div className="col-md-12 alert alert-danger">
-                            {this.state.formResult}
-                          </div>
-                        </Else>
-                      </If>
-                    </Then>
-                  </If>
-
 
                   <div className="row">
                     <InputField className="col-md-6" title={"forms.user.register.fields.firstName"} name="fname"
