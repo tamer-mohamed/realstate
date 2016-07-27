@@ -6,6 +6,7 @@ module.exports = {
   },
   messages: {
     "settings.currency": "د.ك",
+    "settings.phoneNumber": "+965 6995 8669",
     "settings.country": "Kuwait",
 
 
@@ -265,6 +266,7 @@ module.exports = {
     "loading.image": "Loading image",
     "register": "register",
     "login": "login",
+    "contactAgent": "Contact Agent",
     "upload": "Uploaded images: {value}",
 
     "accountType.individual": "individual",

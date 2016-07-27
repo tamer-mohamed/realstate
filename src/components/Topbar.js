@@ -14,7 +14,7 @@ const Topbar = React.createClass({
 
               <p className="text">
                 <a><i className="fa fa-map-marker"/> <FormattedMessage id="settings.country"/></a>
-                <a href="tel:+61383766284"><i className="fa fa-phone"/> +965 6995 8669</a>
+                <a href="tel:+61383766284"><i className="fa fa-phone"/> <FormattedMessage id="settings.phoneNumber"/></a>
               </p>
 
             </div>

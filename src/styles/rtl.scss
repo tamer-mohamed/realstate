@@ -6,3 +6,60 @@
   }
 
 }
+
+header {
+  .logo {
+    float: right;
+  }
+  .navbar {
+    float: right;
+    margin: 11px 100px 0 0 !important;
+  }
+
+  .user {
+    float: left;
+    img {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+    .userName {
+      margin-left: 10px;
+    }
+  }
+
+  .user-drop {
+    left: -13px;
+    right: inherit;
+
+    li i {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+  }
+}
+
+.Select--single > .Select-control .Select-value, .Select-placeholder {
+  right: 0;
+  left: inherit;
+}
+
+.btn i {
+  margin-left: 10px;
+  margin-right: 0 !important;
+}
+
+.call-action .btn {
+  float: left;
+}
+
+.property-data .prop-features {
+  span {
+    padding-right: 20px;
+    padding-left: 0
+  }
+
+  .location, .area {
+    background-position: top right;
+  }
+
+}

@@ -29,12 +29,21 @@ const MyProperties = React.createClass({
   },
   handleDeleteProperty: function(e, propertyId){
     e.preventDefault();
+    NProgress.start();
+
     let confirm = window.confirm('are you sure?');
     if(confirm){
       Firebase.database().ref(`properties/${propertyId}`).remove((e)=>{
         if(e !== null){
           window.alert(`Error`);
         }
+        else{
+          let {properties} = this.state;
+          _.unset(properties, `${propertyId}`);
+          NProgress.done();
+          this.setState({properties});
+        }
+
       })
     }
 

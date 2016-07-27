@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import _ from 'lodash';
+import Image from './Image';
 import { If, Then, Else } from 'react-if';
 
 
@@ -26,7 +28,8 @@ const Property = React.createClass({
   },
   render: function(){
     let lang = this.context.lang;
-    let itemID = this.props.data['.key'];
+    let itemID = this.props.id;
+    let images = this.props.data.images;
 
     return (
       <div className="item">
@@ -35,7 +38,10 @@ const Property = React.createClass({
           </h3>
         </div>
         <figure>
-          <img src="dist/images/items/10.png" alt="" className="img-responsive"/>
+          {_.isArray(images) ?
+            <Image url={`images/${itemID}/${images[0]}`} alt="" className="img-responsive"/> :
+            <img src="dist/images/items/10.png" alt="" className="img-responsive"/>
+          }
           <div className="overlay">
             <Link to={`/${lang}/properties/${itemID}`} className="btn btn-detail">Detail</Link>
           </div>
@@ -51,7 +57,7 @@ const Property = React.createClass({
 
           </div>
           <div className="right">
-            <span className="area">{this.props.data.space} m2</span>
+            <span className="area">{this.props.data.space} m <sup>2</sup></span>
             <span className="price">$ {this.props.data.price}</span>
           </div>
         </div>

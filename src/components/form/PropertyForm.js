@@ -7,7 +7,6 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 // form components
 import InputField from './Input';
-import FileUpload from './FileUpload';
 import SelectField from './Select';
 import RadioButton from './RadioButton';
 import RadioGroup from './RadioGroup';
@@ -19,6 +18,7 @@ import PropertyAddress from './PropertyAddress';
 import Purposes from './Purposes';
 import Dropzone from './Dropzone';
 import Image from '../Image'
+import PropertyImageField from './PropertyImage';
 import FileStorage from '../../models/FileStorage';
 
 
@@ -43,8 +43,8 @@ const PropertyForm = React.createClass({
   getInitialState: function(){
     return {
       step: 1,
+      property: this.props.property,
       imagesToUpload: [],
-      propertyImages: this.props.editMode && this.props.property.images ? this.props.property.images : [],
       formHelpers: {
         locationChanged: false
       }
@@ -64,20 +64,6 @@ const PropertyForm = React.createClass({
     let nextStep = step + 1;
     this.setState({step: nextStep});
   },
-  onDrop: function(file){
-    let images = this.state.imagesToUpload;
-    images.push(file);
-    this.setState({imagesToUpload: images});
-  },
-  generateDropZones: function(num = this.props.maxImages){
-    let zones = [];
-    for(let i = 0; i < num; i++)
-      zones.push(<Dropzone onDrop={this.onDrop} className={"col-md-3"} key={`dropzone-${i}`}
-                           name={`propertyImagesToUpload[${i}]`}
-                           accept="image/*"/>);
-
-    return zones;
-  },
   formatPreferences: function(values){
     let prefrencePrefix = 'property-preference-';
     let propertyPref = {};
@@ -87,6 +73,7 @@ const PropertyForm = React.createClass({
 
     return propertyPref;
   },
+
   submit: function(values){
 
     const {formatMessage} = this.props.intl;
@@ -102,13 +89,13 @@ const PropertyForm = React.createClass({
         console.log('Form submitted with values', values);
 
 
-        FileStorage.upload('images/' + this.props.propId, this.state.imagesToUpload, {
+        FileStorage.upload('images/' + this.props.propId, values.propertyImagesToUpload, {
           onUpdate: ()=>{
 
           },
           onSuccess: (fileNames)=>{
             let updatedPropertyImages;
-            let images = this.props.property.images;
+            let {images} = this.state.property;
 
             console.log(fileNames);
             console.log('IMAGE', images);
@@ -162,7 +149,7 @@ const PropertyForm = React.createClass({
   },
   render: function(){
     const {formatMessage} = this.props.intl;
-    const property = this.props.property;
+    const property = this.state.property;
     const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
 
     return (<Form ref="form" onSubmit={this.submit}>
@@ -227,19 +214,12 @@ const PropertyForm = React.createClass({
 
           <div className="clearfix">
 
+            <PropertyImageField
+              propId={this.props.propId}
+              maxImages={this.props.maxImages}
+              images={property.images}/>
 
-            { _.isArray(property.images) && !_.isEmpty(property.images) ?
-              <div>
-                <h6><FormattedMessage id="upload" values={{value:property.images.length}}/></h6>
-                {property.images.map((image)=>{
-                  return <div className="col-md-3">
-                    <Image url={`images/${this.props.propId}/${image}`}/>
-                  </div>;
-                })}
-                {this.generateDropZones(this.props.maxImages - property.images.length)}
-              </div>
-              : this.generateDropZones()
-            }
+
           </div>
         </div>
 

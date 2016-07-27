@@ -13,8 +13,8 @@ const PropertiesContainer = React.createClass({
     let properties = [];
 
     _.forEach(this.props.data, (v, k)=>{
-      properties.push(<li className="col-md-3 col-sm-6" key={k}><Property
-        data={v}/></li>)
+      properties.push(<li className="col-md-3 col-sm-6" key={k}>
+        <Property data={v} id={k}/></li>)
     });
     return properties;
   },
