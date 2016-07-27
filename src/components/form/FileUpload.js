@@ -2,6 +2,8 @@ import React from 'react';
 import Formsy from 'formsy-react';
 import { If, Then, Else } from 'react-if';
 import firebase from 'firebase';
+import FBImage from '../Image';
+import InputHidden from './InputHidden';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 
 const FileUpload = React.createClass({
@@ -11,42 +13,30 @@ const FileUpload = React.createClass({
   mixins: [Formsy.Mixin],
 
   propTypes: {
-    onChange: React.PropTypes.func
+    firebaseRef: React.PropTypes.string.isRequired
+  },
+  getDefaultProps: function(){
+    return {
+      fileName: ""
+    }
   },
 
   getInitialState: function(){
     return {
-      value: this.props.value
+      imageName: this.props.imageName,
+      uploading: false
     };
-  },
-  syncValue: function(){
-    this.setValue(this.state.value);
   },
 
   // setValue() will set the value of the component, which in
   // turn will validate it and the rest of the form
   changeValue(event) {
 
-    this.upload(event.target.files, function(snapshot){
-      this.setValue(name);
+    this.upload(event.target, (file)=>{
+      this.setState({uploading: false, files:event.target.files});
     });
 
 
-  },
-  upload(files, cb){
-    let storage = firebase.storage().ref('images');
-    for(var i = 0, f; f = files[i]; i++){
-      let uploadTask = storage.child(f.name).put(f, {contentType: f.type});
-      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot){
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      }, function(error){
-        // Handle unsuccessful uploads
-        alert('File upload:', error.code);
-      }, function(){
-      });
-
-    }
   },
   render() {
     // Set a specific className based on the validation
@@ -62,29 +52,35 @@ const FileUpload = React.createClass({
     // or the server has returned an error message
     const errorMessage = this.getErrorMessage();
 
-    const preview = this.getValue() ? <div></div> : null;
+    const isUploading = this.state.uploading;
+
+
+    const preview = this.state.imageName !== '' ?
+      <FBImage url={this.props.firebaseRef+'/'+this.state.imageName}/> : null;
 
     const input = <input
+      ref='fileInput'
       className={className}
       type={'file'}
-      name={this.props.name}
       onChange={this.changeValue}
-      value={this.getValue()}
-      checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
     />;
 
     return (
-      <div className={className}>
-        {preview}
-
-        {
-          <div>
-            {input}
-            <span className='validation-error'>{errorMessage}</span>
-          </div>
-        }
-
-
+      <div className="row">
+        <div className="col-md-3">
+          {preview}
+        </div>
+        <div className="col-md-4">
+          {isUploading ? <FormattedMessage id="uploading"/> :
+            <div>
+              <InputHidden name={this.props.name} value={this.state.imageName || null}/>
+              <div>
+                {input}
+                <span className='validation-error'>{errorMessage}</span>
+              </div>
+            </div>
+          }
+        </div>
       </div>
     );
   }

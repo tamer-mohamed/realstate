@@ -89,8 +89,6 @@ const InputField = React.createClass({
 
       </div>
     );
-
-    const addOnLabel = <span className="input-group-addon">{this.props.addOnLabel}</span>;
   }
 });
 

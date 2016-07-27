@@ -262,8 +262,10 @@ module.exports = {
     // generic
     "totalSum": "Total",
     "loading": "Loading ...",
+    "loading.image": "Loading image",
     "register": "register",
     "login": "login",
+    "upload": "Uploaded images: {value}",
 
     "accountType.individual": "individual",
     "accountType.business": "business",

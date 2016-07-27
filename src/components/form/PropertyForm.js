@@ -2,6 +2,7 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import { Form } from 'formsy-react';
 import {hashHistory} from 'react-router';
+import NProgress from "nprogress";
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 // form components
@@ -16,6 +17,9 @@ import InputPostfixAddon from './InputPostfixAddon';
 import FeatureLevelsModal from './FeatureLevelsModal';
 import PropertyAddress from './PropertyAddress';
 import Purposes from './Purposes';
+import Dropzone from './Dropzone';
+import Image from '../Image'
+import FileStorage from '../../models/FileStorage';
 
 
 const PropertyForm = React.createClass({
@@ -32,12 +36,15 @@ const PropertyForm = React.createClass({
   getDefaultProps: function(){
     return {
       property: {},
+      maxImages: 3,
       editMode: false
     }
   },
   getInitialState: function(){
     return {
       step: 1,
+      imagesToUpload: [],
+      propertyImages: this.props.editMode && this.props.property.images ? this.props.property.images : [],
       formHelpers: {
         locationChanged: false
       }
@@ -57,6 +64,20 @@ const PropertyForm = React.createClass({
     let nextStep = step + 1;
     this.setState({step: nextStep});
   },
+  onDrop: function(file){
+    let images = this.state.imagesToUpload;
+    images.push(file);
+    this.setState({imagesToUpload: images});
+  },
+  generateDropZones: function(num = this.props.maxImages){
+    let zones = [];
+    for(let i = 0; i < num; i++)
+      zones.push(<Dropzone onDrop={this.onDrop} className={"col-md-3"} key={`dropzone-${i}`}
+                           name={`propertyImagesToUpload[${i}]`}
+                           accept="image/*"/>);
+
+    return zones;
+  },
   formatPreferences: function(values){
     let prefrencePrefix = 'property-preference-';
     let propertyPref = {};
@@ -69,11 +90,47 @@ const PropertyForm = React.createClass({
   submit: function(values){
 
     const {formatMessage} = this.props.intl;
+
+    NProgress.start();
+
     //TODO: set validation for area
     if(this.refs.form.state.isValid){
       if(this.props.editMode){
         values.preferences = this.formatPreferences(values);
-        this.props.onSubmit(values);
+
+        console.log('Property Form ID: ', this.props.propId);
+        console.log('Form submitted with values', values);
+
+
+        FileStorage.upload('images/' + this.props.propId, this.state.imagesToUpload, {
+          onUpdate: ()=>{
+
+          },
+          onSuccess: (fileNames)=>{
+            let updatedPropertyImages;
+            let images = this.props.property.images;
+
+            console.log(fileNames);
+            console.log('IMAGE', images);
+
+            if(this.props.editMode && _.isArray(images)){
+              updatedPropertyImages = _.concat(images, fileNames);
+            }
+            else{
+              updatedPropertyImages = fileNames;
+            }
+
+            values.propertyImages = updatedPropertyImages;
+
+
+            console.log(values.propertyImages);
+            NProgress.done();
+
+            this.props.onSubmit(values);
+          }
+        });
+
+
       }
 
       else{
@@ -85,15 +142,13 @@ const PropertyForm = React.createClass({
           case 2:
             let stepOneValues = this.refs.form.getModel();
             stepOneValues.preferences = this.formatPreferences(stepOneValues);
+            stepOneValues.imagesToUpload = this.state.imagesToUpload;
 
 
             this.props.onSubmit({
               1: stepOneValues,
               2: values
             });
-
-            this.refs.form.reset();
-            hashHistory.push(`${this.context.lang}/user/dashboard/properties`);
             break;
         }
       }
@@ -109,8 +164,6 @@ const PropertyForm = React.createClass({
     const {formatMessage} = this.props.intl;
     const property = this.props.property;
     const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
-
-    console.log('PROPER', property.location);
 
     return (<Form ref="form" onSubmit={this.submit}>
 
@@ -167,19 +220,29 @@ const PropertyForm = React.createClass({
       </div>
 
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-12">
           <h6 className="fieldset-title">
             <FormattedMessage id="forms.property.add.fields.title"/>
           </h6>
+
+          <div className="clearfix">
+
+
+            { _.isArray(property.images) && !_.isEmpty(property.images) ?
+              <div>
+                <h6><FormattedMessage id="upload" values={{value:property.images.length}}/></h6>
+                {property.images.map((image)=>{
+                  return <div className="col-md-3">
+                    <Image url={`images/${this.props.propId}/${image}`}/>
+                  </div>;
+                })}
+                {this.generateDropZones(this.props.maxImages - property.images.length)}
+              </div>
+              : this.generateDropZones()
+            }
+          </div>
         </div>
 
-
-        <FileUpload className="col-md-6"
-                    title={"forms.property.add.fields.title"}
-                    value={property.propertyImage}
-                    name="property_image"
-                    type="file"
-                    required/>
 
       </div>
 

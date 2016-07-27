@@ -44,6 +44,8 @@ const PropertyAdd = React.createClass({
   submit: function(data){
     let {formatMessage} = this.props.intl;
 
+    console.log('Manage property Data', data);
+
     firebase.database().ref(`properties/${this.props.params.propId}`).update({
       title: data.title,
       location: data.location,
@@ -53,15 +55,17 @@ const PropertyAdd = React.createClass({
       type: data.type.type,
       preferences: data.preferences,
       purpose: data.purpose.value,
-      image: data.propertyImage,
-      addedBy: this.context.user.uid,
-      updatedAt: Firebase.ServerValue.TIMESTAMP
+      images: data.propertyImages,
+      addedBy: this.context.user.uid
+      //updatedAt: Firebase.ServerValue.TIMESTAMP
     }).then(()=>{
 
       this.context.pushNotification({message: formatMessage({id: "forms.property.success"}), level: 'success'});
 
       hashHistory.push(`${this.context.lang}/user/dashboard/properties`);
-    }).catch((e)=> window.alert(e));
+    }).catch((e)=>{
+      window.alert("Error in Updating property:" + e);
+    });
 
   },
   resetForm: function(){
@@ -79,7 +83,8 @@ const PropertyAdd = React.createClass({
               <FormattedMessage id="screen.secure.properties.manage.pageTitle"/></h2>
             <div className="row">
               {this.state.loaded ?
-                <PropertyForm onSubmit={this.submit} editMode={true} property={property}/>
+                <PropertyForm onSubmit={this.submit} editMode={true} property={property}
+                              propId={this.props.params.propId}/>
                 : null
               }
             </div>
