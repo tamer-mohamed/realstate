@@ -15,7 +15,6 @@ const PropertyAddress = React.createClass({
     value: React.PropTypes.object
   },
   getInitialState: function(){
-    console.log('asdasdasd', this.props.value);
     return {
       selectedLocation: this.props.value.location || null
     }

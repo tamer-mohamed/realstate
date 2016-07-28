@@ -45,8 +45,8 @@ const PropertyAdd = React.createClass({
     let {formatMessage} = this.props.intl;
 
     console.log('Manage property Data', data);
-
-    firebase.database().ref(`properties/${this.props.params.propId}`).update({
+    console.log(`properties/${this.props.params.propId}`);
+    Firebase.database().ref(`properties/${this.props.params.propId}`).update({
       title: data.title,
       location: data.location,
       price: data.price,
@@ -54,12 +54,11 @@ const PropertyAdd = React.createClass({
       space: data.space,
       type: data.type.type,
       preferences: data.preferences,
-      purpose: data.purpose.value,
+      purpose: data.purpose,
       images: data.propertyImages,
       addedBy: this.context.user.uid
       //updatedAt: Firebase.ServerValue.TIMESTAMP
     }).then(()=>{
-
       this.context.pushNotification({message: formatMessage({id: "forms.property.success"}), level: 'success'});
 
       hashHistory.push(`${this.context.lang}/user/dashboard/properties`);

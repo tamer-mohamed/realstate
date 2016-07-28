@@ -8,6 +8,7 @@ module.exports = {
     "settings.currency": "د.ك",
     "settings.phoneNumber": "+965 6995 8669",
     "settings.country": "Kuwait",
+    "settings.space": "M",
 
 
     "contextualMenu.addProperty": "إضافة العقارات",
@@ -25,6 +26,10 @@ module.exports = {
     "userMenu.allProperties": "العقارات",
     "userMenu.contact": "الهيئة الشخصية",
 
+    // property
+    "property.space": "{space} {measure}",
+    "property.price": "{currency} {price}",
+
     // Contextual Menu
     "contextualMenu.user.addProperty": "إضافة العقار",
 
@@ -36,6 +41,9 @@ module.exports = {
 
     "block.submitProperty.text": "هل تريد اضافة عقارك؟",
     "block.submitProperty.buttonText": "إضافة عقار",
+
+    //errors
+    "error.imageSrc": "Image dones't exist",
 
 
     // validations

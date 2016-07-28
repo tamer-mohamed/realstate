@@ -6,6 +6,7 @@ import SelectField from './Select';
 import Loader from '../Loader';
 
 const Purposes = React.createClass({
+
   propTypes: {
     intl: intlShape.isRequired,
     title: React.PropTypes.string.isRequired,
@@ -38,8 +39,10 @@ const Purposes = React.createClass({
     if(!this.state.loaded)
       return <Loader title="loading"/>;
 
-    let selected = this.props.editMode ? this.props.value : this.state.purposes[0];
+    let selected = this.props.editMode ? this.props.value : this.state.purposes[0].value;
     let className = this.props.className || "";
+
+
     return (<SelectField title={this.props.title}
                          className={className}
                          name="purpose"

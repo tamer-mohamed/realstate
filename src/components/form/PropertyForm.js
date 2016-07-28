@@ -4,6 +4,7 @@ import { Form } from 'formsy-react';
 import {hashHistory} from 'react-router';
 import NProgress from "nprogress";
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
+import q from 'q';
 
 // form components
 import InputField from './Input';
@@ -44,6 +45,7 @@ const PropertyForm = React.createClass({
     return {
       step: 1,
       property: this.props.property,
+      images: this.props.property.images || [],
       imagesToUpload: [],
       formHelpers: {
         locationChanged: false
@@ -73,50 +75,80 @@ const PropertyForm = React.createClass({
 
     return propertyPref;
   },
+  updateImages: function(images){
+    //this.props.onUpdate(images);
+    this.setState({images});
+  },
 
+  // TODO: move to FileStorage module
+  deleteImages: function(images, {onSuccess}){
+
+    if(_.isEmpty(images))
+      onSuccess();
+
+
+    let promises = [];
+    _.forEach(images, (image, k)=>{
+      let promise = q.defer();
+
+      this.deleteImage(image, {
+        onSuccess: ()=>{
+          promise.resolve();
+        },
+        onFail: (e)=>{
+          promise.reject(e);
+        }
+      });
+
+      promises.push(promise.promise);
+    });
+
+    q.all(promises).then(()=>{
+      onSuccess();
+    })
+
+  },
+
+  // TODO: move to FileStorage module
+  deleteImage: function(image, {onSuccess,onFail}){
+    const {formatMessage} = this.props.intl;
+    FileStorage.delete(`images/${this.props.propId}/${image}`).then(onSuccess).catch((e)=>{
+      this.context.pushNotification({message: formatMessage({id: "error.imageSrc"}), level: 'error'});
+      onFail(e);
+    })
+  },
   submit: function(values){
 
     const {formatMessage} = this.props.intl;
-
+    const isEditMode = this.props.editMode;
     NProgress.start();
+    console.log('Form submitted with values', values);
 
     //TODO: set validation for area
     if(this.refs.form.state.isValid){
-      if(this.props.editMode){
+      let imagesToDelete = values.propertyImagesToDelete;
+
+      if(isEditMode){
         values.preferences = this.formatPreferences(values);
 
-        console.log('Property Form ID: ', this.props.propId);
-        console.log('Form submitted with values', values);
+        this.deleteImages(imagesToDelete, {
+          onSuccess: ()=>{
+            let reIndexed = _.filter(values.propertyImagesToUpload, (f)=> f ? true : false);
+            FileStorage.upload('images/' + this.props.propId, reIndexed, {
+              onUpdate: ()=>{
 
+              },
+              onSuccess: (fileNames)=>{
+                values.propertyImages = _.concat(_.filter(this.state.property.images, function(imageName){
+                  return _.indexOf(imagesToDelete, imageName) === -1;
+                }), fileNames);
 
-        FileStorage.upload('images/' + this.props.propId, values.propertyImagesToUpload, {
-          onUpdate: ()=>{
-
-          },
-          onSuccess: (fileNames)=>{
-            let updatedPropertyImages;
-            let {images} = this.state.property;
-
-            console.log(fileNames);
-            console.log('IMAGE', images);
-
-            if(this.props.editMode && _.isArray(images)){
-              updatedPropertyImages = _.concat(images, fileNames);
-            }
-            else{
-              updatedPropertyImages = fileNames;
-            }
-
-            values.propertyImages = updatedPropertyImages;
-
-
-            console.log(values.propertyImages);
-            NProgress.done();
-
-            this.props.onSubmit(values);
+                this.props.onSubmit(values);
+                NProgress.done();
+              }
+            });
           }
         });
-
 
       }
 
@@ -188,6 +220,7 @@ const PropertyForm = React.createClass({
                                required/>
 
             <Purposes className="col-md-3"
+                      editMode={this.props.editMode}
                       value={property.purpose}
                       title={"forms.property.add.fields.purpose"}/>
           </div>

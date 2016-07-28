@@ -2,12 +2,16 @@ import React from 'react';
 import Dropzone from './Dropzone';
 import Image from '../Image';
 import FileStorage from '../../models/FileStorage';
+import InputHidden from './InputHidden';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 const PropertyImage = React.createClass({
   propTypes: {
     images: React.PropTypes.array,
     intl: intlShape.isRequired,
+  },
+  contextTypes: {
+    pushNotification: React.PropTypes.func
   },
   getDefaultProps: function(){
     return {
@@ -17,7 +21,8 @@ const PropertyImage = React.createClass({
   getInitialState: function(){
     return {
       images: this.props.images,
-      imagesToUpload: []
+      imagesToUpload: [],
+      imagesToDelete: []
     }
   },
   generateDropZones: function(){
@@ -31,10 +36,6 @@ const PropertyImage = React.createClass({
 
     return zones;
   },
-  updateImages: function(images){
-    //this.props.onUpdate(images);
-    this.setState({images});
-  },
   onDrop: function(file){
     console.log('ADDING', file);
     let images = this.state.imagesToUpload;
@@ -43,23 +44,13 @@ const PropertyImage = React.createClass({
     this.setState({imagesToUpload: images});
   },
   deleteImage: function(image){
-    const {formatMessage} = this.props.intl;
+    let {imagesToDelete, images} = this.state;
+    //remove from the listed images
+    let filtered = _.filter(images, (i)=> i !== image);
 
+    imagesToDelete.push(image);
 
-    console.log('DELTETE', image);
-
-    FileStorage.delete(`images/${this.props.propId}/${image}`).then(()=>{
-
-      let images = this.state.images;
-      images = _.remove(images, function(imageName){
-        return imageName === image;
-      });
-      firebase.database().ref(`properties/${this.props.propId}`).update(({images})).then(()=>this.updateImages(images));
-
-    }).catch(()=>{
-
-      this.context.pushNotification({message: formatMessage({id: "errorGeneric"}), level: 'error'});
-    })
+    this.setState({imagesToDelete, images: filtered});
   },
 
   render: function(){
@@ -81,6 +72,11 @@ const PropertyImage = React.createClass({
             </div>
           </div>;
         })}
+
+        {this.state.imagesToDelete.map((image, i)=>{
+          return <InputHidden value={image} name={`propertyImagesToDelete[${i}]`}/>
+        })}
+
         {this.generateDropZones()}
       </div>);
   }

@@ -30,6 +30,9 @@ const PropertyAdd = React.createClass({
     let {formatMessage} = this.props.intl;
     let data = values;
 
+
+    console.log(data);
+
     let propId = Firebase.database().ref('properties').push({
       title: data[1].title,
       location: data[1].location.value,
@@ -38,13 +41,13 @@ const PropertyAdd = React.createClass({
       space: data[1].space,
       type: data[1].type.type,
       preferences: data[1].preferences,
-      purpose: data[1].purpose.value,
+      purpose: data[1].purpose,
       featuredLevel: data[2],
       addedBy: this.context.user.uid,
       //  addedAt: Firebase.ServerValue.TIMESTAMP
     }, (e)=>{
       if(e === null){
-        FileStorage.upload('images/' + propId, data[1].imagesToUpload, {
+        FileStorage.upload('images/' + propId, data[1].propertyImagesToUpload, {
           onUpdate: ()=>{
 
           },

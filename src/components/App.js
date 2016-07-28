@@ -35,7 +35,8 @@ const App = React.createClass({
 
   getInitialState: function(){
     return {
-      loggedIn: null
+      loggedIn: null,
+      lang: this.props.params.lang
     }
   },
 

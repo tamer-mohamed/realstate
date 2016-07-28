@@ -1,65 +1,117 @@
 .rtl {
   direction: rtl;
-
+  font: 14px "Droid Arabic Kuf", "Tahoma";
   .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
     float: right;
   }
 
-}
-
-header {
-  .logo {
-    float: right;
-  }
-  .navbar {
-    float: right;
-    margin: 11px 100px 0 0 !important;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Droid Arabic Kuf", "Tahoma";
   }
 
-  .user {
+  header {
+    .logo {
+      float: right;
+    }
+    .navbar {
+      float: right;
+      margin: 11px 100px 0 0 !important;
+    }
+
+    .user {
+      float: left;
+      img {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+      .userName {
+        margin-left: 10px;
+      }
+    }
+
+    .user-drop {
+      left: -13px;
+      right: inherit;
+
+      li i {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  header .navbar-nav > li {
+    float: right;
+  }
+
+  header .navbar-nav > li {
+    margin-left: 40px;
+    margin-right: 0;
+  }
+
+  header .nav > li > a.active:before {
+    position: absolute;
+    left: 0;
+    top: -42px;
+    width: 100%;
+    content: ' ';
+    height: 10px;
+    background: #f44336;
+    display: block;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  .Select--single > .Select-control .Select-value, .Select-placeholder {
+    right: 0;
+    left: inherit;
+  }
+
+  .btn i {
+    margin-left: 10px;
+    margin-right: 0 !important;
+  }
+
+  .call-action .btn {
     float: left;
-    img {
-      margin-right: 0;
-      margin-left: 10px;
-    }
-    .userName {
-      margin-left: 10px;
-    }
   }
 
-  .user-drop {
-    left: -13px;
-    right: inherit;
-
-    li i {
-      margin-left: 10px;
-      margin-right: 0;
+  .property-data .prop-features {
+    span {
+      padding-right: 20px;
+      padding-left: 0
     }
+
+    .location, .area {
+      background-position: top right;
+    }
+
   }
-}
-
-.Select--single > .Select-control .Select-value, .Select-placeholder {
-  right: 0;
-  left: inherit;
-}
-
-.btn i {
-  margin-left: 10px;
-  margin-right: 0 !important;
-}
-
-.call-action .btn {
-  float: left;
-}
-
-.property-data .prop-features {
-  span {
+  .item .item-detail span i {
+    margin-left: 10px;
+    margin-right: 0px;
+  }
+  .item .item-detail .price span, .item .item-detail .area span {
+    padding-left: 0px;
     padding-right: 20px;
-    padding-left: 0
   }
 
-  .location, .area {
-    background-position: top right;
+  .item .item-detail .place {
+    margin-left: 20px;
+    margin-right: 0;
+  }
+
+  .page-wrap .page-title {
+    font-size: 35px;
+  }
+
+  .item .item-detail .right {
+    float: left;
+    text-align: left;
+  }
+
+  .item .item-detail .left {
+    float: right;
   }
 
 }

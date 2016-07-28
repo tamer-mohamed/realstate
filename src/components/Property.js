@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import Image from './Image';
+import {FormattedMessage,intlShape,injectIntl,FormattedHTMLMessage} from 'react-intl';
 import { If, Then, Else } from 'react-if';
 
 
 const Property = React.createClass({
   propTypes: {
-    data: React.PropTypes.object
+    data: React.PropTypes.object,
+    intl: intlShape.isRequired,
   },
   contextTypes: {
     lang: React.PropTypes.string
@@ -30,6 +32,8 @@ const Property = React.createClass({
     let lang = this.context.lang;
     let itemID = this.props.id;
     let images = this.props.data.images;
+    let currency = this.props.intl.formatMessage({id: "settings.currency"});
+    let spaceMeasure = this.props.intl.formatHTMLMessage({id: "settings.space"});
 
     return (
       <div className="item">
@@ -57,8 +61,10 @@ const Property = React.createClass({
 
           </div>
           <div className="right">
-            <span className="area">{this.props.data.space} m <sup>2</sup></span>
-            <span className="price">$ {this.props.data.price}</span>
+            <span className="area"> <FormattedHTMLMessage id="property.space"
+                                                          values={{space:this.props.data.space,measure:spaceMeasure}}/> <sup>2</sup></span>
+            <span className="price"><FormattedMessage id="property.price"
+                                                      values={{currency,price:this.props.data.price}}/> </span>
           </div>
         </div>
       </div>
@@ -66,4 +72,4 @@ const Property = React.createClass({
   }
 });
 
-export default Property;
+export default injectIntl(Property);

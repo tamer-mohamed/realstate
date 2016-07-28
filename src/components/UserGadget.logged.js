@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
-import { hashHistory } from 'react-router';
+import {FormattedMessage} from 'react-intl';
+import { hashHistory,withRouter } from 'react-router';
 import { Link } from 'react-router';
 
 const UserGadgetLogged = React.createClass({
@@ -11,7 +12,8 @@ const UserGadgetLogged = React.createClass({
   },
   contextTypes: {
     lang: React.PropTypes.string,
-    user: React.PropTypes.any
+    user: React.PropTypes.any,
+    switchLang: React.PropTypes.func
   },
   getInitialState: function(){
     return {
@@ -31,10 +33,11 @@ const UserGadgetLogged = React.createClass({
       hashHistory.push(this.context.lang);
     });
   },
+  switchLang(lang){
+    this.props.router.push(this.context.lang);
+  },
   render: function(){
     let lang = this.context.lang;
-
-    console.log(this.props.userId);
     return (
       <div>
         <a href="#" className="dropdown-toggle" data-toggle="dropdown">
@@ -42,6 +45,7 @@ const UserGadgetLogged = React.createClass({
           <span className="userName">{this.state.currentUser.fname}</span>
           <span className="drop-arow"/>
         </a>
+
         <ul className="dropdown-menu user-drop">
           <li>
             <Link to={`${lang}/user/profile`}><i className="fa fa-user"/>My Profile</Link>
@@ -53,9 +57,10 @@ const UserGadgetLogged = React.createClass({
             <a onClick={this.handleLogout}><i className="fa fa-sign-out"/>Logout</a>
           </li>
         </ul>
+
       </div>
     )
   }
 });
 
-export default UserGadgetLogged;
+export default withRouter(UserGadgetLogged);

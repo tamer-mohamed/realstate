@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
 import PropertySingleSlider from './PropertySingleSlider';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage,intlShape,injectIntl,FormattedHTMLMessage} from 'react-intl';
 import { Link } from 'react-router';
 
 
@@ -45,6 +45,8 @@ const PropertySingle = React.createClass({
     });
   },
   render: function(){
+    let spaceMeasure = this.props.intl.formatHTMLMessage({id: "settings.space"});
+
     if(this.state.propertyDetails){
       return (
         <div className="page-wrap properties-page property-single">
@@ -68,12 +70,13 @@ const PropertySingle = React.createClass({
               <div className="col-md-5 property-data">
                 <div className="prop-features prop-before">
                   <span className="location">{this.state.locationData.location} ({this.state.locationData.area})</span>
-                  <span className="area">{this.state.propertyDetails.space} m2</span>
+                  <span className="area"> <FormattedHTMLMessage id="property.space"
+                                                                values={{space:this.state.propertyDetails.space,measure:spaceMeasure}}/> <sup>2</sup></span>
                 </div>
                 <div className="prop-price">
                   <strong className="price">
                     {this.state.propertyDetails.price}
-                     <FormattedMessage id="settings.currency"/>
+                    <FormattedMessage id="settings.currency"/>
                   </strong>
 
                 </div>
@@ -94,4 +97,4 @@ const PropertySingle = React.createClass({
   }
 });
 
-export default PropertySingle;
+export default injectIntl(PropertySingle);
