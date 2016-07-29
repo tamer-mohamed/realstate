@@ -289,7 +289,7 @@ module.exports = {
     "login": "login",
     "contactAgent": "Contact Agent",
     "upload": "Uploaded images: {value}",
-    "sell": "selalla",
+    "sale": "selalla",
     "rent": "Rentsas",
 
     "accountType.individual": "individual",
