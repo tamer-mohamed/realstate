@@ -21,12 +21,14 @@ const Purposes = React.createClass({
 
   },
   componentWillMount: function(){
+    const {formatMessage} = this.props.intl;
+
     firebase.database().ref('purposes').once('value', (snapshot)=>{
       let value = snapshot.val();
       let purposes = [];
 
       _.forEach(value, function(v, k){
-        purposes.push({value: k, title: v});
+        purposes.push({value: k, title: formatMessage({id: `purposes.${k}`})});
       });
 
       this.setState({loaded: true, purposes});

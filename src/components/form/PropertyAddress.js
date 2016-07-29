@@ -29,9 +29,6 @@ const PropertyAddress = React.createClass({
     return nextProps.value !== this.props.value || this.state.selectedLocation != nextState.selectedLocation;
   },
   updateAreas: function(location){
-    if(this.refs.areaInput)
-      this.refs.areaInput.resetValue();
-
     this.setState({selectedLocation: location})
   },
   render: function(){

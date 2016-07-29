@@ -11,6 +11,7 @@ import NotificationSystem from 'react-notification-system';
 // form components
 import PropertyForm from '../form/PropertyForm';
 import Loader from '../Loader';
+import {Page} from '../containers/Page';
 
 
 //components
@@ -74,24 +75,15 @@ const PropertyAdd = React.createClass({
     const property = this.state.property;
 
     return (
-
-      <div className="page-wrap">
-        <div className="container">
-          <div className="page-contents">
-            <h2 className="page-title">
-              <FormattedMessage id="screen.secure.properties.manage.pageTitle"/></h2>
-            <div className="row">
-              {this.state.loaded ?
-                <PropertyForm onSubmit={this.submit} editMode={true} property={property}
-                              propId={this.props.params.propId}/>
-                : null
-              }
-            </div>
-          </div>
-        </div>
+      <div className="row">
+        {this.state.loaded ?
+          <PropertyForm onSubmit={this.submit} editMode={true} property={property}
+                        propId={this.props.params.propId}/>
+          : null
+        }
       </div>
     );
   }
 });
 
-export default injectIntl(PropertyAdd);
+export default Page(injectIntl(PropertyAdd), "screen.secure.properties.manage.pageTitle");

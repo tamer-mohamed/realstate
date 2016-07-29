@@ -33,14 +33,13 @@ const AreasInput = React.createClass({
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
   },
-  componentWillReceiveProps: function(){
-
+  componentWillReceiveProps: function(nextProps){
     this.unbind('areas');
-    this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
+    this.bindAsArray(firebase.database().ref(`areas/${nextProps.location}`), 'areas');
   },
-//  shouldComponentUpdate: function(nextProps, nextState) {
-//    console.log(nextProps);
-//    return nextProps.location !== this.props.location;
+//  shouldComponentUpdate: function(nextProps, nextState){
+//    console.log(nextProps.location !== this.props.location || this.state.areas !== nextState.areas);
+//    return nextProps.location !== this.props.location || this.state.areas !== nextState.areas;
 //  },
   render: function(){
     const {formatMessage} = this.props.intl;
@@ -50,7 +49,7 @@ const AreasInput = React.createClass({
 
     const options = this.state.areas.map((option, i) => (
       <option key={'areas-option-'+i} value={ option['.key']}>
-        { option['.value']}
+        {formatMessage({id: `areas.${option['.key']}`})}
       </option>
     ));
 

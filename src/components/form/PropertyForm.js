@@ -75,11 +75,6 @@ const PropertyForm = React.createClass({
 
     return propertyPref;
   },
-  updateImages: function(images){
-    //this.props.onUpdate(images);
-    this.setState({images});
-  },
-
   // TODO: move to FileStorage module
   deleteImages: function(images, {onSuccess}){
 

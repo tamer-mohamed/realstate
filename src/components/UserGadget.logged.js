@@ -48,7 +48,7 @@ const UserGadgetLogged = React.createClass({
 
         <ul className="dropdown-menu user-drop">
           <li>
-            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/>My Profile</Link>
+            <Link to={`${lang}/user/profile/edit`}><i className="fa fa-user"/>My Profile</Link>
           </li>
           <li>
             <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/>My Properties</Link>

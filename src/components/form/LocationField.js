@@ -28,12 +28,13 @@ const LocationField = React.createClass({
 
   },
   componentWillMount: function(){
+    const {formatMessage} = this.props.intl;
     firebase.database().ref('locations').once('value', (snapshot)=>{
       let value = snapshot.val();
       let locations = [];
 
       _.forEach(value, function(v, k){
-        locations.push({value: k, title: v});
+        locations.push({value: k, title:  formatMessage({id: `locations.${k}`})});
       });
 
       if(this.props.onLoaded && !this.props.editMode)
@@ -56,8 +57,6 @@ const LocationField = React.createClass({
 
 
     let selectedLocation = this.props.editMode ? this.props.value : locations[0];
-
-    console.log('asdasdasd',selectedLocation);
 
     return ( <SelectField className={this.props.className}
                           title={this.props.title}

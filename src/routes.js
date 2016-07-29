@@ -9,6 +9,8 @@ import MyProperties from './components/secure/MyProperties';
 import PropertyManage from './components/secure/PropertyManage';
 import Registration from './components/Registration';
 import Error404 from './components/Error404';
+import UserProfile from './components/secure/UserProfile';
+import UserEditProfile from './components/secure/UserEditProfile';
 
 
 // user
@@ -67,6 +69,19 @@ const routes = [
                         component: PropertyManage
                       }
                     ]
+                  }
+                ]
+              },
+              {
+
+                // user profile
+                path: 'profile',
+                onEnter: auth.requireAuth,
+                indexRoute: {component: UserProfile},
+                childRoutes: [
+                  {
+                    path: 'edit',
+                    component: UserEditProfile
                   }
                 ]
               }

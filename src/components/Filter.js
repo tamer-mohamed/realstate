@@ -63,19 +63,20 @@ const Filter = React.createClass({
     const {formatMessage} = this.props.intl;
 
     let locations = this.state.locations.map(function(result){
-      return {value: result['.key'], label: result['.value']};
+      return {value: result['.key'], label: formatMessage({id: `locations.${result['.value']}`})};
     });
 
 //    let areas = this.state.areas.map(function(result){
 //      return {value: result['.key'], label: result['.value']};
 //    });
 
+
     let purposes = this.state.purposes.map(function(result){
-      return {value: result['.key'], label: result['.value']};
+      return {value: result['.key'], label: formatMessage({id: `purposes.${result['.value']}`})};
     });
 
     let types = this.state.types.map(function(result){
-      return {value: result['.key'], label: result['title']};
+      return {value: result['.key'], label: formatMessage({id: `types.${result['.value']}`})};
     });
 
     return (
