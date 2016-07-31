@@ -20,6 +20,7 @@ const UserEditProfile = React.createClass({
   },
   componentWillMount: function(){
     NProgress.start();
+    console.log(this.context.user);
     Firebase.database().ref(`users/${this.context.user.uid}`).once('value', (snapshot)=>{
       console.log(snapshot);
       this.setState({loaded: true, user: snapshot.val()});
@@ -33,7 +34,7 @@ const UserEditProfile = React.createClass({
 
     return (
       <div className="row">
-        <ProfileForm user={this.state.user}/>
+        <ProfileForm user={this.state.user} userId={this.context.user.uid}/>
       </div>
 
     )
