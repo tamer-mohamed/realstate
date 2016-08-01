@@ -18,6 +18,7 @@ module.exports = {
 
     // page titles
     "pageTitle.userProfile": "User Profile",
+    "pageTitle.userEditProfile": "User Profile",
 
     // main menu
     "menu.home": "الرئسية",
@@ -71,7 +72,7 @@ module.exports = {
     // user profile
     "forms.userProfile.labels.personalInfo": "Personal info",
     "forms.userProfile.labels.name": "name",
-    "forms.userProfile.labels.additionalMail": "Addetional Mail",
+    "forms.userProfile.labels.addetionalMail": "Addetional Mail",
     "forms.userProfile.labels.phoneNumber": "Phone number",
     "forms.userProfile.labels.intro": "Intro",
     "forms.userProfile.labels.profilePic": "Profile picture",

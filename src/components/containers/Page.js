@@ -12,8 +12,8 @@ export const Page = (ComposedComponent, title) => class extends Component {
       <div className="page-wrap">
         <div className="container">
           <div className="page-contents">
-            <h2 className="page-title">
-              <FormattedMessage id={title}/></h2>
+
+            {title ? <h2 className="page-title"><FormattedMessage id={title}/></h2> : null}
 
             <ComposedComponent {...this.props} data={this.state.data}/>
 

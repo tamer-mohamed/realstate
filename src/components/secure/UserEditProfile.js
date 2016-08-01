@@ -42,4 +42,4 @@ const UserEditProfile = React.createClass({
 });
 
 
-export default Page(UserEditProfile, "pageTitle.userProfile");
+export default Page(UserEditProfile, "pageTitle.userEditProfile");
