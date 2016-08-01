@@ -1,17 +1,23 @@
 import React from 'react';
 import Firebase from 'firebase';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
+import {hashHistory} from 'react-router';
 import q from 'q';
 import { Form } from 'formsy-react';
 import InputField from '../form/Input';
 import Textarea from '../form/Textarea';
 import FileStorage from '../../models/FileStorage';
 import CompanyForm from './ProfileForm.company';
-import Dropzone from '../form/Dropzone';
-
+import ImageDropZone from '../form/ImageDropZone';
 
 const ProfileForm = React.createClass({
 
+  userProfilePicRef: function(){
+    return `users/${this.props.userId}/profilePic`
+  },
+  userCompanyPicRef: function(){
+    return `users/${this.props.userId}/companyLogo`
+  },
   propTypes: {
     intl: intlShape.isRequired,
     user: React.PropTypes.object.isRequired
@@ -41,11 +47,8 @@ const ProfileForm = React.createClass({
     })
   },
   submit: function(values){
-    let userCompanyPicRef;
     const {user,userId} = this.props;
-    let userProfilePicRef = `users/${this.props.userId}/profilePic`;
-    if(user.type === 1)
-      userCompanyPicRef = `users/${this.props.userId}/companyLogo`;
+    const {formatMessage} = this.props.intl;
 
     let data = {
       fname: values.fname,
@@ -57,29 +60,34 @@ const ProfileForm = React.createClass({
     };
 
     let updateUser = (userData, onSuccess)=>{
-      Firebase.database().ref('users/' + this.props.userId).update(userData, ()=>{
+      Firebase.database().ref('users/' + userId).update(userData, ()=>{
         onSuccess();
       });
     };
 
 
     if(this.refs.form.state.isValid){
+      let promises = [];
 
-      if(this.props.user.image !== values.profilePic ||
-        (user.type === 1 && this.props.user.compnayLogo !== values.compnayLogo)
+      if((user.type === 1 && this.props.user.companyLogo !== values.companyLogo)
       ){
-        FileStorage.upload(userCompanyPicRef, [values.companyLogo], {
+        let companyLogoPromise = q.defer();
+        FileStorage.upload(this.userCompanyPicRef(), [values.companyLogo], {
           onSuccess: (fileNames)=>{
-            this.deleteFile(userCompanyPicRef, this.props.user.companyLogo, {
+            this.deleteFile(this.userCompanyPicRef(), this.props.user.companyLogo, {
               onSuccess: ()=>{
                 data.companyLogo = fileNames[0];
                 updateUser(data,
                   ()=>{
-                    console.log('DONE');
+                    companyLogoPromise.resolve();
                   });
               },
               onFail: ()=>{
-
+                this.context.pushNotification({
+                  message: formatMessage({id: "forms.userProfile.error.upload.companyLogo"}),
+                  level: 'error'
+                });
+                companyLogoPromise.reject();
               }
             })
           },
@@ -87,62 +95,47 @@ const ProfileForm = React.createClass({
 
           }
         });
+        promises.push(companyLogoPromise.promise);
       }
 
-      switch(true){
-        case user.type === 1 && this.props.user.compnayLogo !== values.compnayLogo:
+      if(this.props.user.image !== values.profilePic){
+        let profilePicPromise = q.defer();
 
-          FileStorage.upload(userCompanyPicRef, [values.companyLogo], {
-            onSuccess: (fileNames)=>{
-              this.deleteFile(userCompanyPicRef, this.props.user.companyLogo, {
-                onSuccess: ()=>{
-                  data.companyLogo = fileNames[0];
-                  updateUser(data,
-                    ()=>{
-                      console.log('DONE');
-                    });
-                },
-                onFail: ()=>{
+        FileStorage.upload(this.userProfilePicRef(), [values.profilePic], {
+          onSuccess: (fileNames)=>{
+            this.deleteFile(this.userProfilePicRef(), this.props.user.image, {
+              onSuccess: ()=>{
+                data.image = fileNames[0];
+                updateUser(data,
+                  ()=>{
+                    profilePicPromise.resolve();
+                  });
+              },
+              onFail: ()=>{
+                this.context.pushNotification({
+                  message: formatMessage({id: "forms.userProfile.error.upload.profilePic"}),
+                  level: 'error'
+                });
+                profilePicPromise.reject();
 
-                }
-              })
-            },
-            onUpdate: ()=>{
+              }
+            });
+          },
+          onUpdate: ()=>{
 
-            }
-          });
+          }
+        });
 
-          break;
-        case this.props.user.image !== values.profilePic :
-
-          FileStorage.upload(userProfilePicRef, [values.profilePic], {
-            onSuccess: ()=>{
-              this.deleteFile(userProfilePicRef, this.props.user.image, {
-                onSuccess: ()=>{
-                  updateUser(data,
-                    ()=>{
-                      console.log('DONE');
-                    });
-                },
-                onFail: ()=>{
-
-                }
-              });
-            },
-            onUpdate: ()=>{
-
-            }
-          });
-
-          break;
-        default:
-
-          updateUser(data, ()=>{
-            console.log('DONE');
-          });
-
-          break;
+        promises.push(profilePicPromise.promise);
       }
+
+      q.all(promises).then(()=>{
+        updateUser(data, ()=>{
+          hashHistory.push(`${this.context.lang}/user/profile`);
+          this.context.pushNotification({message: formatMessage({id: "forms.userProfile.success"}), level: 'success'});
+        });
+
+      })
 
 
     }
@@ -161,34 +154,41 @@ const ProfileForm = React.createClass({
               <FormattedMessage id="forms.userProfile.labels.personalInfo"/>
             </h6>
             <div className="row">
-              <InputField className="col-md-6"
-                          title={"forms.userProfile.labels.name"}
-                          value={this.props.user.fname}
-                          name="fname"
-                          required/>
-              <InputField className="col-md-6"
-                          title={"forms.userProfile.labels.additionalMail"}
-                          value={this.props.user.additionalMail}
-                          name="additionalMail"/>
+              <div className="col-md-8">
+                <div className="row">
+                  <InputField className="col-md-6"
+                              title={"forms.userProfile.labels.name"}
+                              value={this.props.user.fname}
+                              name="fname"
+                              required/>
+                  <InputField className="col-md-6"
+                              title={"forms.userProfile.labels.additionalMail"}
+                              value={this.props.user.additionalMail}
+                              validations="isEmail"
+                              validationError={formatMessage({id:"forms.validations.generic.isEmail"})}
+                              name="additionalMail"/>
+                </div>
+                <div className="row">
+                  <InputField className="col-md-6"
+                              title={"forms.userProfile.labels.phoneNumber"}
+                              value={this.props.user.phonenumber}
+                              name="phonenumber"
+                              required/>
 
-              <div className="row">
-                <Dropzone className="col-md-3"
-                          title={"forms.userProfile.labels.profilePic"}
-                          name="profilePic"/>
+                  <Textarea className="col-md-6"
+                            name="intro"
+                            value={this.props.user.intro}
+                            title={"forms.userProfile.labels.intro"}/>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <ImageDropZone itemClassName="col-md-12" image={this.props.user.image}
+                               title={"forms.userProfile.labels.profilePic"} name="profilePic"
+                               picRef={this.userProfilePicRef()}/>
               </div>
 
             </div>
-            <div className="row">
-              <InputField className="col-md-6"
-                          title={"forms.userProfile.labels.phoneNumber"}
-                          value={this.props.user.phonenumber}
-                          name="phonenumber"
-                          required/>
 
-            <Textarea className="col-md-6"
-                      name="intro"
-                      title={"forms.userProfile.labels.intro"}/>
-            </div>
 
             {this.props.user.type === 1 ? <CompanyForm {...this.props} /> : null}
 

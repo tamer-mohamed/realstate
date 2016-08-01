@@ -15,7 +15,6 @@ const Image = React.createClass({
   },
   componentWillMount: function(){
     firebase.storage().ref(this.props.url).getDownloadURL().then((url)=>{
-      console.log('DONEWLODANDA');
       this.setState({downloading: false, imageUrl: url});
     })
   },

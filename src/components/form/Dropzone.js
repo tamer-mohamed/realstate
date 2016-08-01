@@ -3,11 +3,14 @@ import _ from 'lodash';
 import React from 'react';
 import InputHidden from './InputHidden';
 import FileStorage from '../../models/FileStorage';
+import {injectIntl,intlShape} from 'react-intl';
 
 
 const Dropzone = React.createClass({
   propTypes: {
-    accept: React.PropTypes.string.isRequired
+    accept: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string.isRequired,
+    intl: intlShape.isRequired
   },
   getInitialState: function(){
     return {}
@@ -28,6 +31,8 @@ const Dropzone = React.createClass({
     });
   },
   render: function(){
+    let className = `${this.props.className} text-center`;
+    let {formatMessage} = this.props.intl;
     return (
       <div className={this.props.className}>
 
@@ -47,9 +52,9 @@ const Dropzone = React.createClass({
               <InputHidden value={this.state.file} name={`${this.props.name}`}/>
             </div>
           </div> :
-          <div className="text-center">
+          <div className={className}>
             <Drop ref="dropzone" onDrop={this.onDrop} multiple={false} accept={this.props.accept}>
-              <div>Try dropping some files here, or click to select files to upload.</div>
+              <div>{formatMessage({id: this.props.title})}</div>
               <div className="overlay">
                 <a onClick={this.onDrop} className="btn btn-danger">+</a>
               </div>
@@ -63,4 +68,4 @@ const Dropzone = React.createClass({
 });
 
 
-export default Dropzone;
+export default injectIntl(Dropzone);

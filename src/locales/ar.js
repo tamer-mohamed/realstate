@@ -53,6 +53,7 @@ module.exports = {
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
     "forms.validations.generic.isNumeric": " يجب أن يكون رقمية",
+    "forms.validations.generic.isEmail": "Should be Email",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
     // registration form
@@ -66,6 +67,20 @@ module.exports = {
     "forms.user.register.fields.accountType": "نوع الحساب",
     "forms.user.register.success": "سجلت بنجاح",
 
+
+    // user profile
+    "forms.userProfile.labels.personalInfo": "Personal info",
+    "forms.userProfile.labels.name": "name",
+    "forms.userProfile.labels.additionalMail": "Addetional Mail",
+    "forms.userProfile.labels.phoneNumber": "Phone number",
+    "forms.userProfile.labels.intro": "Intro",
+    "forms.userProfile.labels.profilePic": "Profile picture",
+    "forms.userProfile.labels.companyInfo": "Company info",
+    "forms.userProfile.labels.companyName": "Company name",
+    "forms.userProfile.labels.companyLogo" : "Company logo",
+    "forms.userProfile.success": "DONE",
+    "forms.userProfile.error.upload.profilePic": "Error on Uploading profile picture",
+    "forms.userProfile.error.upload.compnanyLogo": "Error on Uploading Company logo",
 
     //
     "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
@@ -90,6 +105,7 @@ module.exports = {
     "screen.secure.properties.manage.pageTitle": "تعديل العقار",
     "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
     "forms.property.add.labels.address": " معلومات عنوان العقار",
+    "forms.property.add.labels.image":"Image upload here ",
     "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
     "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
     "forms.property.add.labels.info": "المعلومات",
