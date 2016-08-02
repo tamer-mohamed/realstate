@@ -3,14 +3,14 @@ import NProgress from 'nprogress';
 import Image from './Image';
 
 const ProfilePic = React.createClass({
-
+  defaultImg: 'default.png',
   propTypes: {
     image: React.PropTypes.string,
-    fbRef: React.PropTypes.string.isRequired
+    userId: React.PropTypes.string.isRequired
   },
   render: function(){
-    let ref = this.props.fbRef;
-    let image = this.props.image || "default";
+    let ref = `users/`;
+    let image = this.props.image ? `${this.props.userId}` : this.defaultImg;
 
     return (
       <Image url={`${ref}/${image}`}/>

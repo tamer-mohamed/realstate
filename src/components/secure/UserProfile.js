@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 import {Page} from '../containers/Page';
 import NProgress from 'nprogress';
 import ProfilePic from '../ProfilePic';
+import FontAwesome from 'react-fontawesome';
 
 const UserProfile = React.createClass({
 
@@ -19,9 +20,7 @@ const UserProfile = React.createClass({
   },
   componentWillMount: function(){
     NProgress.start();
-    console.log(this.context.user);
     Firebase.database().ref(`users/${this.context.user.uid}`).once('value', (snapshot)=>{
-      console.log(snapshot);
       this.setState({loaded: true, user: snapshot.val()});
       NProgress.done();
     })
@@ -33,11 +32,11 @@ const UserProfile = React.createClass({
 
     return (
       <div className="row">
-        <div className="col-md-8">
-          <h1>{this.state.user.fname}</h1>
+        <div className="col-md-10">
+          <h4>{this.state.user.fname}</h4>
         </div>
-        <div className="col-md-4">
-
+        <div className="col-md-2">
+          <ProfilePic image={this.state.user.image} userId={this.context.user.uid}/>
         </div>
       </div>
     )
