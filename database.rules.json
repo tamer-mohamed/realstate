@@ -7,7 +7,12 @@
   "users": {
     ".write": "auth != null",
     "$uid": {
-      ".write": "auth.uid === $uid" // only the current user can edit his info
+    }
+  },
+  "welcomeMails": {
+    "$uid": {
+      ".write": "auth.uid === $uid"
+      // only the current user can edit his info
     }
   }
 }

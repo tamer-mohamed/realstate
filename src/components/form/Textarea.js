@@ -3,7 +3,7 @@ import Formsy from 'formsy-react';
 import { If, Then, Else } from 'react-if';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 
-const InputField = React.createClass({
+const Textarea = React.createClass({
 
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
@@ -61,8 +61,8 @@ const InputField = React.createClass({
 
     const labelClassName = "form-control-label";
 
-    const input = <input
-      className={this.props.type !== 'checkbox'? "form-control" : null}
+    const input = <textarea
+      className={"form-control"}
       type={this.props.type || 'text'}
       name={this.props.name}
       onChange={this.changeValue}
@@ -74,9 +74,6 @@ const InputField = React.createClass({
     return (
       <div className={className}>
 
-        {this.props.type === "checkbox" ?
-          <label> <FormattedMessage id={this.props.title}/> {input} </label>
-          :
           <div>
             <label htmlFor={this.props.name} className={labelClassName}>
               <FormattedMessage id={this.props.title}/>
@@ -84,7 +81,6 @@ const InputField = React.createClass({
             {input}
             <span className='validation-error'>{errorMessage}</span>
           </div>
-        }
 
 
       </div>
@@ -92,4 +88,4 @@ const InputField = React.createClass({
   }
 });
 
-export default InputField;
+export default Textarea;

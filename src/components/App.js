@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import _ from 'lodash';
 import { IntlProvider, addLocaleData ,defineMessages} from 'react-intl';
+import NotificationSystem from 'react-notification-system';
 // components
 import Header from './HeaderFront';
 import Topbar from './Topbar';
@@ -34,20 +35,29 @@ const App = React.createClass({
 
   getInitialState: function(){
     return {
-      loggedIn: null
+      loggedIn: null,
+      lang: this.props.params.lang
     }
   },
 
   childContextTypes: {
     lang: React.PropTypes.string,
-    user: React.PropTypes.any
+    user: React.PropTypes.any,
+    pushNotification: React.PropTypes.func
   },
   propTypes: {children: React.PropTypes.object, lang: React.PropTypes.string},
 
   getChildContext: function(){
     return {
       lang: this.props.params.lang,
-      user: firebase.auth().currentUser
+      user: firebase.auth().currentUser,
+      pushNotification: ({message, level})=>{
+        event.preventDefault();
+        this.refs.notificationSystem.addNotification({
+          message,
+          level
+        });
+      }
     };
   },
   handleLogout: function(loggedIn){
@@ -68,7 +78,9 @@ const App = React.createClass({
 
     return (
       <IntlProvider {... localeData} defaultLocale="ar">
+
         <div className={localeData.className}>
+          <NotificationSystem ref="notificationSystem"/>
           <Topbar/>
           <Header/>
           <section>

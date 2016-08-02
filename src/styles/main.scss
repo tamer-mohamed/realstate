@@ -1,5 +1,4 @@
 
-
 header .logo img {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -26,4 +25,14 @@ header .logo img {
 
 .validation-error {
   color: red;
+}
+
+.modal-featureLevels {
+  min-width: 50%;
+  left: 25%;
+}
+
+.property-slider .thumbnails a {
+  margin-left: 10px;
+  width: 20%;
 }

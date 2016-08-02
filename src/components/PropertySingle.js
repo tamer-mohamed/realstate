@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
+import PropertySingleSlider from './PropertySingleSlider';
+import {FormattedMessage,intlShape,injectIntl,FormattedHTMLMessage} from 'react-intl';
 import { Link } from 'react-router';
 
 
@@ -43,6 +45,8 @@ const PropertySingle = React.createClass({
     });
   },
   render: function(){
+    let spaceMeasure = this.props.intl.formatHTMLMessage({id: "settings.space"});
+
     if(this.state.propertyDetails){
       return (
         <div className="page-wrap properties-page property-single">
@@ -57,26 +61,32 @@ const PropertySingle = React.createClass({
 
           <div className="container">
             <div className="row">
-              <div className="col-md-7 property-slider">
-                <figure>
-                  <img src="dist/images/pro-big.jpg" alt="Image" className="img-responsive"/>
-                  <span className="label sale">{this.state.purpose}</span>
-                </figure>
-                <div className="thumbnails">
-                  <a href="#"><img src="dist/images/pro-thumb1.jpg" alt="Thumbnils" className="img-responsive"/></a>
-                  <a href="#"><img src="dist/images/pro-thumb2.jpg" alt="Thumbnils" className="img-responsive"/></a>
-                  <a href="#"><img src="dist/images/pro-thumb3.jpg" alt="Thumbnils" className="img-responsive"/></a>
-                </div>
-              </div>
+              <PropertySingleSlider
+                className="col-md-7 property-slider"
+                purpose={this.state.purpose}
+                FBref={`images/${this.props.params.propertyId}`}
+                images={this.state.propertyDetails.images}/>
+
               <div className="col-md-5 property-data">
                 <div className="prop-features prop-before">
                   <span className="location">{this.state.locationData.location} ({this.state.locationData.area})</span>
+<<<<<<< HEAD
                   <span className="area">{this.state.propertyDetails.space} m<sub>2<sub></span>
+=======
+                  <span className="area"> <FormattedHTMLMessage id="property.space"
+                                                                values={{space:this.state.propertyDetails.space,measure:spaceMeasure}}/> <sup>2</sup></span>
+>>>>>>> origin/dev
                 </div>
                 <div className="prop-price">
-                  <strong className="price">{this.state.propertyDetails.price}</strong>
-                  <a href="" className="btn btn-danger">Contact Agent</a>
+                  <strong className="price">
+                    {this.state.propertyDetails.price}
+                    <FormattedMessage id="settings.currency"/>
+                  </strong>
+
                 </div>
+                <a href="" className="btn btn-danger"> <FormattedMessage id="contactAgent"/></a>
+
+
                 <div className="prop-features">
                 </div>
               </div>
@@ -91,4 +101,4 @@ const PropertySingle = React.createClass({
   }
 });
 
-export default PropertySingle;
+export default injectIntl(PropertySingle);

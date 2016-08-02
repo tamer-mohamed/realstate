@@ -1,10 +1,16 @@
 import React from 'react';
 import Formsy from 'formsy-react';
-import {FormattedMessage} from 'react-intl';
 import InputField from './Input';
+import {FormattedMessage} from 'react-intl';
 
 const RadioGroup = React.createClass({
   mixins: [Formsy.Mixin],
+
+  getInitialState: function(){
+    return {
+      values: {}
+    }
+  },
 
   componentDidMount() {
     const value = this.props.value;
@@ -16,29 +22,33 @@ const RadioGroup = React.createClass({
     this.setValue(value);
     this.setState({value});
   },
+  updateList: function(key, value){
+    let values = this.state.values;
+    values[key] = value;
 
+    if(this.props.onChange)
+      this.props.onChange(values);
+
+    this.setState({values});
+  },
   render() {
-    const className = 'form-group' + (this.props.className || ' ') +
+    const className = 'form-group ' + (this.props.className || ' ') +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
-    const { name, items } = this.props;
 
-    console.log('itemitemitemitem', items);
+    const { name, items } = this.props;
     return (
 
       <div className={className}>
         {items.map((item, i) => (
-
           <div key={i}>
-            <label>
-              <FormattedMessage id={`accountType.${item['title']}`}/>
-              <input
-                type="radio"
-                name={name}
-                onChange={this.changeValue.bind(this, item.value)}
-                checked={this.state.value === item.value}
-              />
-            </label>
+            <InputField
+              type="checkbox"
+              title={item['title']}
+              name={name}
+              onChange={(value)=> this.updateList(item['.key'],value)}
+              checked={this.state.value === item['.key']}
+            />
           </div>
         ))
         }

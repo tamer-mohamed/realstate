@@ -11,7 +11,7 @@ const PreferencesInput = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string,
-    propertyType: React.PropTypes.string,
+    value: React.PropTypes.object,
     name: React.PropTypes.string,
     title: React.PropTypes.string,
     intl: intlShape.isRequired,
@@ -25,6 +25,9 @@ const PreferencesInput = React.createClass({
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref(`types`), 'types');
   },
+//  shouldComponentUpdate: function(nextProps, nextState){
+//    return nextProps.value !== this.props.value || nextState.value !== this.state.value;
+//  },
 
   updatePrefrences: function(event){
     if(this.props.onChange)
@@ -37,10 +40,6 @@ const PreferencesInput = React.createClass({
 
     this.setValue({type: typeObject['.key'], preferences: typeObject.preferences});
   },
-//  shouldComponentUpdate: function(nextProps, nextState) {
-//    console.log(nextProps);
-//    return nextProps.location !== this.props.location;
-//  },
   render: function(){
     const {formatMessage} = this.props.intl;
     const className = (this.props.className || ' ') + " " +
@@ -50,13 +49,14 @@ const PreferencesInput = React.createClass({
     const currentValue = this.getValue();
 
     let propertyPrefrences = [];
-    if(currentValue && currentValue.preferences && !_.isEmpty(this.getValue().preferences)){
+    if(currentValue && currentValue.preferences && !_.isEmpty(currentValue.preferences)){
+      console.log('CURRENT', currentValue.preferences);
       _.forEach(currentValue.preferences, (v, k)=>{
         propertyPrefrences.push(
           <InputField key={`property-preference-${k}`} className="col-md-3"
                       title={`property.preference.${k}`}
                       name={`property-preference-${k}`}
-                      value={this.props.editMode? currentValue.preferences[k] : 0} required/>)
+                      value={this.props.editMode && v === parseInt(v, 10)? v : 0} required/>)
       });
     }
     const options = this.state.types.map((option, i) => (
@@ -83,7 +83,7 @@ const PreferencesInput = React.createClass({
         <select
           title={this.props.title}
           onChange={this.updatePrefrences}
-          value={this.getValue()? this.getValue().type : ''}
+          value={currentValue? currentValue.type : ''}
           className="form-control"
           name={this.props.name}>
           {options}

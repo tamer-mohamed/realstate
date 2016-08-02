@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link,IndexLink } from 'react-router';
 import Select from 'react-select';
 import Button from 'react-bootstrap/lib/Button';
 import ReactFireMixin from 'reactfire';
@@ -14,6 +14,7 @@ const HeaderFront = React.createClass({
   },
   render: function(){
     let lang = this.context.lang;
+
 
     return (
       <section>
@@ -31,9 +32,9 @@ const HeaderFront = React.createClass({
                 <nav className="navbar collapse" id="mobile-menu">
                   <ul className="nav navbar-nav">
                     <li>
-                      <Link activeClassName="active" to={`/${lang}`}>
+                      <IndexLink activeClassName="active" to={`${lang}`}>
                         <FormattedMessage id="menu.home"/>
-                      </Link>
+                      </IndexLink>
                     </li>
                     <li><Link activeClassName="active" to={`/${lang}/about/`}><FormattedMessage id="menu.about"/></Link>
                     </li>
@@ -43,6 +44,7 @@ const HeaderFront = React.createClass({
                 </nav>
 
                 <UserGadget userId={this.context.user}/>
+
 
 
                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#mobile-menu"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 const UserGadgetLogged = React.createClass({
   contextTypes: {
@@ -9,7 +10,7 @@ const UserGadgetLogged = React.createClass({
   render: function(){
     return (
       <div>
-        <Link to={`${this.context.lang}/user/login`}>Login</Link> /  <Link to={`${this.context.lang}/user/register`}>Register</Link>
+        <Link to={`${this.context.lang}/user/login`}><FormattedMessage id="login" /></Link> /  <Link to={`${this.context.lang}/user/register`}><FormattedMessage id="register" /></Link>
       </div>
     )
   }

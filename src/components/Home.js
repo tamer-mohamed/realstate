@@ -2,7 +2,9 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
-
+import NProgress from "nprogress";
+import {Link} from 'react-router';
+import _ from 'lodash';
 //components
 import FeaturedSlider from './Featured';
 import Filter from './Filter';
@@ -10,16 +12,24 @@ import PropertiesContainer from './PropertiesContainer';
 
 const Home = React.createClass({
   mixins: [ReactFireMixin],
+  contextTypes: {
+    lang: React.PropTypes.string,
+  },
   getInitialState: function(){
     return {
       // propertiesList: [],
+      loaded: false,
       filteredData: [],
-      isSearchEnabled: false,
-      loggedIn: firebase.auth().currentUser
+      isSearchEnabled: false
     }
   },
   componentWillMount: function(){
-    this.bindAsArray(firebase.database().ref('properties'), 'propertiesList');
+    NProgress.start();
+    firebase.database().ref('properties').once('value', (snapshot)=>{
+      NProgress.done();
+      let value = snapshot.val();
+      this.setState({loaded: true, properties: value});
+    });
   },
 
   componentWillUnmount: function(){
@@ -45,7 +55,7 @@ const Home = React.createClass({
     if(this.isSearchParamsEmpty(data)) this.setState({isSearchEnabled: false});
 
     else{
-      let filteredData = _.filter(this.state.propertiesList, function(p){
+      let filteredData = _.filter(this.state.properties, function(p){
 
         let matchedLocation, matchedPurpose, matchedType;
 
@@ -74,7 +84,8 @@ const Home = React.createClass({
 
   },
   render: function(){
-    let data = this.state.isSearchEnabled ? this.state.filteredData : this.state.propertiesList;
+
+    let data = this.state.isSearchEnabled ? this.state.filteredData : this.state.properties;
     return (
       <div>
         <Filter submitSearch={this.submitSearch}/>
@@ -88,9 +99,7 @@ const Home = React.createClass({
                 </h4>
               </div>
               <div className="col-md-3">
-                <a href="contact.html" className="btn btn-danger">
-                  <FormattedMessage id="block.submitProperty.buttonText"/>
-                </a>
+                <Link to={`${this.context.lang}/user/dashboard/properties/add`} className="btn btn-danger"><FormattedMessage id="block.submitProperty.buttonText"/></Link>
               </div>
             </div>
           </div>

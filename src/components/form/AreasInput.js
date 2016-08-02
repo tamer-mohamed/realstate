@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Formsy from 'formsy-react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 //components
 const AreasInput = React.createClass({
   mixins: [ReactFireMixin, Formsy.Mixin],
 
   propTypes: {
+    intl: intlShape.isRequired,
     location: React.PropTypes.string.isRequired,
     options: React.PropTypes.array,
     className: React.PropTypes.string,
@@ -17,7 +18,8 @@ const AreasInput = React.createClass({
   },
   getInitialState: function(){
     return {
-      areas: []
+      areas: [],
+      value: this.props.value
     }
   },
 
@@ -31,30 +33,29 @@ const AreasInput = React.createClass({
   componentWillMount: function(){
     this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
   },
-  componentWillReceiveProps: function(){
-
+  componentWillReceiveProps: function(nextProps){
     this.unbind('areas');
-    this.bindAsArray(firebase.database().ref(`areas/${this.props.location}`), 'areas');
+    this.bindAsArray(firebase.database().ref(`areas/${nextProps.location}`), 'areas');
   },
-//  shouldComponentUpdate: function(nextProps, nextState) {
-//    console.log(nextProps);
-//    return nextProps.location !== this.props.location;
+//  shouldComponentUpdate: function(nextProps, nextState){
+//    console.log(nextProps.location !== this.props.location || this.state.areas !== nextState.areas);
+//    return nextProps.location !== this.props.location || this.state.areas !== nextState.areas;
 //  },
   render: function(){
+    const {formatMessage} = this.props.intl;
     const className = (this.props.className || ' ') + " " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
 
-
     const options = this.state.areas.map((option, i) => (
       <option key={'areas-option-'+i} value={ option['.key']}>
-        { option['.value']}
+        {formatMessage({id: `areas.${option['.key']}`})}
       </option>
     ));
 
     options.unshift(
       <option key={'areas-option-null'} value={null}>
-        --- CHOOSE ---
+        {formatMessage({id: "forms.generic.select"})}
       </option>
     );
 
@@ -82,4 +83,4 @@ const AreasInput = React.createClass({
 });
 
 
-export default AreasInput;
+export default injectIntl(AreasInput);
