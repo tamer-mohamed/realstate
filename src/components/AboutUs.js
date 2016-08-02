@@ -12,9 +12,7 @@ const AboutUs = React.createClass({
 
             <div className="row">
               <div className="col-md-11 col-md-offset-1">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                  totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                  sunt explicabo.</p>
+                <p>Simsar.com is the website for You. At simsar we are dedicated to understand the market and customer needs hence bridging the gap between both!</p>
               </div>
             </div>
 

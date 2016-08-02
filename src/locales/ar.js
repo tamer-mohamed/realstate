@@ -60,7 +60,7 @@ module.exports = {
 
     // generic form vars
     "forms.generic.add": "اضافة",
-    "forms.generic.select": "-- ¬اختيار --",
+    "forms.generic.select": "-- اختيار --",
     "forms.generic.update": "تحديث",
 
     //login form
@@ -249,6 +249,14 @@ module.exports = {
     "types.showroom": "معرض",
     "types.villa": "فيلا",
     "types.warehouse": "مخزن",
+    "types.block":"بلوك",
+    "types.chalet":"شالية",
+    "types.jakhour":"جاخور ",
+    "types.house":"بيت",
+    "types.mall":"مول",
+    "types.moorage":"مرسي",
+    "types.studio":"ستوديو",
+      
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
@@ -256,6 +264,8 @@ module.exports = {
     "featuredLevel.2": "راية الرئيسية",
     "featuredLevel.3": "النشرة الإخبارية",
     "featuredLevel.4": "بريد مباشر",
+      
+    "footer.copyrights":"سمسار",
 
   }
 };
