@@ -208,7 +208,7 @@ const PropertyForm = React.createClass({
             <InputPostfixAddon className="col-md-3"
                                title={"forms.property.add.fields.space"}
                                name="space"
-                               addOnLabel={"m2"}
+                               addOnLabel={<span>m<sup>2</sup></span>}
                                value={property.space}
                                validations="isNumeric"
                                validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
@@ -237,7 +237,7 @@ const PropertyForm = React.createClass({
       <div className="row">
         <div className="col-md-12">
           <h6 className="fieldset-title">
-            <FormattedMessage id="forms.property.add.fields.title"/>
+            <FormattedMessage id="forms.property.add.fields.propertyImage"/>
           </h6>
 
           <div className="clearfix">

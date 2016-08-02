@@ -57,6 +57,10 @@ module.exports = {
     "forms.validations.generic.isEmail": "Should be Email",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
+    // login form
+    "user.login.email":"Email",
+    "user.login.password":"Password",
+
     // registration form
     "screen.user.register.pageTitle": "التسجيل",
     "forms.user.register.errors.addUser": "خطأ في إضافة مستخدم",
@@ -72,13 +76,13 @@ module.exports = {
     // user profile
     "forms.userProfile.labels.personalInfo": "Personal info",
     "forms.userProfile.labels.name": "name",
-    "forms.userProfile.labels.addetionalMail": "Addetional Mail",
+    "forms.userProfile.labels.additionalMail": "Additional Mail",
     "forms.userProfile.labels.phoneNumber": "Phone number",
     "forms.userProfile.labels.intro": "Intro",
     "forms.userProfile.labels.profilePic": "Profile picture",
     "forms.userProfile.labels.companyInfo": "Company info",
     "forms.userProfile.labels.companyName": "Company name",
-    "forms.userProfile.labels.companyLogo" : "Company logo",
+    "forms.userProfile.labels.companyLogo": "Company logo",
     "forms.userProfile.success": "DONE",
     "forms.userProfile.error.upload.profilePic": "Error on Uploading profile picture",
     "forms.userProfile.error.upload.compnanyLogo": "Error on Uploading Company logo",
@@ -106,7 +110,7 @@ module.exports = {
     "screen.secure.properties.manage.pageTitle": "تعديل العقار",
     "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
     "forms.property.add.labels.address": " معلومات عنوان العقار",
-    "forms.property.add.labels.image":"Image upload here ",
+    "forms.property.add.labels.image": "Image upload here ",
     "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
     "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
     "forms.property.add.labels.info": "المعلومات",
@@ -119,6 +123,7 @@ module.exports = {
     "forms.property.add.fields.type": "نوع العقار",
     "forms.property.add.fields.location": "المحافظة",
     "forms.property.add.fields.area": "المنطقة",
+    "forms.property.add.fields.propertyImage": "Property Image",
 
 
     // forms error

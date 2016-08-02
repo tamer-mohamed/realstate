@@ -1,7 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 import {hashHistory} from 'react-router';
-import {intlShape, injectIntl} from 'react-intl';
+import {intlShape, injectIntl,FormattedMessage} from 'react-intl';
 
 const Login = React.createClass({
   propTypes: {
@@ -81,7 +81,7 @@ const Login = React.createClass({
                 <div className="row">
                   <div className="col-md-6">
                     <div className="input-group input-group-lg">
-                      <span className="input-group-addon" id="sizing-addon1">Email</span>
+                      <span className="input-group-addon" id="sizing-addon1"><FormattedMessage id="user.login.email" /></span>
                       <input type="text" className="form-control" placeholder="jhon@smith.com"
                              aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}/>
                     </div>
@@ -89,13 +89,13 @@ const Login = React.createClass({
                   <div className="col-md-6">
                     <div className="input-group input-group-lg">
                   <span className="input-group-addon" id="sizing-addon1"
-                        value={this.state.loginInfo.password}>Password</span>
+                        value={this.state.loginInfo.password}><FormattedMessage id="user.login.password" /></span>
                       <input type="password" className="form-control" placeholder="****"
                              aria-describedby="sizing-addon1"
                              onChange={(e)=>this.updateInfo({password:e.target.value})}/>
                     </div>
                   </div>
-                  ¬
+
                 </div>
                 <div className="row">
                   <div className="col-lg-12">

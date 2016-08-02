@@ -33,7 +33,7 @@ const ProfileForm = React.createClass({
   deleteFile: function(ref, image, {onSuccess,onFail}){
     const {formatMessage} = this.props.intl;
     FileStorage.delete(`${ref}/${image}`).then(onSuccess).catch((e)=>{
-      //in case file doesn't exist, no worries the values will be overridden.
+      //incase file doesn't exist, no worries the values will be overridedn.
       //TODO: onNotFound event
       console.log(e);
       if(e.code === 'storage/object-not-found'){
@@ -52,7 +52,7 @@ const ProfileForm = React.createClass({
 
     let data = {
       fname: values.fname,
-      addetionalMail: values.addetionalMail || null,
+      additionalMail: values.additionalMail || null,
       phonenumber: values.phonenumber,
       companyName: values.companyName || null,
       isPhoneNumberPublic: false,
@@ -140,7 +140,7 @@ const ProfileForm = React.createClass({
 
     }
     else{
-      alert('NoT VALUED');
+      this.context.pushNotification({message: formatMessage({id: "forms.validations.correctErrors"}), level: 'error'});
     }
 
   },
@@ -162,11 +162,11 @@ const ProfileForm = React.createClass({
                               name="fname"
                               required/>
                   <InputField className="col-md-6"
-                              title={"forms.userProfile.labels.addetionalMail"}
-                              value={this.props.user.addetionalMail}
+                              title={"forms.userProfile.labels.additionalMail"}
+                              value={this.props.user.additionalMail}
                               validations="isEmail"
                               validationError={formatMessage({id:"forms.validations.generic.isEmail"})}
-                              name="addetionalMail"/>
+                              name="additionalMail"/>
                 </div>
                 <div className="row">
                   <InputField className="col-md-6"

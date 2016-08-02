@@ -3,6 +3,7 @@ import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 import NProgress from "nprogress";
+import {Link} from 'react-router';
 import _ from 'lodash';
 //components
 import FeaturedSlider from './Featured';
@@ -11,6 +12,9 @@ import PropertiesContainer from './PropertiesContainer';
 
 const Home = React.createClass({
   mixins: [ReactFireMixin],
+  contextTypes: {
+    lang: React.PropTypes.string,
+  },
   getInitialState: function(){
     return {
       // propertiesList: [],
@@ -95,9 +99,7 @@ const Home = React.createClass({
                 </h4>
               </div>
               <div className="col-md-3">
-                <a href="contact.html" className="btn btn-danger">
-                  <FormattedMessage id="block.submitProperty.buttonText"/>
-                </a>
+                <Link to={`${this.context.lang}/user/dashboard/properties/add`} className="btn btn-danger"><FormattedMessage id="block.submitProperty.buttonText"/></Link>
               </div>
             </div>
           </div>

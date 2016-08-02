@@ -34,10 +34,12 @@ const ProfileForm = React.createClass({
                         name="companyName"
                         required/>
 
-            <ImageDropZone itemClassName="col-md-4" className="col-md-4" image={this.props.user.companyLogo}
-                           name="companyLogo"
-                           title="forms.userProfile.labels.companyLogo"
-                           picRef={this.userCompanyPicRef()}/>
+            <div className="col-md-4">
+              <ImageDropZone itemClassName="col-md-12" className="col-md-12" image={this.props.user.companyLogo}
+                             name="companyLogo"
+                             title="forms.userProfile.labels.companyLogo"
+                             picRef={this.userCompanyPicRef()}/>
+            </div>
           </div>
 
         </div>

@@ -8,7 +8,7 @@ import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 const PropertyImage = React.createClass({
   propTypes: {
     images: React.PropTypes.array,
-    intl: intlShape.isRequired,
+    intl: intlShape.isRequired
   },
   contextTypes: {
     pushNotification: React.PropTypes.func
@@ -59,7 +59,6 @@ const PropertyImage = React.createClass({
 
     return (
       <div>
-        <h6><FormattedMessage id="upload" values={{value:images.length}}/></h6>
         {images.map((image, i)=>{
           return <div key={'property-image'+image+i} className="col-md-3">
             <div className="item">
