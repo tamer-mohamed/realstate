@@ -18,7 +18,7 @@ const Property = React.createClass({
     let data = "";
 
     switch(this.props.data.type){
-      case 'apartement':
+      case 'apartment':
         data = <div>
           <span className="bed">{this.props.data.info.bedroom}</span>
           <span className="bath">{this.props.data.info.bathroom}</span>
@@ -68,10 +68,15 @@ const Property = React.createClass({
 
           </div>
           <div className="right">
+<<<<<<< HEAD
+            <span className="area">{this.props.data.space} M <sub>2</sub></span>
+            <span className="price">KD {this.props.data.price}</span>
+=======
             <span className="area"> <FormattedHTMLMessage id="property.space"
-                                                          values={{space:this.props.data.space,measure:spaceMeasure}}/> <sup>2</sup></span>
+                                                          values={{space:this.props.data.space,measure:spaceMeasure}}/> <sub>2</sub></span>
             <span className="price"><FormattedMessage id="property.price"
                                                       values={{currency,price:this.props.data.price}}/> </span>
+>>>>>>> origin/dev
           </div>
         </div>
       </div>

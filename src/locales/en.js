@@ -6,6 +6,8 @@ module.exports = {
     },
 messages: {
     "settings.currency": "KWD",
+    "setting.country":"Kuwait",
+    "setting.phonenumber":"+96569958669",
     
     "contextualMenu.addProperty": "Add Property ",
     
@@ -60,7 +62,7 @@ messages: {
     
     // generic form vars
     "forms.generic.add": "Add",
-    "forms.generic.select": "-- ¬Select --",
+    "forms.generic.select": "-- Select --",
     "forms.generic.update": "Update",
     
     //login form
@@ -249,6 +251,13 @@ messages: {
     "types.showroom": "Showroom",
     "types.villa": "Villa",
     "types.warehouse": "Warehouse",
+    "types.block":"Block",
+    "types.chalet":"Chalet",
+    "types.jakhour":"Jakhour",
+    "types.house":"House",
+    "types.mall":"Mall",
+    "types.moorage":"Moorage",
+    "types.studio":"Studio",
     
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
@@ -256,5 +265,7 @@ messages: {
     "featuredLevel.2": "Main Slider",
     "featuredLevel.3": "Weekly Newsletter",
     "featuredLevel.4": "Direct Mail",
+    
+    "footer.copyrights":"SIMSAR",
 }
 };

@@ -19,7 +19,7 @@ const ItemDetails = React.createClass({
                 <i className="fa fa-map-marker"/>{this.props.itemData.area}({this.props.itemData.location})
               </span>
 
-          <If condition={this.props.itemData.type === 'apartement'}>
+          <If condition={this.props.itemData.type === 'apartment'}>
             <Then>
               <span className="bed">{this.props.itemData.info.bedroom}</span>
               <span className="bath">{this.props.itemData.info.bathroom}</span>

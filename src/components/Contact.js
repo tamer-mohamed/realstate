@@ -23,7 +23,7 @@ const Contact = React.createClass({
                   <h3>Feedback</h3>
                   <form action="#">
                     <input type="text" placeholder="Name"/>
-                    <input type="text" placeholder="eMail"/>
+                    <input type="text" placeholder="E-Mail"/>
                     <input type="text" placeholder="Phone"/>
                     <input type="text" placeholder="Subject"/>
                     <textarea placeholder="Message"/>
