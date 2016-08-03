@@ -50,7 +50,7 @@ const UserGadgetLogged = React.createClass({
             <Link to={`${lang}/user/profile`}><i className="fa fa-user"/><FormattedMessage id="userLinks.myProfile" /></Link>
           </li>
           <li>
-            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/><FormattedMessage id="userLinks.editMyProfile" /></Link>
+            <Link to={`${lang}/user/profile/edit`}><i className="fa fa-user"/><FormattedMessage id="userLinks.editMyProfile" /></Link>
           </li>
           <li>
             <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/><FormattedMessage id="userLinks.myProperties" /></Link>
