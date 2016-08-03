@@ -22,7 +22,7 @@ const Topbar = React.createClass({
                   id="settings.phoneNumber"/></a>
               </p>
 
-              <p className="text pull-right">
+              <p className="langSwitcher pull-right">
                 <LangSwitcher langs={langs} currentLang={this.context.lang}/>
               </p>
 

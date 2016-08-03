@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Firebase from 'firebase';
+import ProfilePic from './ProfilePic';
 import {FormattedMessage} from 'react-intl';
 import { hashHistory,withRouter } from 'react-router';
 import { Link } from 'react-router';
@@ -17,9 +18,7 @@ const UserGadgetLogged = React.createClass({
   },
   getInitialState: function(){
     return {
-      currentUser: {
-        fname: ""
-      }
+      currentUser: {}
     }
   },
   componentWillMount: function(){
@@ -41,14 +40,14 @@ const UserGadgetLogged = React.createClass({
     return (
       <div>
         <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-          <img src="dist/images/avatar1.png" alt="User Photo"/>
+          <ProfilePic image={this.state.currentUser.image} userId={this.context.user.uid}/>
           <span className="userName">{this.state.currentUser.fname}</span>
           <span className="drop-arow"/>
         </a>
 
         <ul className="dropdown-menu user-drop">
           <li>
-            <Link to={`${lang}/user/profile/edit`}><i className="fa fa-user"/>My Profile</Link>
+            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/>My Profile</Link>
           </li>
           <li>
             <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/>My Properties</Link>

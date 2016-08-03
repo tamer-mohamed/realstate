@@ -1,4 +1,5 @@
 import React from 'react';
+import Map from './Map';
 
 const Contact = React.createClass({
 
@@ -13,7 +14,7 @@ const Contact = React.createClass({
     return (
       <div className="full-width map-wrap">
 
-        <div id="map-canvas" style={this.styles.map}/>
+        <div id="map-canvas" style={this.styles.map} />
 
         <div className="contact-form-wrap">
           <div className="container">

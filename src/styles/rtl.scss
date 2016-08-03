@@ -40,6 +40,10 @@
     border-top-right-radius: 6px;
   }
 
+  .langSwitcher {
+    float: right !important;
+  }
+
   header {
     .logo {
       float: right;
@@ -78,19 +82,6 @@
   header .navbar-nav > li {
     margin-left: 40px;
     margin-right: 0;
-  }
-
-  header .nav > li > a.active:before {
-    position: absolute;
-    left: 0;
-    top: -42px;
-    width: 100%;
-    content: ' ';
-    height: 10px;
-    background: #f44336;
-    display: block;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
   }
 
   .Select--single > .Select-control .Select-value, .Select-placeholder {
@@ -160,6 +151,17 @@
   footer ul li:last-child {
     margin-left: 0;
     margin-right: inherit;
+  }
+
+
+  .team-single .agent-contact li i{
+    margin-left:15px;
+    margin-right:inherit;
+  }
+
+  .page-contents ul{
+    margin-right: 0px;
+    margin-left: 20px;
   }
 
 }

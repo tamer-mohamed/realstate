@@ -13,10 +13,7 @@ const LangSwitcher = (props)=>{
   // remove current used lang
 
   return (
-    <div className="user">
       <a  onClick={()=>switchLang(lang.code)}>{lang.text}</a>
-    </div>
-
   )
 };
 

@@ -1,8 +1,28 @@
+ol, ul {
+  list-style: none;
+}
 
 header .logo img {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   -o-border-radius: 0;
+}
+
+header .user img {
+  display: inline-block;
+}
+
+header .nav > li > a.active:before {
+  position: absolute;
+  left: 0;
+  top: -42px;
+  width: 100%;
+  content: ' ';
+  height: 10px;
+  background: #f44336;
+  display: block;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .filter {
@@ -35,4 +55,9 @@ header .logo img {
 .property-slider .thumbnails a {
   margin-left: 10px;
   width: 20%;
+}
+
+
+.team-single .agent-contact li{
+  list-style: none;
 }

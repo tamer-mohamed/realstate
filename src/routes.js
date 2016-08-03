@@ -89,10 +89,6 @@ const routes = [
           },
           {
             // user screens
-            path: 'properties/:propertyId', component: PropertySingle
-          },
-          {
-            // user screens
             path: '*', component: Error404
           }
         ]

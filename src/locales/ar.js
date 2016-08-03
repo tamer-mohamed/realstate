@@ -17,11 +17,11 @@ module.exports = {
     "screen.breadcrumb": "معلومات عنا",
 
     // page titles
-    "pageTitle.userProfile": "User Profile",
-    "pageTitle.userEditProfile": "User Profile",
+    "pageTitle.userProfile": "ملف تعريفي للمستخدم",
+    "pageTitle.userEditProfile": "تحرير الشخصية للمستخدم",
 
     // main menu
-    "menu.home": "الرئسية",
+    "menu.home": "الرئيسية",
     "menu.about": "عنا",
     "menu.contact": "اتصل بنا",
 
@@ -38,7 +38,7 @@ module.exports = {
     "contextualMenu.user.addProperty": "إضافة العقار",
 
     // filters
-    "filters.submitButton": "إرسال",
+    "filters.submitButton": "بحث",
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
@@ -47,7 +47,7 @@ module.exports = {
     "block.submitProperty.buttonText": "إضافة عقار",
 
     //errors
-    "error.imageSrc": "Image dones't exist",
+    "error.imageSrc": "لا توجد صورة",
 
 
     // validations
@@ -58,8 +58,8 @@ module.exports = {
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
     // login form
-    "user.login.email":"Email",
-    "user.login.password":"Password",
+    "user.login.email":"البريد الإلكتروني",
+    "user.login.password":"كلمه السر",
 
     // registration form
     "screen.user.register.pageTitle": "التسجيل",
@@ -73,19 +73,24 @@ module.exports = {
     "forms.user.register.success": "سجلت بنجاح",
 
 
+    // user profile edit
+    "forms.userProfile.labels.personalInfo": "معلومات شخصية",
+    "forms.userProfile.labels.name": "اسم",
+    "forms.userProfile.labels.additionalMail": "البريد إضافية",
+    "forms.userProfile.labels.phoneNumber": "رقم الهاتف",
+    "forms.userProfile.labels.intro": "مقدمة",
+    "forms.userProfile.labels.contactNumber":"Contact number",
+    "forms.userProfile.labels.profilePic": "الصوره الشخصيه",
+    "forms.userProfile.labels.companyInfo": "معلومات عن الشركة",
+    "forms.userProfile.labels.companyName": "اسم الشركة",
+    "forms.userProfile.labels.companyLogo": "شعار الشركة",
+    "forms.userProfile.success": "تم",
+    "forms.userProfile.error.upload.profilePic": "خطأ في تحميل صورة الملف الشخصي",
+    "forms.userProfile.error.upload.compnanyLogo": "خطأ في تحميل شعار الشركة ",
+
     // user profile
-    "forms.userProfile.labels.personalInfo": "Personal info",
-    "forms.userProfile.labels.name": "name",
-    "forms.userProfile.labels.additionalMail": "Additional Mail",
-    "forms.userProfile.labels.phoneNumber": "Phone number",
-    "forms.userProfile.labels.intro": "Intro",
-    "forms.userProfile.labels.profilePic": "Profile picture",
-    "forms.userProfile.labels.companyInfo": "Company info",
-    "forms.userProfile.labels.companyName": "Company name",
-    "forms.userProfile.labels.companyLogo": "Company logo",
-    "forms.userProfile.success": "DONE",
-    "forms.userProfile.error.upload.profilePic": "Error on Uploading profile picture",
-    "forms.userProfile.error.upload.compnanyLogo": "Error on Uploading Company logo",
+    "userProfile.edit": "Edit your profile",
+    "userProfile.contact": "Contact details",
 
     //
     "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
@@ -293,7 +298,7 @@ module.exports = {
     "types.mall":"مول",
     "types.moorage":"مرسي",
     "types.studio":"ستوديو",
-      
+
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
@@ -301,31 +306,31 @@ module.exports = {
     "featuredLevel.2": "راية الرئيسية",
     "featuredLevel.3": "النشرة الإخبارية",
     "featuredLevel.4": "بريد مباشر",
-      
+
     "footer.copyrights":"سمسار",
 
     // footer
 
-    "footer.copyRights": "Al-Ahmad Real Estate",
-    "footer.menu.home": "home",
-    "footer.menu.properties": "properties",
-    "footer.menu.services": "Services",
-    "footer.menu.contact": "Contact Us",
+    "footer.copyRights": "سمسار",
+    "footer.menu.home": "الصفحة الرئيسية",
+    "footer.menu.properties": "عقارات",
+    "footer.menu.services": "خدمات",
+    "footer.menu.contact": "اتصل بنا",
 
 
     // generic
-    "totalSum": "Total",
-    "loading": "Loading ...",
-    "loading.image": "Loading image",
-    "register": "register",
-    "login": "login",
-    "contactAgent": "Contact Agent",
-    "upload": "Uploaded images: {value}",
-    "sale": "selalla",
-    "rent": "Rentsas",
+    "totalSum": "مجموع",
+    "loading": "جار التحميل ...",
+    "loading.image": "تحميل الصور",
+    "register": "تسجيل",
+    "login": "تسجيل الدخول",
+    "contactAgent": "الإتصال بوكيل",
+    "upload": "الصور التي تم تحميلها:{value}",
+    "sale": "بيع",
+    "rent": "إيجار",
 
-    "accountType.individual": "individual",
-    "accountType.business": "business",
-    "accountType.agent": "agent"
+    "accountType.individual": "فرد",
+    "accountType.business": "عمل",
+    "accountType.agent": "وكيل"
   }
 };

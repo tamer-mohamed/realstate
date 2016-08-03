@@ -7,7 +7,7 @@ import Dropzone from '../form/Dropzone';
 import ImageDropZone from '../form/ImageDropZone';
 import q from 'q';
 
-const ProfileForm = React.createClass({
+const companyForm = React.createClass({
 
   propTypes: {
     user: React.PropTypes.object.isRequired
@@ -49,4 +49,4 @@ const ProfileForm = React.createClass({
 
 });
 
-export default ProfileForm;
+export default companyForm;

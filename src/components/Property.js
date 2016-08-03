@@ -20,9 +20,9 @@ const Property = React.createClass({
     switch(this.props.data.type){
       case 'apartment':
         data = <div>
-          <span className="bed">{this.props.data.info.bedroom}</span>
-          <span className="bath">{this.props.data.info.bathroom}</span>
-          <span className="garage">{this.props.data.info.garage}</span>
+          <span className="bed">{this.props.data.preferences.bedroom}</span>
+          <span className="bath">{this.props.data.preferences.bathroom}</span>
+          <span className="garage">{this.props.data.preferences.garage}</span>
         </div>;
         break;
     }
@@ -30,6 +30,7 @@ const Property = React.createClass({
   },
   render: function(){
     let lang = this.context.lang;
+    let {formatMessage} = this.props.intl;
     let itemID = this.props.id;
     let property = this.props.data;
     let images = this.props.data.images;
@@ -61,22 +62,17 @@ const Property = React.createClass({
         <div className="item-detail">
           <div className="left">
               <span className="place">
-                <i className="fa fa-map-marker"/>{this.props.data.location}
+                <i className="fa fa-map-marker"/>{formatMessage({id: `locations.${this.props.data.location}`})}
               </span>
 
             {this.renderDetails()}
 
           </div>
           <div className="right">
-<<<<<<< HEAD
-            <span className="area">{this.props.data.space} M <sub>2</sub></span>
-            <span className="price">KD {this.props.data.price}</span>
-=======
             <span className="area"> <FormattedHTMLMessage id="property.space"
                                                           values={{space:this.props.data.space,measure:spaceMeasure}}/> <sub>2</sub></span>
             <span className="price"><FormattedMessage id="property.price"
                                                       values={{currency,price:this.props.data.price}}/> </span>
->>>>>>> origin/dev
           </div>
         </div>
       </div>

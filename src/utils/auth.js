@@ -3,9 +3,11 @@ import Firebase from 'firebase';
 const auth = (function(){
 
   function requireAuth(nextState, replace, callback){
-
-    firebase.auth().onAuthStateChanged((user)=>{
+    console.log('CALLED');
+    Firebase.auth().onAuthStateChanged((user)=>{
+      console.log(user);
       if(user === null){
+        console.log(user);
         replace({
           pathname: `${nextState.params.lang}/user/login`,
           state: {nextPathname: nextState.location.pathname}

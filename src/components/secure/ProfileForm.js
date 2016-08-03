@@ -55,7 +55,7 @@ const ProfileForm = React.createClass({
       additionalMail: values.additionalMail || null,
       phonenumber: values.phonenumber,
       companyName: values.companyName || null,
-      isPhoneNumberPublic: false,
+      contactnumber: values.contactnumber,
       intro: values.intro || null
     };
 
@@ -175,7 +175,14 @@ const ProfileForm = React.createClass({
                               name="phonenumber"
                               required/>
 
-                  <Textarea className="col-md-6"
+                  <InputField className="col-md-6"
+                              title={"forms.userProfile.labels.contactNumber"}
+                              value={this.props.user.contactnumber}
+                              name="contactnumber"/>
+
+                </div>
+                <div className="row">
+                  <Textarea className="col-md-12"
                             name="intro"
                             value={this.props.user.intro}
                             title={"forms.userProfile.labels.intro"}/>

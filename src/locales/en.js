@@ -2,47 +2,47 @@ module.exports = {
   locale: "en",
   formats: {},
   className: "ltr",
-    "pluralRuleFunction": function(){
-    },
-messages: {
+  "pluralRuleFunction": function(){
+  },
+  messages: {
     "settings.currency": "KWD",
-    "setting.country":"Kuwait",
-    "setting.phonenumber":"+96569958669",
-    
+    "settings.country":"Kuwait",
+    "settings.phoneNumber":"+96569958669",
+
     "contextualMenu.addProperty": "Add Property ",
-    
+
     "screen.about": "About Us",
     "screen.breadcrumb": "About Us",
-    
+
     // main menu
     "menu.home": "Home",
     "menu.about": "About Us",
     "menu.contact": "Contact Us",
-    
+
     // user menu
     "userMenu.signout": "Log Out",
     "userMenu.allProperties": "My Propertie",
     "userMenu.contact": "My Profile",
-    
+
     // Contextual Menu
     "contextualMenu.user.addProperty": "Add Property",
-    
+
     // filters
-    "filters.submitButton": "Submit",
+    "filters.submitButton": "Search",
     "filters.locationField": "Location",
     "filters.typeField": "Type",
     "filters.purposeField": "Purpose",
-    
+
     "block.submitProperty.text": "Would you like to add a property?",
     "block.submitProperty.buttonText": "Add Property",
-    
-    
+
+
     // validations
     "forms.validations.correctErrors": "ERROR: Please Correct the errors below!",
     "forms.validations.generic.required": "This Field is required!",
     "forms.validations.generic.isNumeric": "This Field Accepts Numbers Only!",
     "forms.validations.user.passwordMatch": "Password Mis-Match",
-    
+
     // registration form
     "screen.user.register.pageTitle": "Register",
     "forms.user.register.errors.addUser": "Error in adding User",
@@ -53,26 +53,26 @@ messages: {
     "forms.user.register.submit": "Register",
     "forms.user.register.fields.accountType": "Account type",
     "forms.user.register.success": "Registration is Successful",
-    
-    
+
+
     //
     "screen.secure.properties.listing.propertyTitle": "Title",
     "screen.secure.properties.listing.propertyFeatureLevel": "",
     "screen.secure.properties.listing.manageProperty": " ",
-    
+
     // generic form vars
     "forms.generic.add": "Add",
     "forms.generic.select": "-- Select --",
     "forms.generic.update": "Update",
-    
+
     //login form
     "forms.users.login.submit": "Log In",
-    
-    
+
+
     // user all properties
     "screen.secure.properties.pageTitle": "Properties",
-    
-    
+
+
     // add property
     "screen.secure.properties.add.pageTitle": "Add Property",
     "screen.secure.properties.manage.pageTitle": "Edit Property",
@@ -81,7 +81,7 @@ messages: {
     "forms.property.add.labels.featuredLevel": "Make your Listing Stand Out",
     "forms.property.add.labels.info": "Information",
     "forms.property.success": "Listing is Successful",
-    
+
     "forms.property.add.fields.title": "Title",
     "forms.property.add.fields.price": "Price",
     "forms.property.add.fields.space": "Space",
@@ -89,11 +89,11 @@ messages: {
     "forms.property.add.fields.type": "Type",
     "forms.property.add.fields.location": "Governate",
     "forms.property.add.fields.area": "Area",
-    
-    
+
+
     // forms error
     "forms.errors.property.add": "Error: Can't Add Property!",
-    
+
     // prefrences
     "property.preference.beds": "Beds",
     "property.preference.rooms": "Rooms",
@@ -107,8 +107,8 @@ messages: {
     "property.preference.laborResidence": "Labor Residence",
     "property.preference.villa": "Villa",
     "property.preference.waterWell": "Water Well",
-    
-    
+
+
     "areas.ahmadi.abuHalifa": "Abu Halifa",
     "areas.ahmadi.ahmadi": "AL-Ahmadi",
     "areas.ahmadi.bnaider": "Bnaider",
@@ -222,20 +222,20 @@ messages: {
     "areas.mubarakAlKabeer.sabahAlSalem": "Sabah Al Salem",
     "areas.mubarakAlKabeer.subhan": "Subhan",
     "areas.mubarakAlKabeer.wista": "Wista",
-    
-    
+
+
     "locations.ahmadi": "Al-Ahmadi",
     "locations.farwaniya": "Farwaniya ",
     "locations.hawally": "Hawalli",
     "locations.jahra": "Jahra",
     "locations.kuwaitCity": "Kuwait City",
     "locations.mubarakAlKabeer": "Mubarak Al Kabeer",
-    
-    
+
+
     "purposes.rent": "Rent",
     "purposes.sale": "Sale",
-    
-    
+
+
     "types.apartment": "Apartment",
     "types.beachHouse": "Beach House",
     "types.buildings": "Building",
@@ -258,14 +258,14 @@ messages: {
     "types.mall":"Mall",
     "types.moorage":"Moorage",
     "types.studio":"Studio",
-    
+
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
     "featuredLevel.1": "Special",
     "featuredLevel.2": "Main Slider",
     "featuredLevel.3": "Weekly Newsletter",
     "featuredLevel.4": "Direct Mail",
-    
+
     "footer.copyrights":"SIMSAR",
-}
+  }
 };

@@ -70,12 +70,8 @@ const PropertySingle = React.createClass({
               <div className="col-md-5 property-data">
                 <div className="prop-features prop-before">
                   <span className="location">{this.state.locationData.location} ({this.state.locationData.area})</span>
-<<<<<<< HEAD
-                  <span className="area">{this.state.propertyDetails.space} m<sub>2<sub></span>
-=======
                   <span className="area"> <FormattedHTMLMessage id="property.space"
                                                                 values={{space:this.state.propertyDetails.space,measure:spaceMeasure}}/> <sup>2</sup></span>
->>>>>>> origin/dev
                 </div>
                 <div className="prop-price">
                   <strong className="price">

@@ -86,7 +86,7 @@ const App = React.createClass({
           <section>
             {this.props.children}
           </section>
-          <Footer/>
+          <Footer lang={this.props.params.lang}/>
         </div>
       </IntlProvider>
     )
