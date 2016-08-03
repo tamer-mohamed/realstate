@@ -4,6 +4,7 @@ import Firebase from 'firebase';
 import {Link} from 'react-router';
 import NProgress from "nprogress";
 import Loader from '../Loader';
+import _ from 'lodash';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
 //components
@@ -15,7 +16,8 @@ const MyProperties = React.createClass({
   },
   getInitialState: function(){
     return {
-      loaded: false
+      loaded: false,
+      properties: []
     }
   },
   componentWillMount: function(){
@@ -51,21 +53,29 @@ const MyProperties = React.createClass({
   },
   getProperties: function(){
     let properties = [];
-    _.forEach(this.state.properties, (property, k)=>{
-      properties.push(<tr key={k}>
-        <td width="75%">{property.title}</td>
-        <td>
-          <Link to={`${this.context.lang}/user/dashboard/properties/manage/${k}`}>
-            Edit
-          </Link>
-        </td>
-        <td>
-          <a href="#" onClick={(e)=>this.handleDeleteProperty(e,k)}>
-            Delete
-          </a>
-        </td>
-      </tr>)
-    });
+    if(!_.isEmpty(this.state.properties)){
+      _.forEach(this.state.properties, (property, k)=>{
+        properties.push(<tr key={k}>
+          <td width="75%">{property.title}</td>
+          <td>
+            <Link to={`${this.context.lang}/user/dashboard/properties/manage/${k}`}>
+              Edit
+            </Link>
+          </td>
+          <td>
+            <a href="#" onClick={(e)=>this.handleDeleteProperty(e,k)}>
+              Delete
+            </a>
+          </td>
+        </tr>)
+      });
+
+    }
+    else{
+      properties.push(<tr key={`property-0`}>
+        <td colSpan="3"><h4 className="text-center"><FormattedMessage id="userProperties.noProperties" /></h4></td>
+      </tr>);
+    }
 
     return properties;
   },

@@ -47,13 +47,18 @@ const UserGadgetLogged = React.createClass({
 
         <ul className="dropdown-menu user-drop">
           <li>
-            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/>My Profile</Link>
+            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/><FormattedMessage id="userLinks.myProfile" /></Link>
           </li>
           <li>
-            <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/>My Properties</Link>
+            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/><FormattedMessage id="userLinks.editMyProfile" /></Link>
           </li>
           <li>
-            <a onClick={this.handleLogout}><i className="fa fa-sign-out"/>Logout</a>
+            <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/><FormattedMessage id="userLinks.myProperties" /></Link>
+          </li>
+          <li>
+            <a onClick={this.handleLogout}><i className="fa fa-sign-out"/>
+              <FormattedMessage id="userLinks.logout" />
+            </a>
           </li>
         </ul>
 

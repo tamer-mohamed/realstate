@@ -58,8 +58,8 @@ module.exports = {
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
 
     // login form
-    "user.login.email":"البريد الإلكتروني",
-    "user.login.password":"كلمه السر",
+    "user.login.email": "البريد الإلكتروني",
+    "user.login.password": "كلمه السر",
 
     // registration form
     "screen.user.register.pageTitle": "التسجيل",
@@ -79,7 +79,7 @@ module.exports = {
     "forms.userProfile.labels.additionalMail": "البريد إضافية",
     "forms.userProfile.labels.phoneNumber": "رقم الهاتف",
     "forms.userProfile.labels.intro": "مقدمة",
-    "forms.userProfile.labels.contactNumber":"Contact number",
+    "forms.userProfile.labels.contactNumber": "Contact number",
     "forms.userProfile.labels.profilePic": "الصوره الشخصيه",
     "forms.userProfile.labels.companyInfo": "معلومات عن الشركة",
     "forms.userProfile.labels.companyName": "اسم الشركة",
@@ -91,6 +91,15 @@ module.exports = {
     // user profile
     "userProfile.edit": "Edit your profile",
     "userProfile.contact": "Contact details",
+
+    // user Properties
+    "userProperties.noProperties": "No proprties for now ...",
+
+    // user links in drop down
+    "userLinks.myProfile": "myProfile",
+    "userLinks.editMyProfile": "Edit my profile",
+    "userLinks.myProperties": "My properties",
+    "userLinks.logout": "Logout",
 
     //
     "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
@@ -291,13 +300,13 @@ module.exports = {
     "types.showroom": "معرض",
     "types.villa": "فيلا",
     "types.warehouse": "مخزن",
-    "types.block":"بلوك",
-    "types.chalet":"شالية",
-    "types.jakhour":"جاخور ",
-    "types.house":"بيت",
-    "types.mall":"مول",
-    "types.moorage":"مرسي",
-    "types.studio":"ستوديو",
+    "types.block": "بلوك",
+    "types.chalet": "شالية",
+    "types.jakhour": "جاخور ",
+    "types.house": "بيت",
+    "types.mall": "مول",
+    "types.moorage": "مرسي",
+    "types.studio": "ستوديو",
 
 
     //TODO: change the following the corresponding featured levels in firebase
@@ -307,7 +316,7 @@ module.exports = {
     "featuredLevel.3": "النشرة الإخبارية",
     "featuredLevel.4": "بريد مباشر",
 
-    "footer.copyrights":"سمسار",
+    "footer.copyrights": "سمسار",
 
     // footer
 
