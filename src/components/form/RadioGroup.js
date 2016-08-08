@@ -23,21 +23,21 @@ const RadioGroup = React.createClass({
     const errorMessage = this.getErrorMessage();
     const { name, items } = this.props;
 
-    console.log('itemitemitemitem', items);
     return (
 
       <div className={className}>
         {items.map((item, i) => (
 
-          <div key={i}>
+          <div key={i} className="radio-inline">
             <label>
-              <FormattedMessage id={`accountType.${item['title']}`}/>
               <input
                 type="radio"
                 name={name}
                 onChange={this.changeValue.bind(this, item.value)}
                 checked={this.state.value === item.value}
               />
+              <FormattedMessage id={`accountType.${item['title']}`}/>
+
             </label>
           </div>
         ))

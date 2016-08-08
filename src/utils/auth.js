@@ -19,9 +19,23 @@ const auth = (function(){
     });
   }
 
+  function login(mail, pass, cb){
+    Firebase.auth().signInWithEmailAndPassword(mail, pass).then((user)=>{
+      console.log('Logged', user);
+      cb();
+    }).catch((e)=>{
+      cb(e);
+    });
+  }
+
+  function register(data){
+
+  }
+
 
   return {
-    requireAuth
+    requireAuth,
+    login
   }
 
 })();

@@ -159,10 +159,10 @@ gulp.task('deploy', () =>{
 });
 
 gulp.task('watch', cb =>{
-  runSequence('clean', ['browserSync', 'watchTask', 'copy:theme', 'copy:fonts', 'locales', 'copy:themeJs', 'watchify', 'styles', 'lint', 'images'], cb);
+  runSequence('clean', ['browserSync', 'watchTask', 'copy:theme', 'copy:fonts', 'copy:themeJs', 'watchify', 'styles', 'lint', 'images'], cb);
 });
 
 gulp.task('build', cb =>{
   process.env.NODE_ENV = 'production';
-  runSequence('clean', ['browserify', 'copy:theme', 'styles', 'copy:fonts', 'locales', 'copy:themeJs', 'htmlReplace', 'images'], cb);
+  runSequence('clean', ['browserify', 'copy:theme', 'styles', 'copy:fonts', 'copy:themeJs', 'htmlReplace', 'images'], cb);
 });

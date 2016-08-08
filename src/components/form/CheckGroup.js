@@ -1,6 +1,6 @@
 import React from 'react';
 import Formsy from 'formsy-react';
-import InputField from './Input';
+import CheckBox from './CheckBox';
 import {FormattedMessage} from 'react-intl';
 
 const RadioGroup = React.createClass({
@@ -41,18 +41,16 @@ const RadioGroup = React.createClass({
 
       <div className={className}>
         {items.map((item, i) => (
-          <div key={i}>
-            <InputField
-              type="checkbox"
-              title={item['title']}
-              name={name}
-              onChange={(value)=> this.updateList(item['.key'],value)}
-              checked={this.state.value === item['.key']}
-            />
-          </div>
+          <CheckBox
+            key={i}
+            type="checkbox"
+            title={`featuredLevel.${item['.key']}`}
+            name={name}
+            onChange={(value)=> this.updateList(item['.key'],value)}
+            checked={this.state.value === item['.key']}
+          />
         ))
         }
-        <span className='validation-error'>{errorMessage}</span>
       </div>
     );
   }

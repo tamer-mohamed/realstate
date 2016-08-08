@@ -40,6 +40,16 @@
     border-top-right-radius: 6px;
   }
 
+  .checkbox label, .radio label {
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    margin-right: -20px;
+    margin-left: 0;
+  }
+
   .langSwitcher {
     float: right !important;
 
@@ -154,15 +164,18 @@
     margin-right: inherit;
   }
 
-
-  .team-single .agent-contact li i{
-    margin-left:15px;
-    margin-right:inherit;
+  .team-single .agent-contact li i {
+    margin-left: 15px;
+    margin-right: inherit;
   }
 
-  .page-contents ul{
+  .page-contents ul {
     margin-right: 0px;
     margin-left: 20px;
+  }
+
+  .modal-featureLevels {
+    direction: rtl;
   }
 
 }

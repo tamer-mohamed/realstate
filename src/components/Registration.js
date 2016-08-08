@@ -2,38 +2,28 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Form } from 'formsy-react';
 import Firebase from 'firebase';
-import { If, Then, Else } from 'react-if';
 import { hashHistory } from 'react-router';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
+import qwest from 'qwest';
+import constants from '../constants';
+import {Page} from './containers/Page';
+import progress from 'nprogress';
 // form components
 import InputField from './form/Input';
 import AccountTypes from './form/AccountTypes';
 import SelectField from './form/Select';
 
 const Registration = React.createClass({
+  contextTypes: {
+    lang: React.PropTypes.string,
+    pushNotification: React.PropTypes.func
+  },
   getInitialState: function(){
     return {
       validationErrors: {},
       formResult: null,
       canSubmit: false
     };
-  },
-  contextTypes: {
-    lang: React.PropTypes.string,
-    pushNotification: React.PropTypes.func
-  },
-  sendWelcomeMail: function(data, cb){
-    Firebase.database().ref(`welcomeMails/${data.uid}`).set({
-      fname: data.fname,
-      mail: data.email,
-      userType: data.userType
-    }, function(e){
-
-      if(e === null){
-        cb();
-      }
-
-    });
   },
   disableSubmitButton: function(){
     this.setState({canSubmit: false});
@@ -72,45 +62,28 @@ const Registration = React.createClass({
   submit: function(data){
     let {formatMessage} = this.props.intl;
 
-    //reset errors
-    this.setState({formResult: null});
-
     if(this.refs.form.state.isValid){
-      Firebase.auth().createUserWithEmailAndPassword(data.email, data.password).then((user)=>{
-        Firebase.database().ref(`users/${user.uid}`).set({
-          fname: data.fname,
-          type: data.userType
-        }, (e)=>{
-          if(e === null){
-            data.uid = user.uid;
-//            this.sendWelcomeMail(data, ()=>{
-//
-//
-//
-//            });
+      progress.start();
 
-            this.context.pushNotification({
-              message: formatMessage({id: 'forms.user.register.success'}),
-              level: 'success'
-            });
+      qwest.post(`${constants.BE}user/register`, {
+        email: data.email,
+        fname: data.fname,
+        lang: this.props.params.lang,
+        type: data.userType
+      }).then(()=>{
+        progress.done();
+        this.setState({showSuccess: true});
 
-            // redirect to homepage
-            hashHistory.push(this.context.lang);
-
-
-          }
-          else{
-            this.context.pushNotification({
-              message: formatMessage({id: 'forms.user.register.errors.addUser'}),
-              level: 'error'
-            });
-
-          }
-
+        // redirect to homepage
+        //hashHistory.push(this.context.lang);
+      }).catch((e)=>{
+        progress.done();
+        this.context.pushNotification({
+          message: formatMessage({id: 'forms.user.register.errors.addUser'}),
+          level: 'error'
         });
 
-      }).catch((e)=>{
-        this.context.pushNotification({message: formatMessage({id: `forms.validations.${e.code}`}), level: 'error'});
+        // TOOD: delete created user
       });
     }
     else{
@@ -120,76 +93,46 @@ const Registration = React.createClass({
   },
   render: function(){
     let {formatMessage} = this.props.intl;
-    return (
-      <div className="page-wrap">
+    let RegisterForm = <Form ref="form" onSubmit={this.submit} className="register">
 
-        <div className="container">
-          <div className="page-contents">
+      <div className="row">
+        <InputField className="col-md-6" placeholder={"forms.user.register.fields.firstName"} name="fname"
+                    required/>
 
-
-            <div className="row">
-              <div className="col-md-12">
-                <h2><FormattedMessage id="screen.user.register.pageTitle"/></h2>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-md-7">
-
-                <Form ref="form" onSubmit={this.submit} className="register">
-
-                  <div className="row">
-                    <InputField className="col-md-6" title={"forms.user.register.fields.firstName"} name="fname"
-                                required/>
-
-                    <InputField className="col-md-6" title={"forms.user.register.fields.email"} name="email"
-                                validationErrors={{
+        <InputField className="col-md-6" placeholder={"forms.user.register.fields.email"} name="email"
+                    validationErrors={{
                      isEmail: formatMessage({id: "forms.validation.generic.email"})
                      }} validations="isEmail" required/>
 
-                  </div>
+      </div>
 
-                  <div className="row">
-                    <InputField className="col-md-6" title={"forms.user.register.fields.password"}
-                                name="password"
-                                type="password"
-                                validations={{
-                                minLength: 7
-                              }} validationErrors={{
-                                minLength: 'You can not type in less than 7 characters'
-                              }} required/>
-
-                    <InputField className="col-md-6" title={"forms.user.register.fields.repeatPassword"}
-                                type="password"
-                                name="repeatPassword" validations="equalsField:password"
-                                validationErrors={{
-                                equalsField: 'password has to match'
-                              }} required/>
-
-                  </div>
-
-                  <div className="row">
-                    <div className="col-md-12">
-                      <h6 className="fieldset-title">
-                        <FormattedMessage id="forms.user.register.fields.accountType"/>
-                      </h6>
-                      <div className="input-group">
-                        <AccountTypes />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-md-12">
-                      <input type="submit" className="btn btn-primary"
-                             value={formatMessage({id:"forms.user.register.submit"})}/>
-                    </div>
-                  </div>
-                </Form>
-              </div>
-            </div>
-
+      <div className="row">
+        <div className="col-md-12">
+          <h6 className="fieldset-title">
+            <FormattedMessage id="forms.user.register.fields.accountType"/>
+          </h6>
+          <div className="input-group">
+            <AccountTypes />
           </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">
+          <input type="submit" className="btn btn-danger"
+                 value={formatMessage({id:"forms.user.register.submit"})}/>
+        </div>
+      </div>
+    </Form>;
+
+
+    return (
+      <div className="row">
+        <div className="col-md-12">
+          {this.state.showSuccess ? <div>
+            <FormattedMessage id="screen.user.register.waitVerification"/>
+          </div> : RegisterForm}
+
         </div>
       </div>
     )
@@ -198,4 +141,4 @@ const Registration = React.createClass({
 });
 
 
-export default injectIntl(Registration);
+export default Page(injectIntl(Registration), {title: "screen.user.register.pageTitle"});

@@ -34,7 +34,7 @@ const LocationField = React.createClass({
       let locations = [];
 
       _.forEach(value, function(v, k){
-        locations.push({value: k, title:  formatMessage({id: `locations.${k}`})});
+        locations.push({value: k, title: formatMessage({id: `locations.${k}`})});
       });
 
       if(this.props.onLoaded && !this.props.editMode)
@@ -56,7 +56,7 @@ const LocationField = React.createClass({
       return <Loader title="loading"/>;
 
 
-    let selectedLocation = this.props.editMode ? this.props.value : locations[0];
+    let selectedLocation = this.props.editMode ? this.props.value : locations[0].value;
 
     return ( <SelectField className={this.props.className}
                           title={this.props.title}

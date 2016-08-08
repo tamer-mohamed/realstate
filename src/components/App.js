@@ -72,7 +72,10 @@ const App = React.createClass({
     });
   },
 
-
+  componentDidMount() {
+    if(this.intlData().locale === 'ar')
+      document.body.classList.add('rtl');
+  },
   render: function(){
     const localeData = this.intlData();
 

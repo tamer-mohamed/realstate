@@ -11,6 +11,9 @@ import Registration from './components/Registration';
 import Error404 from './components/Error404';
 import UserProfile from './components/secure/UserProfile';
 import UserEditProfile from './components/secure/UserEditProfile';
+import Verification from './components/Registeration.step2';
+import qwest from 'qwest';
+import constants from './constants';
 
 
 // user
@@ -18,6 +21,7 @@ import PropertyAdd from './components/secure/PropertyAdd';
 
 //utils
 import auth from './utils/auth';
+
 
 const routes = [
   {
@@ -42,12 +46,14 @@ const routes = [
           {
 
             // user screens
+            // {lang}/user
             path: 'user',
             indexRoute: {component: Properties},
             childRoutes: [
 
               // TODO: redirect to dashboard in case user logged in
               {path: "register", component: Registration},
+              {path: "verify/:activationKey", component: Verification},
               {path: "login", component: Login},
               {
 

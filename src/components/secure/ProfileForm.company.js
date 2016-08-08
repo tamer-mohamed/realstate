@@ -29,7 +29,7 @@ const companyForm = React.createClass({
           </h6>
           <div className="row">
             <InputField className="col-md-8"
-                        title={"forms.userProfile.labels.companyName"}
+                        placeholder={"forms.userProfile.labels.companyName"}
                         value={this.props.user.companyName}
                         name="companyName"
                         required/>

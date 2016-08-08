@@ -46,7 +46,6 @@ const InputField = React.createClass({
         <div className="input-group">
           <div className="input-group-addon">{this.props.addOnLabel}</div>
           <input
-            className="form-control"
             type={this.props.type || 'text'}
             name={this.props.name}
             onChange={this.changeValue}

@@ -95,13 +95,11 @@ const FeatureLevelsModal = React.createClass({
                             <FormattedMessage id="forms.property.add.labels.featuredLevel.description"/>
                           </p>
 
-                          <div className="row">
-                            <CheckGroup title="forms.property.add.labels.featuredLevel"
-                                        items={this.state.levels}
-                                        onChange={this.calculateTotal}
-                                        className="col-md-12"
-                                        name="featuredLevel"/>
-                          </div>
+                          <CheckGroup title="forms.property.add.labels.featuredLevel"
+                                      items={this.state.levels}
+                                      onChange={this.calculateTotal}
+                                      className="col-md-12"
+                                      name="featuredLevel"/>
 
                           <hr/>
                           <h5>
@@ -113,8 +111,7 @@ const FeatureLevelsModal = React.createClass({
                     </div>
 
                     <input type="submit" className="btn btn-danger pull-right" onClick={this.handleSubmit}
-                           value="update"/>
-                    <FormattedMessage id="forms.generic.update"/>
+                           value={formatMessage({id:submitTextId})}/>
                   </div>
                   : null
                 }

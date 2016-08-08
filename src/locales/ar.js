@@ -56,6 +56,7 @@ module.exports = {
     "forms.validations.generic.isNumeric": " يجب أن يكون رقمية",
     "forms.validations.generic.isEmail": "Should be Email",
     "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
+    "forms.validations.user.passwordLength": "Password has to be more than {value}",
 
     // login form
     "user.login.email": "البريد الإلكتروني",
@@ -69,8 +70,16 @@ module.exports = {
     "forms.user.register.fields.password": "كلمه السر",
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
     "forms.user.register.submit": "تسجيل",
+    "forms.user.register.fields.waitVerification": "You have been registered succesfully. Please verify your email. check your mail address.",
     "forms.user.register.fields.accountType": "نوع الحساب",
     "forms.user.register.success": "سجلت بنجاح",
+
+    // Verification
+    "user.verification.pageTitle": "Update your password",
+    "forms.user.verification.submit": "Submit",
+    "forms.user.verification.error": "Error in activation process",
+    "forms.user.verification.error.register": "el error da beytla3 lama bey7sal fail f el registeration for firebase",
+    "forms.user.verification.wrongId": "Wrong URL",
 
 
     // user profile edit

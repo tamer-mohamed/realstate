@@ -1,6 +1,7 @@
 import React from 'react';
 import Firebase from 'firebase';
 import {hashHistory} from 'react-router';
+import auth from '../utils/auth';
 import {intlShape, injectIntl,FormattedMessage} from 'react-intl';
 
 const Login = React.createClass({
@@ -56,13 +57,18 @@ const Login = React.createClass({
     // reset result
     this.setState({loginResult: null});
 
-    Firebase.auth().signInWithEmailAndPassword(this.state.loginInfo.email, this.state.loginInfo.password).then((user)=>{
-      console.log('Logged', user);
+    let {email,password} = this.state.loginInfo;
+    auth.login(email, password, function(e){
+      if(e){
+        console.error("User didn't login, Error:", e);
+        this.renderResult(false, e);
+      }
+      else{
+        console.log('Logged', user);
 
-      this.renderResult(true);
-    }).catch((e)=>{
-      console.error("User didn't login, Error:", e);
-      this.renderResult(false, e);
+        this.renderResult(true);
+      }
+
     });
   },
 
@@ -81,7 +87,8 @@ const Login = React.createClass({
                 <div className="row">
                   <div className="col-md-6">
                     <div className="input-group input-group-lg">
-                      <span className="input-group-addon" id="sizing-addon1"><FormattedMessage id="user.login.email" /></span>
+                      <span className="input-group-addon" id="sizing-addon1"><FormattedMessage
+                        id="user.login.email"/></span>
                       <input type="text" className="form-control" placeholder="jhon@smith.com"
                              aria-describedby="sizing-addon1" onChange={(e)=>this.updateInfo({email:e.target.value})}/>
                     </div>
@@ -89,7 +96,7 @@ const Login = React.createClass({
                   <div className="col-md-6">
                     <div className="input-group input-group-lg">
                   <span className="input-group-addon" id="sizing-addon1"
-                        value={this.state.loginInfo.password}><FormattedMessage id="user.login.password" /></span>
+                        value={this.state.loginInfo.password}><FormattedMessage id="user.login.password"/></span>
                       <input type="password" className="form-control" placeholder="****"
                              aria-describedby="sizing-addon1"
                              onChange={(e)=>this.updateInfo({password:e.target.value})}/>

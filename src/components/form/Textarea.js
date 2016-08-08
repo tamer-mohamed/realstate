@@ -1,7 +1,6 @@
 import React from 'react';
 import Formsy from 'formsy-react';
-import { If, Then, Else } from 'react-if';
-import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 
 const Textarea = React.createClass({
 
@@ -62,11 +61,11 @@ const Textarea = React.createClass({
     const labelClassName = "form-control-label";
 
     const input = <textarea
-      className={"form-control"}
       type={this.props.type || 'text'}
       name={this.props.name}
       onChange={this.changeValue}
       onBlur={this.changeValue}
+      placeholder={formatMessage({id:this.props.placeholder})}
       value={this.getValue()}
       checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
     />;
@@ -74,13 +73,13 @@ const Textarea = React.createClass({
     return (
       <div className={className}>
 
-          <div>
-            <label htmlFor={this.props.name} className={labelClassName}>
-              <FormattedMessage id={this.props.title}/>
-            </label>
-            {input}
-            <span className='validation-error'>{errorMessage}</span>
-          </div>
+        <div>
+          <label htmlFor={this.props.name} className={labelClassName}>
+            <FormattedMessage id={this.props.title}/>
+          </label>
+          {input}
+          <span className='validation-error'>{errorMessage}</span>
+        </div>
 
 
       </div>
@@ -88,4 +87,4 @@ const Textarea = React.createClass({
   }
 });
 
-export default Textarea;
+export default injectIntl(Textarea);

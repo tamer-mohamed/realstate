@@ -188,7 +188,7 @@ const PropertyForm = React.createClass({
           </h6>
           <div className="row">
             <InputField className="col-md-6"
-                        title={"forms.property.add.fields.title"}
+                        placeholder={"forms.property.add.fields.title"}
                         value={property.title}
                         name="title"
                         required/>

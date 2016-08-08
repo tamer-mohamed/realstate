@@ -157,12 +157,12 @@ const ProfileForm = React.createClass({
               <div className="col-md-8">
                 <div className="row">
                   <InputField className="col-md-6"
-                              title={"forms.userProfile.labels.name"}
+                              placeholder={"forms.userProfile.labels.name"}
                               value={this.props.user.fname}
                               name="fname"
                               required/>
                   <InputField className="col-md-6"
-                              title={"forms.userProfile.labels.additionalMail"}
+                              placeholder={"forms.userProfile.labels.additionalMail"}
                               value={this.props.user.additionalMail}
                               validations="isEmail"
                               validationError={formatMessage({id:"forms.validations.generic.isEmail"})}
@@ -170,13 +170,13 @@ const ProfileForm = React.createClass({
                 </div>
                 <div className="row">
                   <InputField className="col-md-6"
-                              title={"forms.userProfile.labels.phoneNumber"}
+                              placeholder={"forms.userProfile.labels.phoneNumber"}
                               value={this.props.user.phonenumber}
                               name="phonenumber"
                               required/>
 
                   <InputField className="col-md-6"
-                              title={"forms.userProfile.labels.contactNumber"}
+                              placeholder={"forms.userProfile.labels.contactNumber"}
                               value={this.props.user.contactnumber}
                               name="contactnumber"/>
 

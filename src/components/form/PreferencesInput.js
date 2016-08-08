@@ -2,7 +2,7 @@ import React from 'react';
 import ReactFireMixin from 'reactfire';
 import Formsy from 'formsy-react';
 import _ from 'lodash';
-import {FormattedMessage,intlShape} from 'react-intl';
+import {FormattedMessage,intlShape,injectIntl} from 'react-intl';
 import InputField from './Input';
 
 //components
@@ -42,7 +42,7 @@ const PreferencesInput = React.createClass({
   },
   render: function(){
     const {formatMessage} = this.props.intl;
-    const className = (this.props.className || ' ') + " " +
+    const className = (this.props.className || ' ') + " form-group  " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
     const errorMessage = this.getErrorMessage();
 
@@ -53,15 +53,18 @@ const PreferencesInput = React.createClass({
       console.log('CURRENT', currentValue.preferences);
       _.forEach(currentValue.preferences, (v, k)=>{
         propertyPrefrences.push(
-          <InputField key={`property-preference-${k}`} className="col-md-3"
-                      title={`property.preference.${k}`}
-                      name={`property-preference-${k}`}
-                      value={this.props.editMode && v === parseInt(v, 10)? v : 0} required/>)
+          <div className="col-md-3">
+            <label>{formatMessage({id: `property.preference.${k}`})}</label>
+            <InputField key={`property-preference-${k}`}
+                        placeholder={`property.preference.${k}`}
+                        name={`property-preference-${k}`}
+                        value={this.props.editMode && v === parseInt(v, 10)? v : 0} required/>
+          </div>)
       });
     }
     const options = this.state.types.map((option, i) => (
       <option key={' property-type-'+i} value={option['.key']}>
-        {option['title']}
+        {formatMessage({id: `types.${option['.key']}`})}
       </option>
     ));
 
@@ -99,4 +102,4 @@ const PreferencesInput = React.createClass({
 });
 
 
-export default PreferencesInput;
+export default injectIntl(PreferencesInput);

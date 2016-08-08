@@ -35,7 +35,7 @@ const PropertyAdd = React.createClass({
 
     let propId = Firebase.database().ref('properties').push({
       title: data[1].title,
-      location: data[1].location.value,
+      location: data[1].location,
       price: data[1].price,
       area: data[1].area,
       space: data[1].space,

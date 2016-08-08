@@ -57,11 +57,40 @@ header .nav > li > a.active:before {
   width: 20%;
 }
 
-
-.team-single .agent-contact li{
+.team-single .agent-contact li {
   list-style: none;
 }
 
-.langSwitcher a{
+.langSwitcher a {
   cursor: pointer;
+}
+
+/* FORMS */
+
+input[type=text], input[type=password], textarea {
+  line-height: 20px;
+  width: 100%;
+  background: #FFF;
+  color: #727272;
+  padding: 10px 20px;
+  border-radius: 2px;
+  border: 1px solid #e7e7e7;
+  margin-bottom: 20px;
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.checkbox-inline, .radio-inline {
+  padding-left: 0;
+  padding-right: 20px;
 }
