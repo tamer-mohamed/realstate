@@ -4,10 +4,12 @@ import Formsy from 'formsy-react';
 import _ from 'lodash';
 import {FormattedMessage,intlShape,injectIntl} from 'react-intl';
 import InputField from './Input';
+import SelectField from './Select';
+import Loader from '../Loader';
 
 //components
 const PreferencesInput = React.createClass({
-  mixins: [ReactFireMixin, Formsy.Mixin],
+  mixins: [ReactFireMixin],
 
   propTypes: {
     className: React.PropTypes.string,
@@ -22,79 +24,85 @@ const PreferencesInput = React.createClass({
       editMode: false
     }
   },
+  getInitialState: function(){
+    return {
+      types: [],
+      loaded: false,
+      type: null,
+      preferences: this.props.value ? this.props.value.preferences : []
+    }
+  },
   componentWillMount: function(){
-    this.bindAsArray(firebase.database().ref(`types`), 'types');
+    firebase.database().ref(`types`).once('value')
+      .then((snapshot)=>{
+        this.setState({loaded: true, types: snapshot.val()})
+      })
   },
 //  shouldComponentUpdate: function(nextProps, nextState){
 //    return nextProps.value !== this.props.value || nextState.value !== this.state.value;
 //  },
 
   updatePrefrences: function(event){
-    if(this.props.onChange)
-      this.props.onChange(event);
-
     let selectedType = event.currentTarget.value;
-    let typeObject = _.find(this.state.types, function(t){
-      return t['.key'] === selectedType
+    let typeObject = _.find(this.state.types, function(t, k){
+      return k === selectedType
+    });
+    console.log('preferences', typeObject.preferences);
+    this.setState({type: selectedType, preferences: typeObject.preferences});
+  },
+  format: function(preferences){
+    const propertyPrefrences = [];
+    _.forEach(preferences, (v, k)=>{
+      propertyPrefrences.push(
+        <div className="col-md-3">
+          <InputField key={`property-preference-${k}`}
+                      placeholder={`property.preference.${k}`}
+                      className="input-sm"
+                      name={`preferences.${k}`}
+                      value={this.props.editMode ? v : null}/>
+        </div>)
     });
 
-    this.setValue({type: typeObject['.key'], preferences: typeObject.preferences});
+    return propertyPrefrences;
   },
   render: function(){
+    if(!this.state.loaded)
+      return <Loader title="loading"/>;
+
     const {formatMessage} = this.props.intl;
-    const className = (this.props.className || ' ') + " form-group  " +
-      (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
-    const errorMessage = this.getErrorMessage();
+    const {type,preferences} = this.state;
 
-    const currentValue = this.getValue();
-
-    let propertyPrefrences = [];
-    if(currentValue && currentValue.preferences && !_.isEmpty(currentValue.preferences)){
-      console.log('CURRENT', currentValue.preferences);
-      _.forEach(currentValue.preferences, (v, k)=>{
-        propertyPrefrences.push(
-          <div className="col-md-3">
-            <label>{formatMessage({id: `property.preference.${k}`})}</label>
-            <InputField key={`property-preference-${k}`}
-                        placeholder={`property.preference.${k}`}
-                        name={`property-preference-${k}`}
-                        value={this.props.editMode && v === parseInt(v, 10)? v : 0} required/>
-          </div>)
-      });
+    let propertyPrefrences = null;
+    if(type && !_.isEmpty(preferences)){
+      propertyPrefrences = this.format(preferences);
     }
-    const options = this.state.types.map((option, i) => (
-      <option key={' property-type-'+i} value={option['.key']}>
-        {formatMessage({id: `types.${option['.key']}`})}
-      </option>
-    ));
 
-
-    options.unshift(
-      <option key={' types-option-null'} value={''}>
-        {formatMessage({id: "forms.generic.select"})}
-      </option>
-    );
-
-
-    const labelClassName = "form-control-label";
-
+    let types = [];
+    types.push({value: null, title: formatMessage({id: "forms.generic.select"})});
+    _.forEach(this.state.types, function(v, k){
+      types.push({value: k, title: formatMessage({id: `types.${k}`})});
+    });
     return (
-      <div className={className}>
-        <label htmlFor={this.props.name} className={labelClassName}>
-          <FormattedMessage id={this.props.title}/>
-        </label>
-        <select
-          title={this.props.title}
-          onChange={this.updatePrefrences}
-          value={currentValue? currentValue.type : ''}
-          className="form-control"
-          name={this.props.name}>
-          {options}
-        </select>
+      <div>
+
+        <div className="form-group clearfix">
+          <SelectField
+            title={this.props.title}
+            className="col-md-3"
+            onChange={this.updatePrefrences}
+            value={type || null}
+            validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+            validations={{
+                    isExisty:true
+                    }}
+            options={types}
+            name={'type'}/>
+        </div>
 
         {propertyPrefrences}
 
-        <span className=' validation-error'>{errorMessage}</span>
       </div>
     );
   }

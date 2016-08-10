@@ -30,8 +30,7 @@ const PropertyAdd = React.createClass({
     let {formatMessage} = this.props.intl;
     let data = values;
 
-
-    console.log(data);
+    console.log('VVV', values) //XXX
 
     let propId = Firebase.database().ref('properties').push({
       title: data[1].title,
@@ -39,11 +38,11 @@ const PropertyAdd = React.createClass({
       price: data[1].price,
       area: data[1].area,
       space: data[1].space,
-      type: data[1].type.type,
+      type: data[1].type,
       preferences: data[1].preferences,
       purpose: data[1].purpose,
       featuredLevel: data[2],
-      addedBy: this.context.user.uid,
+      addedBy: this.context.user.uid
       //  addedAt: Firebase.ServerValue.TIMESTAMP
     }, (e)=>{
       if(e === null){

@@ -73,6 +73,7 @@ module.exports = {
     "forms.user.register.fields.waitVerification": "You have been registered succesfully. Please verify your email. check your mail address.",
     "forms.user.register.fields.accountType": "نوع الحساب",
     "forms.user.register.success": "سجلت بنجاح",
+    "screen.user.register.waitVerification": "Waiting for your mail varfiication",
 
     // Verification
     "user.verification.pageTitle": "Update your password",

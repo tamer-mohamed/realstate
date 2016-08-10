@@ -66,15 +66,6 @@ const PropertyForm = React.createClass({
     let nextStep = step + 1;
     this.setState({step: nextStep});
   },
-  formatPreferences: function(values){
-    let prefrencePrefix = 'property-preference-';
-    let propertyPref = {};
-    _.forEach(values.type.preferences, function(v, k){
-      propertyPref[k] = parseInt(values[prefrencePrefix + k], 10);
-    });
-
-    return propertyPref;
-  },
   // TODO: move to FileStorage module
   deleteImages: function(images, {onSuccess}){
 
@@ -119,58 +110,47 @@ const PropertyForm = React.createClass({
     NProgress.start();
     console.log('Form submitted with values', values);
 
-    //TODO: set validation for area
-    if(this.refs.form.state.isValid){
-      let imagesToDelete = values.propertyImagesToDelete;
+    let imagesToDelete = values.propertyImagesToDelete;
 
-      if(isEditMode){
-        values.preferences = this.formatPreferences(values);
+    if(isEditMode){
+      this.deleteImages(imagesToDelete, {
+        onSuccess: ()=>{
+          let reIndexed = _.filter(values.propertyImagesToUpload, (f)=> f ? true : false);
+          FileStorage.upload('images/' + this.props.propId, reIndexed, {
+            onUpdate: ()=>{
 
-        this.deleteImages(imagesToDelete, {
-          onSuccess: ()=>{
-            let reIndexed = _.filter(values.propertyImagesToUpload, (f)=> f ? true : false);
-            FileStorage.upload('images/' + this.props.propId, reIndexed, {
-              onUpdate: ()=>{
+            },
+            onSuccess: (fileNames)=>{
+              values.propertyImages = _.concat(_.filter(this.state.property.images, function(imageName){
+                return _.indexOf(imagesToDelete, imageName) === -1;
+              }), fileNames);
 
-              },
-              onSuccess: (fileNames)=>{
-                values.propertyImages = _.concat(_.filter(this.state.property.images, function(imageName){
-                  return _.indexOf(imagesToDelete, imageName) === -1;
-                }), fileNames);
-
-                this.props.onSubmit(values);
-                NProgress.done();
-              }
-            });
-          }
-        });
-
-      }
-
-      else{
-
-        switch(this.state.step){
-          case 1:
-            this.nextStep();
-            break;
-          case 2:
-            let stepOneValues = this.refs.form.getModel();
-            stepOneValues.preferences = this.formatPreferences(stepOneValues);
-            stepOneValues.imagesToUpload = this.state.imagesToUpload;
-
-
-            this.props.onSubmit({
-              1: stepOneValues,
-              2: values
-            });
-            break;
+              this.props.onSubmit(values);
+              NProgress.done();
+            }
+          });
         }
-      }
-
+      });
 
     }
+
     else{
-      this.context.pushNotification({message: formatMessage({id: "forms.validations.correctErrors"}), level: 'error'});
+
+      switch(this.state.step){
+        case 1:
+          this.nextStep();
+          break;
+        case 2:
+          let stepOneValues = this.refs.form.getModel();
+          stepOneValues.imagesToUpload = this.state.imagesToUpload;
+
+
+          this.props.onSubmit({
+            1: stepOneValues,
+            2: values
+          });
+          break;
+      }
     }
 
   },
@@ -179,7 +159,7 @@ const PropertyForm = React.createClass({
     const property = this.state.property;
     const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
 
-    return (<Form ref="form" onSubmit={this.submit}>
+    return (<Form ref="form" preventExternalInvalidation onValidSubmit={this.submit}>
 
       <div className="row">
         <div className="col-md-12">
@@ -189,8 +169,14 @@ const PropertyForm = React.createClass({
           <div className="row">
             <InputField className="col-md-6"
                         placeholder={"forms.property.add.fields.title"}
-                        value={property.title}
+                        value={property.title || null}
                         name="title"
+                        validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+                        validations={{
+                    isExisty:true
+                    }}
                         required/>
           </div>
           <div className="row">
@@ -199,19 +185,30 @@ const PropertyForm = React.createClass({
                                name="price"
                                addOnLabel={formatMessage({id:"settings.currency"})}
                                validations={{isNumeric:true,minLength:1}}
-                               value={property.price}
+                               value={property.price || null}
                                validationErrors={{
-                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"}),
-                                  isDefaultRequiredValue: formatMessage({id:"forms.validations.generic.required"})
-                                  }} required/>
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
+                               }}
+                               validations={{
+                                  isExisty:true,
+                                  isNumeric:true
+                                }}
+                               required/>
 
             <InputPostfixAddon className="col-md-3"
                                title={"forms.property.add.fields.space"}
                                name="space"
                                addOnLabel={<span>m<sup>2</sup></span>}
-                               value={property.space}
-                               validations="isNumeric"
-                               validationError={formatMessage({id:"forms.validations.generic.isNumeric"})}
+                               value={property.space || null}
+                               validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                    isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
+                    }}
+                               validations={{
+                    isExisty:true,
+                    isNumeric:true
+                    }}
                                required/>
 
             <Purposes className="col-md-3"
@@ -279,7 +276,8 @@ const PropertyForm = React.createClass({
       <div className="row">
         <div className="col-lg-12">
           <div className="input-group input-group-lg">
-            <input type="submit" className="btn btn-danger" value={formatMessage({id:submitTextId})}/>
+            <input type="submit" formNoValidate={true} className="btn btn-danger"
+                   value={formatMessage({id:submitTextId})}/>
           </div>
         </div>
       </div>

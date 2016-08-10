@@ -64,90 +64,81 @@ const ProfileForm = React.createClass({
         onSuccess();
       });
     };
+    let promises = [];
 
-
-    if(this.refs.form.state.isValid){
-      let promises = [];
-
-      if((user.type === 1 && this.props.user.companyLogo !== values.companyLogo)
-      ){
-        let companyLogoPromise = q.defer();
-        FileStorage.upload(this.userCompanyPicRef(), [values.companyLogo], {
-          onSuccess: (fileNames)=>{
-            this.deleteFile(this.userCompanyPicRef(), this.props.user.companyLogo, {
-              onSuccess: ()=>{
-                data.companyLogo = fileNames[0];
-                updateUser(data,
-                  ()=>{
-                    companyLogoPromise.resolve();
-                  });
-              },
-              onFail: ()=>{
-                this.context.pushNotification({
-                  message: formatMessage({id: "forms.userProfile.error.upload.companyLogo"}),
-                  level: 'error'
+    if((user.type === 1 && this.props.user.companyLogo !== values.companyLogo)
+    ){
+      let companyLogoPromise = q.defer();
+      FileStorage.upload(this.userCompanyPicRef(), [values.companyLogo], {
+        onSuccess: (fileNames)=>{
+          this.deleteFile(this.userCompanyPicRef(), this.props.user.companyLogo, {
+            onSuccess: ()=>{
+              data.companyLogo = fileNames[0];
+              updateUser(data,
+                ()=>{
+                  companyLogoPromise.resolve();
                 });
-                companyLogoPromise.reject();
-              }
-            })
-          },
-          onUpdate: ()=>{
+            },
+            onFail: ()=>{
+              this.context.pushNotification({
+                message: formatMessage({id: "forms.userProfile.error.upload.companyLogo"}),
+                level: 'error'
+              });
+              companyLogoPromise.reject();
+            }
+          })
+        },
+        onUpdate: ()=>{
 
-          }
-        });
-        promises.push(companyLogoPromise.promise);
-      }
+        }
+      });
+      promises.push(companyLogoPromise.promise);
+    }
 
-      if(this.props.user.image !== values.profilePic){
-        let profilePicPromise = q.defer();
+    if(this.props.user.image !== values.profilePic){
+      let profilePicPromise = q.defer();
 
-        FileStorage.upload(this.userProfilePicRef(), [values.profilePic], {
-          onSuccess: (fileNames)=>{
-            this.deleteFile(this.userProfilePicRef(), this.props.user.image, {
-              onSuccess: ()=>{
-                data.image = fileNames[0];
-                updateUser(data,
-                  ()=>{
-                    profilePicPromise.resolve();
-                  });
-              },
-              onFail: ()=>{
-                this.context.pushNotification({
-                  message: formatMessage({id: "forms.userProfile.error.upload.profilePic"}),
-                  level: 'error'
+      FileStorage.upload(this.userProfilePicRef(), [values.profilePic], {
+        onSuccess: (fileNames)=>{
+          this.deleteFile(this.userProfilePicRef(), this.props.user.image, {
+            onSuccess: ()=>{
+              data.image = fileNames[0];
+              updateUser(data,
+                ()=>{
+                  profilePicPromise.resolve();
                 });
-                profilePicPromise.reject();
+            },
+            onFail: ()=>{
+              this.context.pushNotification({
+                message: formatMessage({id: "forms.userProfile.error.upload.profilePic"}),
+                level: 'error'
+              });
+              profilePicPromise.reject();
 
-              }
-            });
-          },
-          onUpdate: ()=>{
+            }
+          });
+        },
+        onUpdate: ()=>{
 
-          }
-        });
+        }
+      });
 
-        promises.push(profilePicPromise.promise);
-      }
-
-      q.all(promises).then(()=>{
-        updateUser(data, ()=>{
-          hashHistory.push(`${this.context.lang}/user/profile`);
-          this.context.pushNotification({message: formatMessage({id: "forms.userProfile.success"}), level: 'success'});
-        });
-
-      })
-
-
+      promises.push(profilePicPromise.promise);
     }
-    else{
-      this.context.pushNotification({message: formatMessage({id: "forms.validations.correctErrors"}), level: 'error'});
-    }
+
+    q.all(promises).then(()=>{
+      updateUser(data, ()=>{
+        hashHistory.push(`${this.context.lang}/user/profile`);
+        this.context.pushNotification({message: formatMessage({id: "forms.userProfile.success"}), level: 'success'});
+      });
+
+    })
 
   },
   render: function(){
     const {formatMessage} = this.props.intl;
     return (
-      <Form ref="form" onSubmit={this.submit}>
+      <Form ref="form" preventExternalInvalidation onValidSubmit={this.submit}>
         <div className="row">
           <div className="col-md-12">
             <h6 className="fieldset-title">
@@ -158,14 +149,24 @@ const ProfileForm = React.createClass({
                 <div className="row">
                   <InputField className="col-md-6"
                               placeholder={"forms.userProfile.labels.name"}
-                              value={this.props.user.fname}
+                              value={this.props.user.fname || null}
                               name="fname"
+                              validationErrors={{
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"})
+                              }}
+                              validations={{
+                                isExisty:true
+                               }}
                               required/>
                   <InputField className="col-md-6"
                               placeholder={"forms.userProfile.labels.additionalMail"}
-                              value={this.props.user.additionalMail}
-                              validations="isEmail"
-                              validationError={formatMessage({id:"forms.validations.generic.isEmail"})}
+                              value={this.props.user.additionalMail || null}
+                              validations={{
+                                isEmail:true
+                               }}
+                              validationErrors={{
+                              isEmail:formatMessage({id:"forms.validations.generic.isEmail"})
+                              }}
                               name="additionalMail"/>
                 </div>
                 <div className="row">
@@ -185,7 +186,7 @@ const ProfileForm = React.createClass({
                   <Textarea className="col-md-12"
                             name="intro"
                             value={this.props.user.intro}
-                            title={"forms.userProfile.labels.intro"}/>
+                            placeholder={"forms.userProfile.labels.intro"}/>
                 </div>
               </div>
               <div className="col-md-4">
@@ -202,7 +203,10 @@ const ProfileForm = React.createClass({
             <div className="row">
               <div className="col-lg-12">
                 <div className="input-group input-group-lg">
-                  <input type="submit" className="btn btn-danger" value={formatMessage({id:"forms.generic.update"})}/>
+                  <input type="submit"
+                         className="btn btn-danger"
+                         formNoValidate={true}
+                         value={formatMessage({id:"forms.generic.update"})}/>
                 </div>
               </div>
             </div>

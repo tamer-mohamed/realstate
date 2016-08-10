@@ -27,7 +27,9 @@ const AreasInput = React.createClass({
     if(this.props.onChange)
       this.props.onChange(event);
 
-    this.setValue(event.currentTarget.value);
+    let value = event.currentTarget.value === "" ? null : event.currentTarget.value;
+
+    this.setValue(value);
   },
 
   componentWillMount: function(){
@@ -43,9 +45,9 @@ const AreasInput = React.createClass({
 //  },
   render: function(){
     const {formatMessage} = this.props.intl;
-    const className = (this.props.className || ' ') + " " +
-      (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
-    const errorMessage = this.getErrorMessage();
+    const className = (this.props.className || ' ') +
+      (this.showRequired() ? 'required' : !this.isPristine() && this.showError() ? ' error' : '');
+    const errorMessage = !this.isPristine() || this.isFormSubmitted() ? this.getErrorMessage() : null;
 
     const options = this.state.areas.map((option, i) => (
       <option key={'areas-option-'+i} value={ option['.key']}>
@@ -54,7 +56,7 @@ const AreasInput = React.createClass({
     ));
 
     options.unshift(
-      <option key={'areas-option-null'} value={null}>
+      <option key={'areas-option-null'} value={""}>
         {formatMessage({id: "forms.generic.select"})}
       </option>
     );
@@ -67,12 +69,12 @@ const AreasInput = React.createClass({
           <FormattedMessage id={this.props.title}/>
         </label>
         <select
+          {...this.props}
           title={this.props.title}
           onChange={this.changeValue}
           value={this.getValue()}
           className="form-control"
-          name={this.props.name}
-          required>
+          name={this.props.name}>
           {options}
         </select>
         <span className='validation-error'>{errorMessage}</span>

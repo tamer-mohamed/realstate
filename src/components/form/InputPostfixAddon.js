@@ -3,38 +3,29 @@ import Formsy from 'formsy-react';
 import { If, Then, Else } from 'react-if';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 
-const InputField = React.createClass({
+const InputFieldPostFix = React.createClass({
 
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
 
-  getInitialState: function () {
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string,
+    disabled: React.PropTypes.bool
+  },
+  getInitialState: function(){
     return {
       value: this.props.value
     };
   },
-
-  syncValue: function () {
-    this.setValue(this.state.value);
-  },
-
-  // setValue() will set the value of the component, which in
-  // turn will validate it and the rest of the form
-  changeValue(event) {
-    this.setValue(event.currentTarget[this.props.type === 'checkbox' ? 'checked' : 'value']);
+  changeValue: function(e){
+    let value = e.currentTarget.value == '' ? null : e.currentTarget.value;
+    this.setValue(value);
   },
   render() {
-    // Set a specific className based on the validation
-    // state of this component. showRequired() is true
-    // when the value is empty and the required prop is
-    // passed to the input. showError() is true when the
-    // value typed is invalid
     const className = (this.props.className || ' ') + " " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
-
-    // An error message is returned ONLY if the component is invalid
-    // or the server has returned an error message
-    const errorMessage = this.getErrorMessage();
+    const errorMessage = !this.isPristine() || this.isFormSubmitted() ? this.getErrorMessage() : null;
 
     const labelClassName = "form-control-label";
 
@@ -46,14 +37,12 @@ const InputField = React.createClass({
         </label>
 
         <div className="input-group">
-          <input
-            className="form-control"
-            type={this.props.type || 'text'}
-            name={this.props.name}
-            onChange={this.changeValue}
-            onBlur={this.changeValue}
-            value={this.getValue()}
-            checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
+          <input className="form-control"
+                 type={this.props.type || 'text'}
+                 name={this.props.name}
+                 onChange={this.changeValue}
+                 value={this.getValue()}
+                 checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
           />
 
           <div className="input-group-addon">{this.props.addOnLabel}</div>
@@ -66,4 +55,4 @@ const InputField = React.createClass({
   }
 });
 
-export default InputField;
+export default InputFieldPostFix;

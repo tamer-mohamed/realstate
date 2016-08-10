@@ -31,7 +31,6 @@ const Dropzone = React.createClass({
     });
   },
   render: function(){
-    let className = `${this.props.className} text-center`;
     let {formatMessage} = this.props.intl;
     return (
       <div className={this.props.className}>
@@ -52,8 +51,12 @@ const Dropzone = React.createClass({
               <InputHidden value={this.state.file} name={`${this.props.name}`}/>
             </div>
           </div> :
-          <div className={className}>
-            <Drop ref="dropzone" onDrop={this.onDrop} multiple={false} accept={this.props.accept}>
+          <div className={"text-center"}>
+            <Drop className="dropzone-component col-md-12"
+                  ref="dropzone"
+                  onDrop={this.onDrop}
+                  multiple={false}
+                  accept={this.props.accept}>
               <div>{formatMessage({id: this.props.title})}</div>
               <div className="overlay">
                 <a onClick={this.onDrop} className="btn btn-danger">+</a>

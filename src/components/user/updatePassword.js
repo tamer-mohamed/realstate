@@ -13,6 +13,7 @@ const UpdatePassword = React.createClass({
                     placeholder="forms.user.register.fields.password"
                     name="password"
                     type="password"
+                    value={undefined}
                     validations={{
                                 minLength: 4
                               }} validationErrors={{
@@ -21,6 +22,7 @@ const UpdatePassword = React.createClass({
 
         <InputField className="form-group col-md-6"
                     placeholder="forms.user.register.fields.repeatPassword"
+                    value={undefined}
                     type="password"
                     name="repeatPassword" validations="equalsField:password"
                     validationErrors={{

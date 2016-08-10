@@ -16,7 +16,7 @@ const SelectField = React.createClass({
   render() {
     const className = (this.props.className || ' ') + " " +
       (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
-    const errorMessage = this.getErrorMessage();
+    const errorMessage = this.isFormSubmitted() && this.getErrorMessage();
 
     const options = this.props.options.map((option, i) => (
       <option key={option.title+option.value} value={option.value}>

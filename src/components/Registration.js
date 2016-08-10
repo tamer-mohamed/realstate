@@ -86,23 +86,35 @@ const Registration = React.createClass({
         // TOOD: delete created user
       });
     }
-    else{
-      this.context.pushNotification({message: formatMessage({id: 'forms.validations.correctErrors'}), level: 'error'});
-    }
+//    else{
+//      this.context.pushNotification({message: formatMessage({id: 'forms.validations.correctErrors'}), level: 'error'});
+//    }
 
   },
   render: function(){
     let {formatMessage} = this.props.intl;
-    let RegisterForm = <Form ref="form" onSubmit={this.submit} className="register">
+    let RegisterForm = <Form preventExternalInvalidation ref="form" onValidSubmit={this.submit} className="register">
 
       <div className="row">
         <InputField className="col-md-6" placeholder={"forms.user.register.fields.firstName"} name="fname"
+                    value={null}
+                    validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+                    validations={{
+                    isExisty:true
+                    }}
                     required/>
 
         <InputField className="col-md-6" placeholder={"forms.user.register.fields.email"} name="email"
+                    value={null}
                     validationErrors={{
-                     isEmail: formatMessage({id: "forms.validation.generic.email"})
-                     }} validations="isEmail" required/>
+                     isEmail: formatMessage({id: "forms.validations.generic.isEmail"}),
+                     isExisty: formatMessage({id: "forms.validations.generic.required"})
+                     }} validations={{
+                    isExisty:true,
+                    isEmail:true
+                    }} required/>
 
       </div>
 
@@ -119,7 +131,7 @@ const Registration = React.createClass({
 
       <div className="row">
         <div className="col-md-12">
-          <input type="submit" className="btn btn-danger"
+          <input type="submit" className="btn btn-danger" formNoValidate={true}
                  value={formatMessage({id:"forms.user.register.submit"})}/>
         </div>
       </div>

@@ -50,6 +50,7 @@ const LocationField = React.createClass({
       this.props.onChange(e.currentTarget.value)
   },
   render: function(){
+    const {formatMessage} = this.props.intl;
     let locations = this.state.locations;
 
     if(!this.state.loaded)
@@ -62,8 +63,15 @@ const LocationField = React.createClass({
                           title={this.props.title}
                           name="location"
                           options={locations}
+                          validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+                          validations={{
+                    isExisty:true
+                    }}
                           onChange={this.onChange}
-                          value={selectedLocation}/>);
+                          value={selectedLocation}
+                          required/>);
 
 
   }

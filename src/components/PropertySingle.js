@@ -25,19 +25,6 @@ const PropertySingle = React.createClass({
   },
   getLocation: function(){
     let locationData = {location: null, area: null};
-
-    if(typeof this.state.propertyDetails !== 'undefined'){
-      firebase.database().ref(`locations/${this.state.propertyDetails.location}`).once('value', (dataSnapshot)=>{
-        locationData.location = dataSnapshot.val();
-        firebase.database().ref(`areas/${this.state.propertyDetails.location}/${this.state.propertyDetails.area}`).once('value', (dataSnapshot)=>{
-          locationData.area = dataSnapshot.val();
-
-          this.setState({locationData});
-        });
-      });
-    }
-
-
   },
   getPurpose: function(){
     firebase.database().ref(`purposes/${this.state.propertyDetails.purpose}`).once('value', (dataSnapshot)=>{
@@ -45,6 +32,7 @@ const PropertySingle = React.createClass({
     });
   },
   render: function(){
+    const {formatMessage} = this.props.intl;
     let spaceMeasure = this.props.intl.formatHTMLMessage({id: "settings.space"});
 
     if(this.state.propertyDetails){
@@ -69,7 +57,9 @@ const PropertySingle = React.createClass({
 
               <div className="col-md-5 property-data">
                 <div className="prop-features prop-before">
-                  <span className="location">{this.state.locationData.location} ({this.state.locationData.area})</span>
+                  <span className="location">
+                    {formatMessage({id: `locations.${this.state.propertyDetails.location}`})}
+                    - {formatMessage({id: `areas.${this.state.propertyDetails.area}`})}</span>
                   <span className="area"> <FormattedHTMLMessage id="property.space"
                                                                 values={{space:this.state.propertyDetails.space,measure:spaceMeasure}}/> <sup>2</sup></span>
                 </div>

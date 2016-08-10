@@ -32,7 +32,8 @@ const PropertyAddress = React.createClass({
     this.setState({selectedLocation: location})
   },
   render: function(){
-    console.log(this.state.selectedLocation);
+    const {formatMessage} = this.props.intl;
+
     return (
       <div>
         <Location className="col-md-4"
@@ -45,7 +46,13 @@ const PropertyAddress = React.createClass({
         {this.state.selectedLocation ? <Areas ref="areaInput" location={this.state.selectedLocation}
                                               className="col-md-4"
                                               editMode={this.props.editMode}
-                                              value={this.props.value.area}
+                                              value={this.props.value.area || null}
+                                              validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+                                              validations={{
+                    isExisty:true
+                    }}
                                               title="forms.property.add.fields.area"
                                               name={"area"}/> : null}
       </div>

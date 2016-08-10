@@ -73,7 +73,11 @@ const MyProperties = React.createClass({
     }
     else{
       properties.push(<tr key={`property-0`}>
-        <td colSpan="3"><h4 className="text-center"><FormattedMessage id="userProperties.noProperties" /></h4></td>
+        <td colSpan="3">
+          <p className="text-center">
+            <FormattedMessage id="userProperties.noProperties"/>
+          </p>
+        </td>
       </tr>);
     }
 
@@ -96,22 +100,23 @@ const MyProperties = React.createClass({
               </Link>
             </h2>
 
-
-            <table className="table table-striped table-hover user-properties-listing">
-              <thead>
-              <tr>
-                <th>
-                  <FormattedMessage id="screen.secure.properties.listing.propertyTitle"/>
-                </th>
-                <th>
-                  <FormattedMessage id="screen.secure.properties.listing.manageProperty"/>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              { this.getProperties()}
-              </tbody>
-            </table>
+            <div className="typography">
+              <table className="table table-striped table-hover user-properties-listing">
+                <thead>
+                <tr>
+                  <th>
+                    <FormattedMessage id="screen.secure.properties.listing.propertyTitle"/>
+                  </th>
+                  <th>
+                    <FormattedMessage id="screen.secure.properties.listing.manageProperty"/>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                { this.getProperties()}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

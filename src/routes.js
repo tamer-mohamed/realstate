@@ -42,7 +42,13 @@ const routes = [
           {path: 'about', component: About},
           // contact us
           {path: 'contact', component: Contact},
-
+          {
+            path: "properties",
+            indexRoute: {component: Properties},
+            childRoutes: [
+              {path: ":propertyId", component: PropertySingle}
+            ]
+          },
           {
 
             // user screens
