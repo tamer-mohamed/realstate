@@ -202,13 +202,13 @@ const PropertyForm = React.createClass({
                                addOnLabel={<span>m<sup>2</sup></span>}
                                value={property.space || null}
                                validationErrors={{
-                    isExisty: formatMessage({id: "forms.validations.generic.required"}),
-                    isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
-                    }}
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
+                                  }}
                                validations={{
-                    isExisty:true,
-                    isNumeric:true
-                    }}
+                                  isExisty:true,
+                                  isNumeric:true
+                                  }}
                                required/>
 
             <Purposes className="col-md-3"

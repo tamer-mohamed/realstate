@@ -58,13 +58,11 @@ const MyProperties = React.createClass({
         properties.push(<tr key={k}>
           <td width="75%">{property.title}</td>
           <td>
-            <Link to={`${this.context.lang}/user/dashboard/properties/manage/${k}`}>
-              Edit
+            <Link className="btn btn-small" to={`${this.context.lang}/user/dashboard/properties/manage/${k}`}>
+              <i className="fa fa-pencil-square"/> <FormattedMessage id="userProperties.edit"/>
             </Link>
-          </td>
-          <td>
-            <a href="#" onClick={(e)=>this.handleDeleteProperty(e,k)}>
-              Delete
+            <a className="btn btn-small" href="#" onClick={(e)=>this.handleDeleteProperty(e,k)}>
+              <i className="fa fa-trash"/> <FormattedMessage id="userProperties.delete"/>
             </a>
           </td>
         </tr>)
@@ -96,7 +94,7 @@ const MyProperties = React.createClass({
               <FormattedMessage id="screen.secure.properties.pageTitle"/>
 
               <Link className="btn btn-danger pull-right" to={`${this.context.lang}/user/dashboard/properties/add`}>
-                <FormattedMessage id="contextualMenu.addProperty"/>
+                <i className="fa fa-plus"/> <FormattedMessage id="contextualMenu.addProperty"/>
               </Link>
             </h2>
 

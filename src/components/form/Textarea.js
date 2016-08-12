@@ -47,12 +47,12 @@ const Textarea = React.createClass({
   render() {
     const {formatMessage} = this.props.intl;
     const className = (this.props.className || ' ') + " " +
-      (this.showRequired() ? 'required' : this.showError() ? 'error' : '') +
+      (this.showRequired() ? 'required' : this.showError() && this.isFormSubmitted() ? 'error' : '') +
       (this.props.type === 'checkbox' ? '' : '');
 
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
-    const errorMessage = this.getErrorMessage();
+    const errorMessage = this.isFormSubmitted() && this.getErrorMessage();
 
     const input = <textarea
       type={this.props.type || 'text'}
@@ -67,7 +67,7 @@ const Textarea = React.createClass({
     return (
       <div className={className}>
         {input}
-        <span className='validation-error'>{errorMessage}</span>
+        {this.props.showErrors && <span className='validation-error'>{errorMessage}</span>}
       </div>
     );
   }

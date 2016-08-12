@@ -27,7 +27,7 @@ const InputField = React.createClass({
     const {formatMessage} = this.props.intl;
     let className = (this.props.className || ' ') + " form-group ";
     className += (!this.isPristine() && !this.isValid() && this.isFormSubmitted() ? 'error' : '');
-    const errorMessage = !this.isPristine() || this.isFormSubmitted() ? this.getErrorMessage() : null;
+    const errorMessage =  this.isFormSubmitted() ? this.getErrorMessage() : null;
 
     const input = <input
       {...this.props}
@@ -41,7 +41,7 @@ const InputField = React.createClass({
     return (
       <div className={className}>
         {input}
-        <span className='validation-error'>{errorMessage}</span>
+        {this.props.showErrors && <span className='validation-error'>{errorMessage}</span>}
       </div>
     );
   }

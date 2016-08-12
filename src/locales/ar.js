@@ -104,11 +104,13 @@ module.exports = {
 
     // user Properties
     "userProperties.noProperties": "No proprties for now ...",
+    "userProperties.edit": "edit",
+    "userProperties.delete": "delete",
 
     // user links in drop down
     "userLinks.myProfile": "myProfile",
     "userLinks.editMyProfile": "Edit my profile",
-    "userLinks.myProperties": "My properties",
+    "userLinks.myProperties": "manage properties",
     "userLinks.logout": "Logout",
 
     //
@@ -166,6 +168,16 @@ module.exports = {
     "property.preference.laborResidence": "سكن عمال",
     "property.preference.villa": "فيلا",
     "property.preference.waterWell": "بئر ماء",
+
+
+    // contact form (feedback)
+    "contactForm.title": "Feedbac",
+    "contactForm.name": "Name",
+    "contactForm.phone": "Phone",
+    "contactForm.email": "Email",
+    "contactForm.subject": "Subject",
+    "contactForm.message": "Message",
+    "contactForm.submit": "Send Message",
 
 
     "areas.abuHalifa": "أبوحليفه",

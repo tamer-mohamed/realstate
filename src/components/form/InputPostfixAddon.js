@@ -24,8 +24,8 @@ const InputFieldPostFix = React.createClass({
   },
   render() {
     const className = (this.props.className || ' ') + " " +
-      (this.showRequired() ? 'required' : this.showError() ? 'error' : '');
-    const errorMessage = !this.isPristine() || this.isFormSubmitted() ? this.getErrorMessage() : null;
+      (this.showRequired() ? 'required' : this.showError() && this.isFormSubmitted() ? 'error' : '');
+    const errorMessage = this.isFormSubmitted() ? this.getErrorMessage() : null;
 
     const labelClassName = "form-control-label";
 

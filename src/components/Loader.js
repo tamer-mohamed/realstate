@@ -8,7 +8,9 @@ const Loader = React.createClass({
   },
   render: function(){
     const {formatMessage} = this.props.intl;
-    return <div> {formatMessage({id: this.props.title})} ....... </div>
+    return <div className="text-center">
+      <i className="fa fa-spinner fa-pulse"/> {formatMessage({id: this.props.title})}
+    </div>
   }
 
 });

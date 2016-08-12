@@ -71,13 +71,13 @@ const App = React.createClass({
       this.handleLogout(user);
     });
   },
-
-  componentDidMount() {
-    if(this.intlData().locale === 'ar')
-      document.body.classList.add('rtl');
-  },
   render: function(){
     const localeData = this.intlData();
+
+    if(localeData.locale === 'ar')
+      document.body.classList.add('rtl')
+    else
+      document.body.classList.remove('rtl')
 
     return (
       <IntlProvider {... localeData} defaultLocale="ar">

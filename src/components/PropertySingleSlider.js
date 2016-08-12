@@ -1,18 +1,20 @@
 import Image from './Image';
+import _ from 'lodash';
 
 const PropertySingleSlider = (props)=>{
-  if(!props.images)
-    return null;
-
-
+  let images = props.images || [];
   return (
     <div className={props.className}>
 
       <figure>
-        <Image url={`${props.FBref}/${props.images[0]}`}/>
-        <span className="label sale">{props.purpose}</span>
+        {images.length > 0 ?
+          <Image url={`${props.FBref}/${images[0]}`}/>
+          :
+          <img src="dist/images/items/10.png"/>
+        }
+        <span className={`label ${props.purposeId}`}>{props.purposeText}</span>
       </figure>
-      { props.images.length > 1 ?
+      { images.length > 1 ?
         <div className="thumbnails">
           {
             props.images.map((image, i)=>{

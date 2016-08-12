@@ -66,6 +66,13 @@ header .nav > li > a.active:before {
 }
 
 /* FORMS */
+form {
+  .error.form-group, .error {
+    textarea, input {
+      border: 1px solid red
+    }
+  }
+}
 
 input[type=text], input[type=password], textarea {
   line-height: 20px;
@@ -98,4 +105,16 @@ label {
 .dropzone-component {
   border: 1px dashed #8c8c8c;
   line-height: 90px;
+}
+
+.page-contents ul {
+  list-style: none;
+}
+
+.user-data {
+  margin-bottom: 40px;
+}
+
+.typography table .btn {
+  margin: inherit !important;
 }
