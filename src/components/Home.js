@@ -3,7 +3,7 @@ import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 import NProgress from "nprogress";
-import {Link} from 'react-router';
+import {Link,hashHistory} from 'react-router';
 import _ from 'lodash';
 //components
 import FeaturedSlider from './Featured';
@@ -24,12 +24,22 @@ const Home = React.createClass({
     }
   },
   componentWillMount: function(){
-    NProgress.start();
-    firebase.database().ref('properties').once('value', (snapshot)=>{
-      NProgress.done();
-      let value = snapshot.val();
-      this.setState({loaded: true, properties: value});
-    });
+    const {mode,oobCode} = this.props.location.query;
+
+    switch(mode){
+      case "resetPassword":
+        hashHistory.push(`${this.context.lang}/user/confirmResetPassword/${oobCode}`);
+        break;
+
+      default:
+        NProgress.start();
+        firebase.database().ref('properties').once('value', (snapshot)=>{
+          NProgress.done();
+          let value = snapshot.val();
+          this.setState({loaded: true, properties: value});
+        });
+    }
+
   },
 
   componentWillUnmount: function(){
@@ -99,7 +109,8 @@ const Home = React.createClass({
                 </h4>
               </div>
               <div className="col-md-3">
-                <Link to={`${this.context.lang}/user/dashboard/properties/add`} className="btn btn-danger"><FormattedMessage id="block.submitProperty.buttonText"/></Link>
+                <Link to={`${this.context.lang}/user/dashboard/properties/add`}
+                      className="btn btn-danger"><FormattedMessage id="block.submitProperty.buttonText"/></Link>
               </div>
             </div>
           </div>

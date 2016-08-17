@@ -26,6 +26,7 @@ const FeatureLevelsModal = React.createClass({
   },
   getInitialState: function(){
     return {
+      loading: true,
       isShowingModal: true,
       propertyLevel: this.props.propertyLevel,
       levels: [], //
@@ -33,13 +34,14 @@ const FeatureLevelsModal = React.createClass({
     }
   },
   componentWillMount: function(){
-    this.bindAsArray(firebase.database().ref(`config/featuredLevels`), 'levels');
+    firebase.database().ref(`config/featuredLevels`).once('value', (snapshot)=>{
+      this.setState({loading: false, levels: snapshot.val()});
+    })
   },
   closeModal: function(){
     this.setState({isShowingModal: false});
   },
   handleClose: function(){
-    console.log('CALLED');
     if(this.props.onClose)
       this.props.onClose();
 
@@ -59,7 +61,9 @@ const FeatureLevelsModal = React.createClass({
 
   },
   shouldComponentUpdate: function(nextProps, nextState){
-    return this.state.isShowingModal !== nextState.isShowingModal || this.state.totalSum !== nextState.totalSum;
+    return this.state.isShowingModal !== nextState.isShowingModal ||
+      this.state.totalSum !== nextState.totalSum
+      || this.state.levels !== nextState.levels;
   },
   calculateTotal: function(checkedValues){
     let total = 0;
@@ -76,6 +80,11 @@ const FeatureLevelsModal = React.createClass({
   render: function(){
     const {formatMessage} = this.props.intl;
     const submitTextId = this.props.editMode ? "forms.generic.update" : "forms.generic.add";
+    let levels = [];
+
+    _.forEach(this.state.levels, (value, key)=>{
+      levels.push({key, value});
+    });
     return (
       <div>
         {this.state.isShowingModal ?
@@ -85,7 +94,7 @@ const FeatureLevelsModal = React.createClass({
 
               <Form>
 
-                { !_.isEmpty(this.state.levels) ?
+                { !_.isEmpty(levels) ?
                   <div>
                     <div className="well">
                       <div className="row">
@@ -96,7 +105,7 @@ const FeatureLevelsModal = React.createClass({
                           </p>
 
                           <CheckGroup title="forms.property.add.labels.featuredLevel"
-                                      items={this.state.levels}
+                                      items={levels}
                                       onChange={this.calculateTotal}
                                       className="col-md-12"
                                       name="featuredLevel"/>

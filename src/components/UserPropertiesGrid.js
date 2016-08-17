@@ -13,7 +13,9 @@ const UserPropertiesGrid = React.createClass({
     firebase.database().ref(`properties`).orderByChild('addedBy').equalTo(userId).limitToFirst(5).once('value', (snapShot)=>{
       let properties = snapShot.val();
       // delete the current property
-      delete properties[id];
+      if(properties)
+        delete properties[id];
+
       this.setState({loaded: true, properties});
     });
   },
@@ -22,7 +24,6 @@ const UserPropertiesGrid = React.createClass({
       return <Loader title="loading"/>;
     }
 
-    console.log(this.state.properties);
     let properties = [];
     _.forEach(this.state.properties, (v, k)=>{
       properties.push(<li className="col-md-3 col-sm-6" key={k}>

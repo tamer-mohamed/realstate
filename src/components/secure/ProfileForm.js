@@ -50,12 +50,14 @@ const ProfileForm = React.createClass({
     const {user,userId} = this.props;
     const {formatMessage} = this.props.intl;
 
+    console.log(values);
+
     let data = {
       fname: values.fname,
       additionalMail: values.additionalMail || null,
       phonenumber: values.phonenumber,
       companyName: values.companyName || null,
-      contactnumber: values.contactnumber,
+      contactnumber: values.contactnumber || null,
       intro: values.intro || null
     };
 
@@ -114,7 +116,6 @@ const ProfileForm = React.createClass({
                 level: 'error'
               });
               profilePicPromise.reject();
-
             }
           });
         },
@@ -126,13 +127,19 @@ const ProfileForm = React.createClass({
       promises.push(profilePicPromise.promise);
     }
 
-    q.all(promises).then(()=>{
+    if(promises.length){
+      q.all(promises).then(()=> updateUser(data, ()=>{
+        hashHistory.push(`${this.context.lang}/user/profile`);
+        this.context.pushNotification({message: formatMessage({id: "forms.userProfile.success"}), level: 'success'});
+      }))
+    }
+    else{
       updateUser(data, ()=>{
         hashHistory.push(`${this.context.lang}/user/profile`);
         this.context.pushNotification({message: formatMessage({id: "forms.userProfile.success"}), level: 'success'});
       });
+    }
 
-    })
 
   },
   render: function(){
@@ -174,6 +181,14 @@ const ProfileForm = React.createClass({
                               placeholder={"forms.userProfile.labels.phoneNumber"}
                               value={this.props.user.phonenumber}
                               name="phonenumber"
+                              validationErrors={{
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                                  isNumeric:formatMessage({id: "forms.validations.generic.isNumeric"})
+                              }}
+                              validations={{
+                                isExisty:true,
+                                isNumeric:true
+                               }}
                               required/>
 
                   <InputField className="col-md-6"

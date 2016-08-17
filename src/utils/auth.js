@@ -20,22 +20,24 @@ const auth = (function(){
   }
 
   function login(mail, pass, cb){
-    Firebase.auth().signInWithEmailAndPassword(mail, pass).then((user)=>{
-      console.log('Logged', user);
-      cb();
-    }).catch((e)=>{
-      cb(e);
-    });
+    return Firebase.auth().signInWithEmailAndPassword(mail, pass);
   }
 
-  function register(data){
+  function sendResetPassword(email){
+    console.log(email);
+    return Firebase.auth().sendPasswordResetEmail(email);
+  }
 
+  function confirmResetPassword(code, password){
+    return Firebase.auth().confirmPasswordReset(code, password);
   }
 
 
   return {
     requireAuth,
-    login
+    login,
+    sendResetPassword,
+    confirmResetPassword
   }
 
 })();

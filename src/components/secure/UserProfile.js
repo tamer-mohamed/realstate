@@ -36,7 +36,7 @@ const UserProfile = React.createClass({
       return null;
 
     let {user} = this.state;
-    let userId = this.props.params.userId || this.context.user.uid;
+    let userId = this.props.params && this.props.params.userId ? this.props.params.userId : this.context.user.uid;
     return (
       <div>
         <div className="page-wrap team-single">

@@ -52,11 +52,6 @@ const PropertyForm = React.createClass({
       }
     }
   },
-  componentWillMount: function(){
-    this.bindAsArray(firebase.database().ref('purposes'), 'purposes');
-    this.bindAsArray(firebase.database().ref('types'), 'types');
-    this.bindAsArray(firebase.database().ref('config/featuredLevels'), 'featuredLevels');
-  },
 
   resetForm: function(){
     this.refs.form.reset();
@@ -104,12 +99,9 @@ const PropertyForm = React.createClass({
     })
   },
   submit: function(values){
-
-    const {formatMessage} = this.props.intl;
-    const isEditMode = this.props.editMode;
     NProgress.start();
-    console.log('Form submitted with values', values);
 
+    const {isEditMode} = this.props;
     let imagesToDelete = values.propertyImagesToDelete;
 
     if(isEditMode){

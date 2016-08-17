@@ -6,6 +6,7 @@ import NProgress from "nprogress";
 import Loader from '../Loader';
 import _ from 'lodash';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
+import FeatureLevelsModal from '../form/FeatureLevelsModal';
 
 //components
 const MyProperties = React.createClass({
@@ -64,6 +65,14 @@ const MyProperties = React.createClass({
             <a className="btn btn-small" href="#" onClick={(e)=>this.handleDeleteProperty(e,k)}>
               <i className="fa fa-trash"/> <FormattedMessage id="userProperties.delete"/>
             </a>
+
+            <a className="btn btn-small" href="#" onClick={(e)=>{
+             e.preventDefault();this.setState({showUpgrade: true});
+             }
+            }>
+              <i className="fa fa-arrow-up"/> <FormattedMessage id="userProperties.upgrade"/>
+            </a>
+
           </td>
         </tr>)
       });
@@ -83,7 +92,7 @@ const MyProperties = React.createClass({
   },
   render: function(){
     if(!this.state.loaded)
-      return <Loader title="loading..."/>
+      return <Loader title="loading"/>;
 
     return (
       <div className="page-wrap">
@@ -115,6 +124,13 @@ const MyProperties = React.createClass({
                 </tbody>
               </table>
             </div>
+
+            {this.state.showUpgrade ?
+              <FeatureLevelsModal onClose={()=> this.setState({showUpgrade:false})}
+                                  onSubmit={this.submit}/>
+              : null
+            }
+
           </div>
         </div>
       </div>

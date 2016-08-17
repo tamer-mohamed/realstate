@@ -44,10 +44,10 @@ const RadioGroup = React.createClass({
           <CheckBox
             key={i}
             type="checkbox"
-            title={`featuredLevel.${item['.key']}`}
+            title={`featuredLevel.${item['key']}`}
             name={name}
-            onChange={(value)=> this.updateList(item['.key'],value)}
-            checked={this.state.value === item['.key']}
+            onChange={(value)=> this.updateList(item['key'],value)}
+            checked={this.state.value === item['key']}
           />
         ))
         }

@@ -12,6 +12,8 @@ import Error404 from './components/Error404';
 import UserProfile from './components/secure/UserProfile';
 import UserEditProfile from './components/secure/UserEditProfile';
 import Verification from './components/Registeration.step2';
+import ForgetPassword from './components/ForgetPassword';
+import confirmResetPassword from './components/confirmResetPassword';
 import qwest from 'qwest';
 import constants from './constants';
 
@@ -100,6 +102,14 @@ const routes = [
                     component: UserProfile
                   }
                 ]
+              },
+              {
+                path: 'forgetPassword',
+                component: ForgetPassword
+              },
+              {
+                path: 'confirmResetPassword/:code',
+                component: confirmResetPassword
               }
             ]
           },

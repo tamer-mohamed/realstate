@@ -13,6 +13,11 @@ const InputField = React.createClass({
     label: React.PropTypes.string,
     disabled: React.PropTypes.bool
   },
+  getDefaultProps: function(){
+    return {
+      showErrors: true
+    }
+  },
 
   getInitialState: function(){
     return {
@@ -27,7 +32,7 @@ const InputField = React.createClass({
     const {formatMessage} = this.props.intl;
     let className = (this.props.className || ' ') + " form-group ";
     className += (!this.isPristine() && !this.isValid() && this.isFormSubmitted() ? 'error' : '');
-    const errorMessage =  this.isFormSubmitted() ? this.getErrorMessage() : null;
+    const errorMessage = this.isFormSubmitted() ? this.getErrorMessage() : null;
 
     const input = <input
       {...this.props}
@@ -41,7 +46,7 @@ const InputField = React.createClass({
     return (
       <div className={className}>
         {input}
-        {this.props.showErrors && <span className='validation-error'>{errorMessage}</span>}
+        {this.props.showErrors && <span className='validation-error'>{errorMessage}</span> }
       </div>
     );
   }

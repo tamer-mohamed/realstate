@@ -61,6 +61,17 @@ module.exports = {
     // login form
     "user.login.email": "البريد الإلكتروني",
     "user.login.password": "كلمه السر",
+    "user.login.pagetitle": "Title",
+    "user.login.forgetPassword": "Forget password",
+
+    // Forget password
+    "user.forgetPassword.pagetitle": "Forget password",
+    "user.forgetPassword.submit": "Send",
+    "user.forgetPassword.success": "Link for password recovery is sent to your mail.",
+
+    // cofirm password reset
+    "user.confirmPasswordReset.success": "Password reset succed",
+    "user.confirmPasswordReset.pagetitle": "Password reset",
 
     // registration form
     "screen.user.register.pageTitle": "التسجيل",
@@ -106,6 +117,7 @@ module.exports = {
     "userProperties.noProperties": "No proprties for now ...",
     "userProperties.edit": "edit",
     "userProperties.delete": "delete",
+    "userProperties.upgrade": "upgrade",
 
     // user links in drop down
     "userLinks.myProfile": "myProfile",
@@ -362,6 +374,15 @@ module.exports = {
 
     "accountType.individual": "فرد",
     "accountType.business": "عمل",
-    "accountType.agent": "وكيل"
+    "accountType.agent": "وكيل",
+
+
+    // error messages
+    "auth/user-not-found": "User not found",
+    "auth/invalid-email": "Invalid Email address",
+    "auth/expired-action-code": "Expired action code, retry to send another mail with new token!",
+    "auth/invalid-action-code": "Inlvalid action code",
+    "auth/user-disabled": "User is disabled",
+    "auth/weak-password": "Weak password"
   }
 };

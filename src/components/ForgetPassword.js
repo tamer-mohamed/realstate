@@ -1,12 +1,12 @@
 import React from 'react';
-import Firebase from 'firebase';
 import {hashHistory,Link} from 'react-router';
+import qwest from 'qwest';
 import auth from '../utils/auth';
 import {intlShape, injectIntl,FormattedMessage} from 'react-intl';
 import {Form} from 'formsy-react';
 import InputField from './form/Input';
 
-const Login = React.createClass({
+const ForgetPassword = React.createClass({
   propTypes: {
     intl: intlShape.isRequired
   },
@@ -35,13 +35,14 @@ const Login = React.createClass({
     this.setState({loginInfo});
   },
 
-  submitLogin: function(values){
+  submit: function(values, reset){
     const {formatMessage} = this.props.intl;
-    const {email,password} = values;
-    auth.login(email, password).then((user)=>{
-      hashHistory.push(`${this.props.params.lang}/user/profile`);
-    }).catch((e)=>{
+    auth.sendResetPassword(values.email).then(_=>{
+      this.context.pushNotification({message: formatMessage({id: "user.forgetPassword.success"}), level: 'success'});
+      hashHistory.push(`${this.props.params.lang}`);
+    }).catch(e=>{
       this.context.pushNotification({message: formatMessage({id: e.code}), level: 'error'});
+
     });
   },
 
@@ -53,44 +54,30 @@ const Login = React.createClass({
 
         <div className="container">
           <div className="page-contents">
-            <h2 className="page-title">{formatMessage({id: "user.login.pagetitle"})}</h2>
+            <h2 className="page-title">{formatMessage({id: "user.forgetPassword.pagetitle"})}</h2>
             <div className="row">
-              <Form preventExternalInvalidation onValidSubmit={this.submitLogin}>
+              <Form preventExternalInvalidation onValidSubmit={this.submit}>
                 <div className="row">
+
                   <InputField type="text"
                               className="col-md-6"
                               value={null}
                               name="email"
                               placeholder="user.login.email"
                               validations={{
-                             isExisty:true
+                             isExisty:true,
+                             isEmail:true
                              }}
                               validationErrors={{
-                             isExisty:formatMessage({id:"forms.validations.generic.required"})
+                             isExisty:formatMessage({id:"forms.validations.generic.required"}),
+                             isEmail:formatMessage({id:"forms.validations.generic.isEmail"})
                              }}
                               required/>
-
-                  <InputField type="password"
-                              className="col-md-6"
-                              value={null}
-                              name="password"
-                              placeholder="user.login.password"
-                              validations={{
-                             isExisty:true
-                             }}
-                              validationErrors={{
-                             isExisty:formatMessage({id:"forms.validations.generic.required"})
-                             }}
-                              required/>
-
                   <div className="col-md-12">
                     <input type="submit"
                            formNoValidate={true}
                            className="btn btn-danger"
-                           value={formatMessage({id:"forms.users.login.submit"})}/>
-
-                    <Link className="btn" to={`${this.props.params.lang}/user/forgetPassword`}><FormattedMessage
-                      id="user.login.forgetPassword"/></Link>
+                           value={formatMessage({id:"user.forgetPassword.submit"})}/>
                   </div>
 
                 </div>
@@ -105,4 +92,4 @@ const Login = React.createClass({
 });
 
 
-export default injectIntl(Login);
+export default injectIntl(ForgetPassword);
