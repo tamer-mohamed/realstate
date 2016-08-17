@@ -7,28 +7,28 @@ module.exports = {
   messages: {
     "settings.currency": "د.ك",
     "settings.phoneNumber": "+965 6995 8669",
-    "settings.country": "Kuwait",
+    "settings.country": "الكويت",
     "settings.space": "M",
 
 
-    "contextualMenu.addProperty": "إضافة العقارات",
+    "contextualMenu.addProperty": "إضافة عقار",
 
-    "screen.about": "معلومات عنا",
-    "screen.breadcrumb": "معلومات عنا",
+    "screen.about": " نبذه عن الموقع",
+    "screen.breadcrumb": "نبذه عن الموقع",
 
     // page titles
     "pageTitle.userProfile": "User Profile",
     "pageTitle.userEditProfile": "User Profile",
 
     // main menu
-    "menu.home": "الرئسية",
-    "menu.about": "عنا",
+    "menu.home": "الرئيسيه",
+    "menu.about": "نبذه عن الموقع",
     "menu.contact": "اتصل بنا",
 
     // user menu
     "userMenu.signout": "خروج",
-    "userMenu.allProperties": "العقارات",
-    "userMenu.contact": "الهيئة الشخصية",
+    "userMenu.allProperties": "إعلاناتي",
+    "userMenu.contact": "حسابي",
 
     // property
     "property.space": "{space} {measure}",
@@ -38,54 +38,56 @@ module.exports = {
     "contextualMenu.user.addProperty": "إضافة العقار",
 
     // filters
-    "filters.submitButton": "إرسال",
-    "filters.locationField": "اختيار موقع",
-    "filters.typeField": "اختيار نوع",
-    "filters.purposeField": "اختيار هدف",
+    "filters.submitButton": "بحث",
+    "filters.purposeField": "اختيار الطلب",
+    "filters.locationField": "اختيار المحافظة",
+    "filters.typeField": "اختيار نوع العقار",
+   
 
     "block.submitProperty.text": "هل تريد اضافة عقارك؟",
     "block.submitProperty.buttonText": "إضافة عقار",
 
     //errors
-    "error.imageSrc": "Image dones't exist",
+    "error.imageSrc": "الصوره غير مقبوله",
 
 
     // validations
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
-    "forms.validations.generic.isNumeric": " يجب أن يكون رقمية",
-    "forms.validations.generic.isEmail": "Should be Email",
-    "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
+    "forms.validations.generic.isNumeric": "(123)يجب أن تكون الارقام ",
+    "forms.validations.generic.isEmail": "يرجى ادخال البريد الالكتروني بشكل صحيح",
+    "forms.validations.user.passwordMatch": "كلمة المرور غير متطابقه  ",
 
     // login form
-    "user.login.email":"Email",
-    "user.login.password":"Password",
+    "user.login.email":"ادخل البريد الالكتروني",
+    "user.login.password":"كلمه السر",
 
     // registration form
-    "screen.user.register.pageTitle": "التسجيل",
+    "screen.user.register.pageTitle": "تسجيل جديد",
     "forms.user.register.errors.addUser": "خطأ في إضافة مستخدم",
     "forms.user.register.fields.email": "البريد الإلكتروني",
-    "forms.user.register.fields.firstName": "الإسم",
+    "forms.user.register.fields.firstName": "اسم الشركه او المؤسسه / مالك العقار",
     "forms.user.register.fields.password": "كلمه السر",
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
-    "forms.user.register.submit": "تسجيل",
-    "forms.user.register.fields.accountType": "نوع الحساب",
-    "forms.user.register.success": "سجلت بنجاح",
+    "forms.user.register.submit": " تسجيل جديد",
+    "forms.user.register.fields.accountType": "نوع المستخدم",
+    "forms.user.register.success": " تم تسجيلك في موقع سمسار بنجاح... شكرا لكم",
 
 
     // user profile
-    "forms.userProfile.labels.personalInfo": "Personal info",
-    "forms.userProfile.labels.name": "name",
-    "forms.userProfile.labels.additionalMail": "Additional Mail",
-    "forms.userProfile.labels.phoneNumber": "Phone number",
-    "forms.userProfile.labels.intro": "Intro",
-    "forms.userProfile.labels.profilePic": "Profile picture",
-    "forms.userProfile.labels.companyInfo": "Company info",
-    "forms.userProfile.labels.companyName": "Company name",
-    "forms.userProfile.labels.companyLogo": "Company logo",
-    "forms.userProfile.success": "DONE",
-    "forms.userProfile.error.upload.profilePic": "Error on Uploading profile picture",
-    "forms.userProfile.error.upload.compnanyLogo": "Error on Uploading Company logo",
+    "forms.userProfile.labels.personalInfo": " بيانات الحساب",
+    "forms.userProfile.labels.name": "اسم",
+    "forms.userProfile.labels.additionalMail": "اضافه بريد الكتروني اخر ",
+    "forms.userProfile.labels.phoneNumber": "ادخل رقم هاتفكم الخاص للتواصل مع اداره الموقع",
+    "forms.userProfile.labels.phoneNumbernotice": "هذا الرقم خاص باداره الموقع ولا يظهر للعامه",
+    "forms.userProfile.labels.intro": "نبذه عنكم...",
+    "forms.userProfile.labels.profilePic": "الصوره الشخصيه",
+    "forms.userProfile.labels.companyInfo": "معلومات عن الشركة",
+    "forms.userProfile.labels.companyName": "اسم الشركة",
+    "forms.userProfile.labels.companyLogo": "شعار الشركة",
+    "forms.userProfile.success": "تم",
+    "forms.userProfile.error.upload.profilePic": "خطأ في تحميل صورة الملف الشخصي",
+    "forms.userProfile.error.upload.compnanyLogo": "خطأ في تحميل شعار الشركة ",
 
     //
     "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
@@ -95,7 +97,7 @@ module.exports = {
     // generic form vars
     "forms.generic.add": "اضافة",
     "forms.generic.select": "-- اختيار --",
-    "forms.generic.update": "تحديث",
+    "forms.generic.update": "تعديل الاعلان",
 
     //login form
     "forms.users.login.submit": "دخول",
@@ -108,37 +110,37 @@ module.exports = {
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
     "screen.secure.properties.manage.pageTitle": "تعديل العقار",
-    "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
-    "forms.property.add.labels.address": " معلومات عنوان العقار",
-    "forms.property.add.labels.image": "Image upload here ",
-    "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
-    "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
+    "forms.property.add.labels.genericInfo": "  عنوان اعلانكم  ",
+    "forms.property.add.labels.address": "  عنوان العقار",
+    "forms.property.add.labels.image": "تحميل صور العقار",
+    "forms.property.add.labels.featuredLevel": " هل ترغب في مشتري او مستاجر بسرعه ؟؟ ",
+    "forms.property.add.labels.featuredLevel.description": " اختار احدي الادوات التي تساعدك في سرعه اتمام صفقتك العقاريه    ",
     "forms.property.add.labels.info": "المعلومات",
     "forms.property.success": "تم اضافت العقار بنجاح",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
-    "forms.property.add.fields.purpose": "الغرد",
+    "forms.property.add.fields.purpose": "الغرض",
     "forms.property.add.fields.type": "نوع العقار",
     "forms.property.add.fields.location": "المحافظة",
     "forms.property.add.fields.area": "المنطقة",
-    "forms.property.add.fields.propertyImage": "Property Image",
+    "forms.property.add.fields.propertyImage": "صورة العقار",
 
 
     // forms error
     "forms.errors.property.add": "خطأ عند إضافة العقارات",
 
     // prefrences
-    "property.preference.beds": "السرير",
-    "property.preference.rooms": "غرف",
+    "property.preference.beds": "سرير",
+    "property.preference.rooms": "غرفه",
     "property.preference.kitchen": "مطبخ",
     "property.preference.bathroom": "حمام",
     "property.preference.apartment": "شقة",
     "property.preference.balcony": "شرفة",
-    "property.preference.parking": "موقف سيارات",
+    "property.preference.parking": "موقف سياره",
     "property.preference.floors": "ادوار",
-    "property.preference.swimmingPool": "حمام سباحة",
+    "property.preference.swimmingPool": "حمام سباحه",
     "property.preference.laborResidence": "سكن عمال",
     "property.preference.villa": "فيلا",
     "property.preference.waterWell": "بئر ماء",
@@ -297,35 +299,44 @@ module.exports = {
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
-    "featuredLevel.1": "مميز",
-    "featuredLevel.2": "راية الرئيسية",
-    "featuredLevel.3": "النشرة الإخبارية",
-    "featuredLevel.4": "بريد مباشر",
+    "featuredLevel.1": "مميز: اظهار اعلانك في برواز احمر",
+    "featuredLevel.2": "شريط العقارات: اظهار عقارك في الشريط لكل الصفحات",
+    "featuredLevel.3": "نشره اسبوعيه: نشر عقارك في الخدمه الاسبوعيه عن طريق مشتركين البريد الالكتروني",
+    "featuredLevel.4": "نشره فوريه: ارسال اعلانك فورا لمشتركي خدمه البريد الالكتروني ",
       
     "footer.copyrights":"سمسار",
 
     // footer
 
-    "footer.copyRights": "Al-Ahmad Real Estate",
-    "footer.menu.home": "home",
-    "footer.menu.properties": "properties",
-    "footer.menu.services": "Services",
-    "footer.menu.contact": "Contact Us",
+    "footer.copyRights": "سمسار",
+    "footer.menu.home": "الصفحة الرئيسية",
+    "footer.menu.properties": "عقارات",
+    "footer.menu.services": "خدمات",
+    "footer.menu.contact": "اتصل بنا",
+    
+    //Contact Us
 
-
+    "contactForm.title":" اقتراحك",
+    "contactForm.name":"الاسم الكامل",
+    "contactForm.email":"البريد الالكتروني",
+    "contactForm.phone":"رقم الهاتف",
+    "contactForm.subject":"عنوان الموضوع",
+    "contactForm.message":"تفاصيل الموضوع",
+    "contactForm.send":"ارسال الاقتراح",
+      
     // generic
-    "totalSum": "Total",
-    "loading": "Loading ...",
-    "loading.image": "Loading image",
-    "register": "register",
-    "login": "login",
-    "contactAgent": "Contact Agent",
-    "upload": "Uploaded images: {value}",
-    "sale": "selalla",
-    "rent": "Rentsas",
+    "totalSum": "مجموع",
+    "loading": "جاري التحميل ...",
+    "loading.image": "تحميل الصور",
+    "register": "تسجيل جديد",
+    "login": "تسجيل الدخول",
+    "contactAgent": "صفحه",
+    "upload": "الصور التي تم تحميلها:{value}",
+    "sale": "بيع",
+    "rent": "إيجار",
 
-    "accountType.individual": "individual",
-    "accountType.business": "business",
-    "accountType.agent": "agent"
+    "accountType.individual": "فرد",
+    "accountType.business": "عمل",
+    "accountType.agent": "وكيل"
   }
 };
