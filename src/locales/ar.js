@@ -7,14 +7,14 @@ module.exports = {
   messages: {
     "settings.currency": "د.ك",
     "settings.phoneNumber": "+965 6995 8669",
-    "settings.country": "Kuwait",
+    "settings.country": "الكويت",
     "settings.space": "M",
 
 
-    "contextualMenu.addProperty": "إضافة العقارات",
+    "contextualMenu.addProperty": "إضافة عقار",
 
-    "screen.about": "معلومات عنا",
-    "screen.breadcrumb": "معلومات عنا",
+    "screen.about": " نبذه عن الموقع",
+    "screen.breadcrumb": "نبذه عن الموقع",
 
     // page titles
     "pageTitle.userProfile": "ملف تعريفي للمستخدم",
@@ -27,8 +27,8 @@ module.exports = {
 
     // user menu
     "userMenu.signout": "خروج",
-    "userMenu.allProperties": "العقارات",
-    "userMenu.contact": "الهيئة الشخصية",
+    "userMenu.allProperties": "إعلاناتي",
+    "userMenu.contact": "حسابي",
 
     // property
     "property.space": "{space} {measure}",
@@ -53,14 +53,13 @@ module.exports = {
     // validations
     "forms.validations.correctErrors": "يرجى تصحيح الأخطاء أدناه",
     "forms.validations.generic.required": "هذه الخانة مطلوبه",
-    "forms.validations.generic.isNumeric": " يجب أن يكون رقمية",
-    "forms.validations.generic.isEmail": "Should be Email",
-    "forms.validations.user.passwordMatch": "كلمة المرور يجب أن تتطابق",
-    "forms.validations.user.passwordLength": "Password has to be more than {value}",
+    "forms.validations.generic.isNumeric": "(123)يجب أن تكون الارقام ",
+    "forms.validations.generic.isEmail": "يرجى ادخال البريد الالكتروني بشكل صحيح",
+    "forms.validations.user.passwordMatch": "كلمة المرور غير متطابقه  ",
 
     // login form
-    "user.login.email": "البريد الإلكتروني",
-    "user.login.password": "كلمه السر",
+    "user.login.email":"ادخل البريد الالكتروني",
+    "user.login.password":"كلمه السر",
     "user.login.pagetitle": "Title",
     "user.login.forgetPassword": "Forget password",
 
@@ -74,16 +73,16 @@ module.exports = {
     "user.confirmPasswordReset.pagetitle": "Password reset",
 
     // registration form
-    "screen.user.register.pageTitle": "التسجيل",
+    "screen.user.register.pageTitle": "تسجيل جديد",
     "forms.user.register.errors.addUser": "خطأ في إضافة مستخدم",
     "forms.user.register.fields.email": "البريد الإلكتروني",
-    "forms.user.register.fields.firstName": "الإسم",
+    "forms.user.register.fields.firstName": "اسم الشركه او المؤسسه / مالك العقار",
     "forms.user.register.fields.password": "كلمه السر",
     "forms.user.register.fields.repeatPassword": "اعد كلمة السر",
-    "forms.user.register.submit": "تسجيل",
+    "forms.user.register.submit": " تسجيل جديد",
+    "forms.user.register.fields.accountType": "نوع المستخدم",
+    "forms.user.register.success": " تم تسجيلك في موقع سمسار بنجاح... شكرا لكم",
     "forms.user.register.fields.waitVerification": "You have been registered succesfully. Please verify your email. check your mail address.",
-    "forms.user.register.fields.accountType": "نوع الحساب",
-    "forms.user.register.success": "سجلت بنجاح",
     "screen.user.register.waitVerification": "Waiting for your mail varfiication",
 
     // Verification
@@ -93,13 +92,13 @@ module.exports = {
     "forms.user.verification.error.register": "el error da beytla3 lama bey7sal fail f el registeration for firebase",
     "forms.user.verification.wrongId": "Wrong URL",
 
-
-    // user profile edit
-    "forms.userProfile.labels.personalInfo": "معلومات شخصية",
+    // user profile Edit
+    "forms.userProfile.labels.personalInfo": " بيانات الحساب",
     "forms.userProfile.labels.name": "اسم",
-    "forms.userProfile.labels.additionalMail": "البريد إضافية",
-    "forms.userProfile.labels.phoneNumber": "رقم الهاتف",
-    "forms.userProfile.labels.intro": "مقدمة",
+    "forms.userProfile.labels.additionalMail": "اضافه بريد الكتروني اخر ",
+    "forms.userProfile.labels.phoneNumber": "ادخل رقم هاتفكم الخاص للتواصل مع اداره الموقع",
+    "forms.userProfile.labels.phoneNumbernotice": "هذا الرقم خاص باداره الموقع ولا يظهر للعامه",
+    "forms.userProfile.labels.intro": "نبذه عنكم...",
     "forms.userProfile.labels.contactNumber": "Contact number",
     "forms.userProfile.labels.profilePic": "الصوره الشخصيه",
     "forms.userProfile.labels.companyInfo": "معلومات عن الشركة",
@@ -108,8 +107,6 @@ module.exports = {
     "forms.userProfile.success": "تم",
     "forms.userProfile.error.upload.profilePic": "خطأ في تحميل صورة الملف الشخصي",
     "forms.userProfile.error.upload.compnanyLogo": "خطأ في تحميل شعار الشركة ",
-
-    // user profile
     "userProfile.edit": "Edit your profile",
     "userProfile.contact": "Contact details",
 
@@ -133,7 +130,7 @@ module.exports = {
     // generic form vars
     "forms.generic.add": "اضافة",
     "forms.generic.select": "-- اختيار --",
-    "forms.generic.update": "تحديث",
+    "forms.generic.update": "تعديل الاعلان",
 
     //login form
     "forms.users.login.submit": "دخول",
@@ -146,50 +143,52 @@ module.exports = {
     // add property
     "screen.secure.properties.add.pageTitle": "اضافة عقار",
     "screen.secure.properties.manage.pageTitle": "تعديل العقار",
-    "forms.property.add.labels.genericInfo": " معلومات عامة عن العقار",
-    "forms.property.add.labels.address": " معلومات عنوان العقار",
-    "forms.property.add.labels.image": "Image upload here ",
-    "forms.property.add.labels.featuredLevel": " مستوى عنوان العقار المميز",
-    "forms.property.add.labels.featuredLevel.description": "Feature level modal description",
+    "forms.property.add.labels.genericInfo": "  عنوان اعلانكم  ",
+    "forms.property.add.labels.address": "  عنوان العقار",
+    "forms.property.add.labels.image": "تحميل صور العقار",
+    "forms.property.add.labels.featuredLevel": " هل ترغب في مشتري او مستاجر بسرعه ؟؟ ",
+    "forms.property.add.labels.featuredLevel.description": " اختار احدي الادوات التي تساعدك في سرعه اتمام صفقتك العقاريه    ",
     "forms.property.add.labels.info": "المعلومات",
     "forms.property.success": "تم اضافت العقار بنجاح",
 
     "forms.property.add.fields.title": "عنوان الاعلان",
     "forms.property.add.fields.price": "السعر المطلوب",
     "forms.property.add.fields.space": "المساحة",
-    "forms.property.add.fields.purpose": "الغرد",
+    "forms.property.add.fields.purpose": "الغرض",
     "forms.property.add.fields.type": "نوع العقار",
     "forms.property.add.fields.location": "المحافظة",
     "forms.property.add.fields.area": "المنطقة",
-    "forms.property.add.fields.propertyImage": "Property Image",
+    "forms.property.add.fields.propertyImage": "صورة العقار",
 
 
     // forms error
     "forms.errors.property.add": "خطأ عند إضافة العقارات",
 
     // prefrences
-    "property.preference.beds": "السرير",
-    "property.preference.rooms": "غرف",
+    "property.preference.beds": "سرير",
+    "property.preference.rooms": "غرفه",
     "property.preference.kitchen": "مطبخ",
     "property.preference.bathroom": "حمام",
     "property.preference.apartment": "شقة",
     "property.preference.balcony": "شرفة",
-    "property.preference.parking": "موقف سيارات",
+    "property.preference.parking": "موقف سياره",
     "property.preference.floors": "ادوار",
-    "property.preference.swimmingPool": "حمام سباحة",
+    "property.preference.swimmingPool": "حمام سباحه",
     "property.preference.laborResidence": "سكن عمال",
     "property.preference.villa": "فيلا",
     "property.preference.waterWell": "بئر ماء",
 
 
-    // contact form (feedback)
-    "contactForm.title": "Feedbac",
-    "contactForm.name": "Name",
-    "contactForm.phone": "Phone",
-    "contactForm.email": "Email",
-    "contactForm.subject": "Subject",
-    "contactForm.message": "Message",
-    "contactForm.submit": "Send Message",
+
+    //Contact Us (Feedback)
+
+    "contactForm.title":" اقتراحك",
+    "contactForm.name":"الاسم الكامل",
+    "contactForm.email":"البريد الالكتروني",
+    "contactForm.phone":"رقم الهاتف",
+    "contactForm.subject":"عنوان الموضوع",
+    "contactForm.message":"تفاصيل الموضوع",
+    "contactForm.submit":"ارسال الاقتراح",
 
 
     "areas.abuHalifa": "أبوحليفه",
@@ -334,23 +333,21 @@ module.exports = {
     "types.showroom": "معرض",
     "types.villa": "فيلا",
     "types.warehouse": "مخزن",
-    "types.block": "بلوك",
-    "types.chalet": "شالية",
-    "types.jakhour": "جاخور ",
-    "types.house": "بيت",
-    "types.mall": "مول",
-    "types.moorage": "مرسي",
-    "types.studio": "ستوديو",
+    "types.block":"بلوك",
+    "types.chalet":"شالية",
+    "types.jakhour":"جاخور ",
+    "types.house":"بيت",
+    "types.mall":"مول",
+    "types.moorage":"مرسي",
+    "types.studio":"ستوديو",
 
 
     //TODO: change the following the corresponding featured levels in firebase
     // ex "featuredLevel.tamam" : "tamam"
-    "featuredLevel.1": "مميز",
-    "featuredLevel.2": "راية الرئيسية",
-    "featuredLevel.3": "النشرة الإخبارية",
-    "featuredLevel.4": "بريد مباشر",
-
-    "footer.copyrights": "سمسار",
+    "featuredLevel.1": "مميز: اظهار اعلانك في برواز احمر",
+    "featuredLevel.2": "شريط العقارات: اظهار عقارك في الشريط لكل الصفحات",
+    "featuredLevel.3": "نشره اسبوعيه: نشر عقارك في الخدمه الاسبوعيه عن طريق مشتركين البريد الالكتروني",
+    "featuredLevel.4": "نشره فوريه: ارسال اعلانك فورا لمشتركي خدمه البريد الالكتروني ",
 
     // footer
 
@@ -363,11 +360,11 @@ module.exports = {
 
     // generic
     "totalSum": "مجموع",
-    "loading": "جار التحميل ...",
+    "loading": "جاري التحميل ...",
     "loading.image": "تحميل الصور",
-    "register": "تسجيل",
+    "register": "تسجيل جديد",
     "login": "تسجيل الدخول",
-    "contactAgent": "الإتصال بوكيل",
+    "contactAgent": "صفحه",
     "upload": "الصور التي تم تحميلها:{value}",
     "sale": "بيع",
     "rent": "إيجار",
