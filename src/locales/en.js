@@ -5,10 +5,11 @@ module.exports = {
   "pluralRuleFunction": function(){
   },
   messages: {
+    "settings.sitename": "Simsar",
     "settings.currency": "KWD",
-    "settings.country":"Kuwait",
     "settings.phoneNumber":"+96569958669",
-
+    "settings.country":"Kuwait",
+   
     "contextualMenu.addProperty": "Add Property ",
 
     "screen.about": "About Us",
@@ -26,7 +27,8 @@ module.exports = {
 
     // Contextual Menu
     "contextualMenu.user.addProperty": "Add Property",
-
+      
+    
     // filters
     "filters.submitButton": "Search",
     "filters.locationField": "Location",
@@ -36,13 +38,30 @@ module.exports = {
     "block.submitProperty.text": "Would you like to add a property?",
     "block.submitProperty.buttonText": "Add Property",
 
+      // advanced search page
+      "advancedSearch.pageTitle": "Advanced Search",
+      
+      "block.submitProperty.text": "Do you want to add your Property?",
+      "block.submitProperty.buttonText": " Add Property",
+      
+      //errors
+      "error.imageSrc": "No Images Found!",
 
     // validations
     "forms.validations.correctErrors": "ERROR: Please Correct the errors below!",
     "forms.validations.generic.required": "This Field is required!",
     "forms.validations.generic.isNumeric": "This Field Accepts Numbers Only!",
     "forms.validations.user.passwordMatch": "Password Mis-Match",
-
+      
+      // Forget password
+      "user.forgetPassword.pagetitle":"Forgot Password?",
+      "user.forgetPassword.submit": "Send",
+      "user.forgetPassword.success": "Sent password recovery link to your email",
+      
+      // cofirm password reset
+      "user.confirmPasswordReset.success": "Password Recovery Successful",
+      "user.confirmPasswordReset.pagetitle": "Password Recovery!",
+      
     // registration form
     "screen.user.register.pageTitle": "Register",
     "forms.user.register.errors.addUser": "Error in adding User",
@@ -56,10 +75,16 @@ module.exports = {
 
 
     //
-    "screen.secure.properties.listing.propertyTitle": "Title",
+    "screen.secure.properties.listing.propertyTitle": "Advert Title",
     "screen.secure.properties.listing.propertyFeatureLevel": "",
     "screen.secure.properties.listing.manageProperty": " ",
 
+      // user links in drop down
+      "userLinks.myProfile": "My Profile",
+      "userLinks.editMyProfile": "Edit My Profile",
+      "userLinks.myProperties": "My Adverts",
+      "userLinks.logout": "Log Out",
+  
     // generic form vars
     "forms.generic.add": "Add",
     "forms.generic.select": "-- Select --",
@@ -72,6 +97,7 @@ module.exports = {
     // user all properties
     "screen.secure.properties.pageTitle": "Properties",
 
+      
 
     // add property
     "screen.secure.properties.add.pageTitle": "Add Property",
@@ -266,6 +292,36 @@ module.exports = {
     "featuredLevel.3": "Weekly Newsletter",
     "featuredLevel.4": "Direct Mail",
 
-    "footer.copyrights":"SIMSAR",
+      // footer
+      "footer.copyrights":"SIMSAR",
+      "footer.menu.home": "Home",
+      "footer.menu.properties": "Real-Estate",
+      "footer.menu.services": "Services",
+      "footer.menu.contact": "Contact Us",
+      
+      // generic
+      "totalSum": "Total Sum",
+      "loading": " Loading ...",
+      "loading.image": " Loading Image",
+      "register": "Register",
+      "login": "Login",
+      "contactAgent": "Contact Agent",
+      "upload": "Image:{value}",
+      "sale": "Sale",
+      "rent": "Rent",
+      
+      "accountType.individual": "Individual Account",
+      "accountType.business": "Business/Corporate Account",
+      "accountType.agent": "Agent Account",
+      
+      // error messages
+      "auth/user-not-found": "User not Found",
+      "auth/invalid-email": " Invalid Email ",
+      "auth/expired-action-code": "Activation Code Expired!",
+      "auth/invalid-action-code": "Invalid Activation Code ",
+      "auth/user-disabled": "User Disabled  ",
+      "auth/weak-password": "Weak Password!  "
+
+    
   }
 };

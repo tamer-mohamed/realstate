@@ -43,12 +43,12 @@ module.exports = {
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
-    "filters.areaField": "Area",
-    "filters.priceField": "Price",
-    "filters.advancedSearch.submitBtn": "Advanced search",
+    "filters.areaField": "المساحة",
+    "filters.priceField": "السعر",
+    "filters.advancedSearch.submitBtn": "بحث متقدم",
 
     // advanced search page
-    "advancedSearch.pageTitle": "Page title",
+    "advancedSearch.pageTitle": "بحث متقدم",
 
     "block.submitProperty.text": "هل تريد اضافة عقارك؟",
     "block.submitProperty.buttonText": "إضافة عقار",
@@ -67,17 +67,18 @@ module.exports = {
     // login form
     "user.login.email": "ادخل البريد الالكتروني",
     "user.login.password": "كلمه السر",
-    "user.login.pagetitle": "Title",
-    "user.login.forgetPassword": "Forget password",
+    "user.login.pagetitle": "تسجيل الدخول",
+    "user.login.forgetPassword": "هل نسيت كلمة المرور",
+      
 
     // Forget password
-    "user.forgetPassword.pagetitle": "Forget password",
-    "user.forgetPassword.submit": "Send",
-    "user.forgetPassword.success": "Link for password recovery is sent to your mail.",
+    "user.forgetPassword.pagetitle": "هل نسيت كلمة المرور",
+    "user.forgetPassword.submit": "إرسال",
+    "user.forgetPassword.success": "تم إرسال رابط لاسترداد كلمة المرور إلى البريد الخاص بك",
 
     // cofirm password reset
-    "user.confirmPasswordReset.success": "Password reset succed",
-    "user.confirmPasswordReset.pagetitle": "Password reset",
+    "user.confirmPasswordReset.success": "إعادة تعيين كلمة المرور بنجاح",
+    "user.confirmPasswordReset.pagetitle": "إعادة تعيين كلمة المرور",
 
     // registration form
     "screen.user.register.pageTitle": "تسجيل جديد",
@@ -89,15 +90,15 @@ module.exports = {
     "forms.user.register.submit": " تسجيل جديد",
     "forms.user.register.fields.accountType": "نوع المستخدم",
     "forms.user.register.success": " تم تسجيلك في موقع سمسار بنجاح... شكرا لكم",
-    "forms.user.register.fields.waitVerification": "You have been registered succesfully. Please verify your email. check your mail address.",
-    "screen.user.register.waitVerification": "Waiting for your mail varfiication",
+    "forms.user.register.fields.waitVerification": "تم تسجيلك بنجاح. يرجى التحقق من البريد الإلكتروني الخاص بك. التحقق من عنوان البريد الخاص بك.",
+    "screen.user.register.waitVerification": "في انتظار التحقق من البريد الإلكتروني",
 
     // Verification
-    "user.verification.pageTitle": "Update your password",
-    "forms.user.verification.submit": "Submit",
-    "forms.user.verification.error": "Error in activation process",
-    "forms.user.verification.error.register": "el error da beytla3 lama bey7sal fail f el registeration for firebase",
-    "forms.user.verification.wrongId": "Wrong URL",
+    "user.verification.pageTitle": "تحديث كلمة السر الخاصة بك",
+    "forms.user.verification.submit": "عرض",
+    "forms.user.verification.error": "خطأ في عملية التنشيط",
+    "forms.user.verification.error.register": "لم تتم العملية بنجاح",
+    "forms.user.verification.wrongId": "رابط خطأ",
 
     // user profile Edit
     "forms.userProfile.labels.personalInfo": " بيانات الحساب",
@@ -106,7 +107,7 @@ module.exports = {
     "forms.userProfile.labels.phoneNumber": "ادخل رقم هاتفكم الخاص للتواصل مع اداره الموقع",
     "forms.userProfile.labels.phoneNumbernotice": "هذا الرقم خاص باداره الموقع ولا يظهر للعامه",
     "forms.userProfile.labels.intro": "نبذه عنكم...",
-    "forms.userProfile.labels.contactNumber": "Contact number",
+    "forms.userProfile.labels.contactNumber": "رقم الاتصال",
     "forms.userProfile.labels.profilePic": "الصوره الشخصيه",
     "forms.userProfile.labels.companyInfo": "معلومات عن الشركة",
     "forms.userProfile.labels.companyName": "اسم الشركة",
@@ -114,20 +115,20 @@ module.exports = {
     "forms.userProfile.success": "تم",
     "forms.userProfile.error.upload.profilePic": "خطأ في تحميل صورة الملف الشخصي",
     "forms.userProfile.error.upload.compnanyLogo": "خطأ في تحميل شعار الشركة ",
-    "userProfile.edit": "Edit your profile",
-    "userProfile.contact": "Contact details",
+    "userProfile.edit": "عدل ملفك الشخصي",
+    "userProfile.contact": "تفاصيل الاتصال",
 
     // user Properties
-    "userProperties.noProperties": "No proprties for now ...",
-    "userProperties.edit": "edit",
-    "userProperties.delete": "delete",
-    "userProperties.upgrade": "upgrade",
+    "userProperties.noProperties": "لا العقاري في الوقت الراهن ...",
+    "userProperties.edit": "تحرير",
+    "userProperties.delete": "حذف",
+    "userProperties.upgrade": "تطوير",
 
     // user links in drop down
-    "userLinks.myProfile": "myProfile",
-    "userLinks.editMyProfile": "Edit my profile",
-    "userLinks.myProperties": "manage properties",
-    "userLinks.logout": "Logout",
+    "userLinks.myProfile": "الملف الشخصي",
+    "userLinks.editMyProfile": "تعديل ملفي الشخصي",
+    "userLinks.myProperties": "إدارة الاعلانات",
+    "userLinks.logout": "خروج",
 
     //
     "screen.secure.properties.listing.propertyTitle": "عنوان الاعلان",
@@ -381,11 +382,11 @@ module.exports = {
 
 
     // error messages
-    "auth/user-not-found": "User not found",
-    "auth/invalid-email": "Invalid Email address",
-    "auth/expired-action-code": "Expired action code, retry to send another mail with new token!",
-    "auth/invalid-action-code": "Inlvalid action code",
-    "auth/user-disabled": "User is disabled",
-    "auth/weak-password": "Weak password"
+    "auth/user-not-found": "المستخدم ليس موجود",
+    "auth/invalid-email": "عنوان البريد الإلكتروني غير صالح",
+    "auth/expired-action-code": "رمز التفعيل منتهية الصلاحية، إعادة المحاولة لإرسال البريد آخر مع رمز مميز جديد!",
+    "auth/invalid-action-code": "رمز التفعيل غير صالح",
+    "auth/user-disabled": "تم تعطيل المستخدم",
+    "auth/weak-password": "كلمة مرور ضعيفة"
   }
 };
