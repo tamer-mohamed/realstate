@@ -8,9 +8,14 @@ const UserPropertiesGrid = React.createClass({
       loaded: false
     }
   },
+  getDefaultProps: function(){
+    return {
+      length: 5
+    }
+  },
   componentWillMount: function(){
-    const {id,userId} = this.props;
-    firebase.database().ref(`properties`).orderByChild('addedBy').equalTo(userId).limitToFirst(5).once('value', (snapShot)=>{
+    const {id,userId,length} = this.props;
+    firebase.database().ref(`properties`).orderByChild('addedBy').equalTo(userId).limitToFirst(length).once('value', (snapShot)=>{
       let properties = snapShot.val();
       // delete the current property
       if(properties)
@@ -31,7 +36,9 @@ const UserPropertiesGrid = React.createClass({
     });
 
     return (
-      <ul className="row">{properties}</ul>
+      <div className="properties-page property-single">
+        <ul className="row">{properties}</ul>
+      </div>
     )
   }
 });

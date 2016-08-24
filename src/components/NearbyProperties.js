@@ -22,7 +22,8 @@ const NearbyProperties = React.createClass({
       return <Loader title="loading"/>;
     }
 
-    console.log(this.state.properties);
+    console.log('Nearby Properties:', this.state.properties);
+    
     let properties = [];
     _.forEach(this.state.properties, (v, k)=>{
       properties.push(<li className="col-md-3 col-sm-6" key={k}>

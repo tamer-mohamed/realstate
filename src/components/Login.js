@@ -39,7 +39,7 @@ const Login = React.createClass({
     const {formatMessage} = this.props.intl;
     const {email,password} = values;
     auth.login(email, password).then((user)=>{
-      hashHistory.push(`${this.props.params.lang}/user/profile`);
+      hashHistory.push(`${this.props.params.lang}`);
     }).catch((e)=>{
       this.context.pushNotification({message: formatMessage({id: e.code}), level: 'error'});
     });

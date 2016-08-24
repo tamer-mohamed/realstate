@@ -26,7 +26,7 @@ const UserProfile = React.createClass({
     let userId = this.props.params.userId || this.context.user.uid;
     NProgress.start();
     Firebase.database().ref(`users/${userId}`).once('value', (snapshot)=>{
-      let isOwner = !this.props.params.userId || this.props.params.userId === this.context.user.uid;
+      let isOwner = (this.context.user && this.props.params.userId === this.context.user.uid);
       this.setState({loaded: true, isOwner, user: snapshot.val()});
       NProgress.done();
     })
@@ -81,7 +81,7 @@ const UserProfile = React.createClass({
 
             <div className="row">
               <div className="col-md-12">
-                <UserPropertiesGrid userId={userId}/>
+                <UserPropertiesGrid userId={userId} length={4}/>
               </div>
             </div>
 

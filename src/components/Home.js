@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactFireMixin from 'reactfire';
 import firebase from 'firebase';
-import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
+import {FormattedMessage, FormattedNumber, FormattedRelative , injectIntl} from 'react-intl';
 import NProgress from "nprogress";
 import {Link,hashHistory} from 'react-router';
 import _ from 'lodash';
@@ -9,6 +9,7 @@ import _ from 'lodash';
 import FeaturedSlider from './Featured';
 import Filter from './Filter';
 import PropertiesContainer from './PropertiesContainer';
+import Pagination from './Pagination';
 
 const Home = React.createClass({
   mixins: [ReactFireMixin],
@@ -18,13 +19,33 @@ const Home = React.createClass({
   getInitialState: function(){
     return {
       // propertiesList: [],
+      page: this.props.params.page || 1,
+      itemsPerPage: 4,
       loaded: false,
       filteredData: [],
       isSearchEnabled: false
     }
   },
+  fetchData: function({start,end}){
+    NProgress.start();
+
+    console.log(start);
+    firebase.database().ref('properties').orderByPriority().startAt(undefined).limitToFirst(end).once('value', snapshot=>{
+      NProgress.done();
+
+      console.log('Properties LOADED', snapshot.val());
+
+      this.setState({loaded: true, properties: snapshot.val()})
+
+      firebase.database().ref('properties').once('value', (snapshot)=>{
+        this.setState({length: snapshot.numChildren()});
+      })
+    })
+  },
   componentWillMount: function(){
     const {mode,oobCode} = this.props.location.query;
+    const {itemsPerPage , page} = this.state;
+
 
     switch(mode){
       case "resetPassword":
@@ -32,19 +53,21 @@ const Home = React.createClass({
         break;
 
       default:
-        NProgress.start();
-        firebase.database().ref('properties').once('value', (snapshot)=>{
-          NProgress.done();
-          let value = snapshot.val();
-          this.setState({loaded: true, properties: value});
-        });
+        this.fetchData({start: itemsPerPage * (page - 1), end: itemsPerPage});
     }
 
   },
-
   componentWillUnmount: function(){
     //this.unbind('propertiesList');
   },
+
+
+  componentDidMount: function(){
+    const {formatMessage} = this.props.intl;
+
+    document.title = formatMessage({id: "settings.sitename"});
+  },
+
   isSearchParamsEmpty: function(data){
     let isEmpty = true;
 
@@ -96,10 +119,15 @@ const Home = React.createClass({
   render: function(){
 
     let data = this.state.isSearchEnabled ? this.state.filteredData : this.state.properties;
+    let pages = Math.ceil(this.state.length / this.state.itemsPerPage);
+
+
     return (
       <div>
         <Filter submitSearch={this.submitSearch}/>
         <PropertiesContainer data={data}/>
+        <Pagination num={pages} current={this.state.page} baseURL={`${this.props.params.lang}/home`}/>
+
         <div className="full-width call-action">
           <div className="container">
             <div className="row">
@@ -121,4 +149,4 @@ const Home = React.createClass({
   }
 });
 
-export default Home;
+export default injectIntl(Home);

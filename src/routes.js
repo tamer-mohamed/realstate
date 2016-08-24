@@ -14,6 +14,7 @@ import UserEditProfile from './components/secure/UserEditProfile';
 import Verification from './components/Registeration.step2';
 import ForgetPassword from './components/ForgetPassword';
 import confirmResetPassword from './components/confirmResetPassword';
+import AdvancedSearch from './components/AdvancedSearch';
 import qwest from 'qwest';
 import constants from './constants';
 
@@ -41,7 +42,11 @@ const routes = [
         childRoutes: [
 
           // pages
+          {path: 'home/page/:page', component: Home},
+          // pages
           {path: 'about', component: About},
+          // search
+          {path: 'search', component: AdvancedSearch},
           // contact us
           {path: 'contact', component: Contact},
           {
@@ -90,11 +95,11 @@ const routes = [
 
                 // user profile
                 path: 'profile',
-                onEnter: auth.requireAuth,
                 indexRoute: {component: UserProfile},
                 childRoutes: [
                   {
                     path: 'edit',
+                    onEnter: auth.requireAuth,
                     component: UserEditProfile
                   },
                   {

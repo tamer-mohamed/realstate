@@ -630,7 +630,7 @@ header .user-drop li i {
   vertical-align: middle;
 }
 
-.filter .btn {
+.filter .btn-submit {
   text-transform: uppercase;
   margin-left: 33px;
   padding: 10px 18px;

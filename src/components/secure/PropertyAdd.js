@@ -30,8 +30,6 @@ const PropertyAdd = React.createClass({
     let {formatMessage} = this.props.intl;
     let data = values;
 
-    console.log('VVV', values) //XXX
-
     let propId = Firebase.database().ref('properties').push({
       title: data[1].title,
       location: data[1].location,
@@ -52,7 +50,6 @@ const PropertyAdd = React.createClass({
           },
           onSuccess: (fileNames)=>{
             values.propertyImages = fileNames;
-            console.log('P{ROPS', fileNames);
 
             Firebase.database().ref('properties/' + propId).update({images: fileNames}).then(()=>{
               this.context.pushNotification({message: formatMessage({id: "forms.property.success"}), level: 'success'});

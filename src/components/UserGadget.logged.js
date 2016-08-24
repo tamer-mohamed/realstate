@@ -37,27 +37,31 @@ const UserGadgetLogged = React.createClass({
   },
   render: function(){
     let lang = this.context.lang;
+    const userId = this.props.userId;
     return (
       <div>
         <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-          <ProfilePic image={this.state.currentUser.image} userId={this.context.user.uid}/>
+          <ProfilePic image={this.state.currentUser.image} userId={userId}/>
           <span className="userName">{this.state.currentUser.fname}</span>
           <span className="drop-arow"/>
         </a>
 
         <ul className="dropdown-menu user-drop">
           <li>
-            <Link to={`${lang}/user/profile`}><i className="fa fa-user"/><FormattedMessage id="userLinks.myProfile" /></Link>
+            <Link to={`${lang}/user/profile/${userId}`}><i className="fa fa-user"/><FormattedMessage
+              id="userLinks.myProfile"/></Link>
           </li>
           <li>
-            <Link to={`${lang}/user/profile/edit`}><i className="fa fa-user"/><FormattedMessage id="userLinks.editMyProfile" /></Link>
+            <Link to={`${lang}/user/profile/edit`}><i className="fa fa-user"/><FormattedMessage
+              id="userLinks.editMyProfile"/></Link>
           </li>
           <li>
-            <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/><FormattedMessage id="userLinks.myProperties" /></Link>
+            <Link to={`${lang}/user/dashboard/properties`}><i className="fa fa-list"/><FormattedMessage
+              id="userLinks.myProperties"/></Link>
           </li>
           <li>
             <a onClick={this.handleLogout}><i className="fa fa-sign-out"/>
-              <FormattedMessage id="userLinks.logout" />
+              <FormattedMessage id="userLinks.logout"/>
             </a>
           </li>
         </ul>

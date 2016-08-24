@@ -5,6 +5,7 @@ module.exports = {
   "pluralRuleFunction": function(){
   },
   messages: {
+    "settings.sitename": "Simsar",
     "settings.currency": "د.ك",
     "settings.phoneNumber": "+965 6995 8669",
     "settings.country": "الكويت",
@@ -42,6 +43,12 @@ module.exports = {
     "filters.locationField": "اختيار موقع",
     "filters.typeField": "اختيار نوع",
     "filters.purposeField": "اختيار هدف",
+    "filters.areaField": "Area",
+    "filters.priceField": "Price",
+    "filters.advancedSearch.submitBtn": "Advanced search",
+
+    // advanced search page
+    "advancedSearch.pageTitle": "Page title",
 
     "block.submitProperty.text": "هل تريد اضافة عقارك؟",
     "block.submitProperty.buttonText": "إضافة عقار",
@@ -58,8 +65,8 @@ module.exports = {
     "forms.validations.user.passwordMatch": "كلمة المرور غير متطابقه  ",
 
     // login form
-    "user.login.email":"ادخل البريد الالكتروني",
-    "user.login.password":"كلمه السر",
+    "user.login.email": "ادخل البريد الالكتروني",
+    "user.login.password": "كلمه السر",
     "user.login.pagetitle": "Title",
     "user.login.forgetPassword": "Forget password",
 
@@ -179,16 +186,15 @@ module.exports = {
     "property.preference.waterWell": "بئر ماء",
 
 
-
     //Contact Us (Feedback)
 
-    "contactForm.title":" اقتراحك",
-    "contactForm.name":"الاسم الكامل",
-    "contactForm.email":"البريد الالكتروني",
-    "contactForm.phone":"رقم الهاتف",
-    "contactForm.subject":"عنوان الموضوع",
-    "contactForm.message":"تفاصيل الموضوع",
-    "contactForm.submit":"ارسال الاقتراح",
+    "contactForm.title": " اقتراحك",
+    "contactForm.name": "الاسم الكامل",
+    "contactForm.email": "البريد الالكتروني",
+    "contactForm.phone": "رقم الهاتف",
+    "contactForm.subject": "عنوان الموضوع",
+    "contactForm.message": "تفاصيل الموضوع",
+    "contactForm.submit": "ارسال الاقتراح",
 
 
     "areas.abuHalifa": "أبوحليفه",
@@ -333,13 +339,13 @@ module.exports = {
     "types.showroom": "معرض",
     "types.villa": "فيلا",
     "types.warehouse": "مخزن",
-    "types.block":"بلوك",
-    "types.chalet":"شالية",
-    "types.jakhour":"جاخور ",
-    "types.house":"بيت",
-    "types.mall":"مول",
-    "types.moorage":"مرسي",
-    "types.studio":"ستوديو",
+    "types.block": "بلوك",
+    "types.chalet": "شالية",
+    "types.jakhour": "جاخور ",
+    "types.house": "بيت",
+    "types.mall": "مول",
+    "types.moorage": "مرسي",
+    "types.studio": "ستوديو",
 
 
     //TODO: change the following the corresponding featured levels in firebase
@@ -351,7 +357,7 @@ module.exports = {
 
     // footer
 
-    "footer.copyRights": "سمسار",
+    "footer.copyrights": "سمسار",
     "footer.menu.home": "الصفحة الرئيسية",
     "footer.menu.properties": "عقارات",
     "footer.menu.services": "خدمات",

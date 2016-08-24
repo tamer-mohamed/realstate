@@ -9,6 +9,7 @@ import q from 'q';
 // form components
 import InputField from './Input';
 import SelectField from './Select';
+import Textarea from './Textarea';
 import RadioButton from './RadioButton';
 import RadioGroup from './RadioGroup';
 import AreasInput from './AreasInput';
@@ -154,65 +155,17 @@ const PropertyForm = React.createClass({
     return (<Form ref="form" preventExternalInvalidation onValidSubmit={this.submit}>
 
       <div className="row">
-        <div className="col-md-12">
-          <h6 className="fieldset-title">
-            <FormattedMessage id="forms.property.add.labels.genericInfo"/>
-          </h6>
-          <div className="row">
-            <InputField className="col-md-6"
-                        placeholder={"forms.property.add.fields.title"}
-                        value={property.title || null}
-                        name="title"
-                        validationErrors={{
-                    isExisty: formatMessage({id: "forms.validations.generic.required"})
-                    }}
-                        validations={{
-                    isExisty:true
-                    }}
-                        required/>
-          </div>
-          <div className="row">
-            <InputPostfixAddon className="col-md-3"
-                               title={"forms.property.add.fields.price"}
-                               name="price"
-                               addOnLabel={formatMessage({id:"settings.currency"})}
-                               validations={{isNumeric:true,minLength:1}}
-                               value={property.price || null}
-                               validationErrors={{
-                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
-                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
-                               }}
-                               validations={{
-                                  isExisty:true,
-                                  isNumeric:true
-                                }}
-                               required/>
 
-            <InputPostfixAddon className="col-md-3"
-                               title={"forms.property.add.fields.space"}
-                               name="space"
-                               addOnLabel={<span>m<sup>2</sup></span>}
-                               value={property.space || null}
-                               validationErrors={{
-                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
-                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
-                                  }}
-                               validations={{
-                                  isExisty:true,
-                                  isNumeric:true
-                                  }}
-                               required/>
-
-            <Purposes className="col-md-3"
-                      editMode={this.props.editMode}
-                      value={property.purpose}
-                      title={"forms.property.add.fields.purpose"}/>
-          </div>
-        </div>
-      </div>
+        {
+          // TODO: Add --choose-- to purposes options
+          // TODO: Add show states for porperty form sections
+        }
+        <Purposes className="col-md-3"
+                  editMode={this.props.editMode}
+                  value={property.purpose}
+                  title={"forms.property.add.fields.purpose"}/>
 
 
-      <div className="row">
         <div className="col-md-12">
           <h6 className="fieldset-title">
             <FormattedMessage id="forms.property.add.labels.address"/>
@@ -221,35 +174,13 @@ const PropertyForm = React.createClass({
 
         <PropertyAddress editMode={this.props.editMode} value={{location:property.location,area:property.area}}/>
 
-      </div>
 
-      <div className="row">
-        <div className="col-md-12">
-          <h6 className="fieldset-title">
-            <FormattedMessage id="forms.property.add.fields.propertyImage"/>
-          </h6>
-
-          <div className="clearfix">
-
-            <PropertyImageField
-              propId={this.props.propId}
-              maxImages={this.props.maxImages}
-              images={property.images}/>
-
-
-          </div>
-        </div>
-
-
-      </div>
-
-
-      <div className="row">
         <div className="col-md-12">
           <h6 className="fieldset-title">
             <FormattedMessage id="forms.property.add.labels.info"/>
           </h6>
         </div>
+
 
         <PreferencesInput className="col-md-12"
                           intl={this.props.intl}
@@ -257,7 +188,64 @@ const PropertyForm = React.createClass({
                           value={{type:property.type,preferences:property.preferences}}
                           title={"forms.property.add.fields.type"}
                           name="type"/>
+
+
+        <InputPostfixAddon className="col-md-3"
+                           title={"forms.property.add.fields.space"}
+                           name="space"
+                           addOnLabel={<span>m<sup>2</sup></span>}
+                           value={property.space || null}
+                           validationErrors={{
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
+                                  }}
+                           validations={{
+                                  isExisty:true,
+                                  isNumeric:true
+                                  }}
+                           required/>
+
+
+        <InputPostfixAddon className="col-md-3"
+                           title={"forms.property.add.fields.price"}
+                           name="price"
+                           addOnLabel={formatMessage({id:"settings.currency"})}
+                           validations={{isNumeric:true,minLength:1}}
+                           value={property.price || null}
+                           validationErrors={{
+                                  isExisty: formatMessage({id: "forms.validations.generic.required"}),
+                                  isNumeric:formatMessage({id:"forms.validations.generic.isNumeric"})
+                               }}
+                           validations={{
+                                  isExisty:true,
+                                  isNumeric:true
+                                }}
+                           required/>
+
       </div>
+
+      <PropertyImageField
+        propId={this.props.propId}
+        maxImages={this.props.maxImages}
+        images={property.images}/>
+
+      <Textarea className="col-md-12"
+                name="intro"
+                value={null}
+                placeholder={"forms.userProfile.labels.intro"}/>
+
+
+      <InputField className="col-md-6"
+                  placeholder={"forms.property.add.fields.title"}
+                  value={property.title || null}
+                  name="title"
+                  validationErrors={{
+                    isExisty: formatMessage({id: "forms.validations.generic.required"})
+                    }}
+                  validations={{
+                    isExisty:true
+                    }}
+                  required/>
 
       {this.state.step === 2 ?
         <FeatureLevelsModal onClose={()=> this.setState({step:1})}

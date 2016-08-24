@@ -184,7 +184,32 @@
   }
 
   .team-single h3 {
-    font-size: 20px;
+    //font-size: 20px;
+  }
+
+  .properties-list {
+    .item {
+
+      h3 {
+        float: right;
+      }
+      figure {
+        float: right;
+      }
+
+      .item-header {
+        span i {
+          margin-right: inherit;
+          margin-left: 10px;
+        }
+        .favorite {
+          float: left;
+        }
+      }
+      .item-data {
+        float: right;
+      }
+    }
   }
 
 }

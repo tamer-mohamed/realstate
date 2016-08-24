@@ -5,8 +5,7 @@ import firebase from 'firebase';
 import {FormattedMessage, FormattedNumber, FormattedRelative} from 'react-intl';
 import Loader from './Loader';
 
-const
-  Image = React.createClass({
+const Image = React.createClass({
     getInitialState: function(){
       return {
         imageName: this.props.imageName,
@@ -22,7 +21,6 @@ const
     render: function(){
       if(this.state.downloading)
         return <Loader />;
-
 
       return (<img src={this.state.imageUrl} className={"img-responsive"}/>);
     }

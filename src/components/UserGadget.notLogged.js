@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import {FormattedMessage,intlShape, injectIntl} from 'react-intl';
 
-const UserGadgetLogged = React.createClass({
+const UserGadgetNotLogged = React.createClass({
   contextTypes: {
     lang: React.PropTypes.string
   },
@@ -16,4 +16,4 @@ const UserGadgetLogged = React.createClass({
   }
 });
 
-export default UserGadgetLogged;
+export default UserGadgetNotLogged;

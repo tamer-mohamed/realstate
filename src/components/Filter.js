@@ -5,12 +5,16 @@ import Firebase from 'firebase';
 import Select from 'react-select';
 import $ from 'jquery';
 import {intlShape, injectIntl} from 'react-intl';
+import {Link} from 'react-router';
 
 const Filter = React.createClass({
   mixins: [ReactFireMixin],
 
   propTypes: {
     intl: intlShape.isRequired
+  },
+  contextTypes: {
+    lang: React.PropTypes.string
   },
   getInitialState: function(){
     return {
@@ -128,9 +132,12 @@ const Filter = React.createClass({
             <div className="col-md-12">
               <div className="pull-right">
                 <button type="button" onClick={()=>{this.props.submitSearch(this.state.property)}} className="adv-srch"
-                        className="btn"><i className="fa fa-search"/>
+                        className="btn btn-submit"><i className="fa fa-search"/>
                   {formatMessage({id: "filters.submitButton"})}
                 </button>
+
+                <Link className="btn"
+                      to={`${this.context.lang}/search`}>{formatMessage({id: "filters.advancedSearch.submitBtn"})}</Link>
               </div>
             </div>
           </div>

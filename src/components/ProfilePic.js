@@ -10,7 +10,7 @@ const ProfilePic = React.createClass({
   },
   render: function(){
     let ref = `users/`;
-    let image = this.props.image ? `${this.props.userId}` : this.defaultImg;
+    let image = this.props.image ? `${this.props.userId}/profilePic/${this.props.image}` : this.defaultImg;
 
     return (
       <Image url={`${ref}/${image}`}/>
